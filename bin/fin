@@ -1,0 +1,34 @@
+/**
+ * @file index.js
+ * @author ienix(enix@foxmail.com)
+ *
+ * @since 2016/9/29
+ */
+
+#!/usr/bin/env node --harmony
+
+'use strict';
+
+process.env.NODE_PATH = __dirname + '/../node_modules/';
+
+const PROGRAM = require('commander');
+
+PROGRAM
+    .version(require('../package').version );
+
+PROGRAM
+    .usage('<command>');
+
+PROGRAM
+    .command('init')
+    .description('Generate a new fin project')
+    .alias('i')
+    .action(() => {
+        require('../command/init')();
+    });
+
+PROGRAM.parse(process.argv);
+
+if (!PROGRAM.args.length) {
+    PROGRAM.help();
+}
