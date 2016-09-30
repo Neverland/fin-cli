@@ -3,7 +3,13 @@
 fin-cli  曼哈顿cli
 ---------------
 
-### usage
+## start
+```javascript
+    npm install fin-cli -g
+
+```
+
+## usage
 
 1. fin init 
    -uri|u git仓库所在的uri
