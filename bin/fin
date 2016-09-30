@@ -1,11 +1,10 @@
+#!/usr/bin/env node --harmony
 /**
  * @file index.js
  * @author ienix(enix@foxmail.com)
  *
  * @since 2016/9/29
  */
-
-#!/usr/bin/env node --harmony
 
 'use strict';
 
@@ -17,10 +16,11 @@ PROGRAM
     .version(require('../package').version );
 
 PROGRAM
-    .usage('<command>');
+    .usage('[option] [...value]');
 
 PROGRAM
     .command('init')
+    .option('-u, --uri <string>', 'icode Uri')
     .description('Generate a new fin project')
     .alias('i')
     .action(() => {
