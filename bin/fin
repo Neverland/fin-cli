@@ -27,6 +27,15 @@ PROGRAM
         require('../command/init')();
     });
 
+PROGRAM
+    .command('create')
+    .option('-t, --type <string>', 'create')
+    .description('Generate a new fin unit')
+    .alias('c')
+    .action(() => {
+        require('../command/create')();
+    });
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {

@@ -7,10 +7,12 @@
 
 'use strict';
 
-const PROGRAM = require('commander');
 const EXEC = require('child_process').exec;
+
+const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
+
 const CHALK = require('chalk');
 
 module.exports = () => {
@@ -18,14 +20,14 @@ module.exports = () => {
         let uri = PROGRAM.args[0].uri;
 
         if (!uri) {
-            console.log(CHALK.bold.red('\n × uri does not exit!'));
+            console.log(CHALK.bold.red('\n × `uri` does not exit!'));
             process.exit();
         }
 
         let projectName = yield PROMPT('Project name: ');
 
         if (!projectName) {
-            console.log(CHALK.bold.red('\n × Project name does not exit!'));
+            console.log(CHALK.bold.red('\n × `Project` name does not exit!'));
             process.exit();
         }
 

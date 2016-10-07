@@ -1,0 +1,48 @@
+<template>
+    <section class="fin-{{is}}">
+    </section>
+</template>
+
+<script>
+    /**
+     * @file <% component %>
+     * @author <% author %>(<% author %>@baidu.com)
+     */
+
+    /**
+     * <% component %> xxxxxxx
+     * @module <% component %>
+     *
+     * @property {array} title - 标题
+     *
+     * @example
+     *
+     */
+
+    export default {
+        props: {
+
+        },
+        data() {
+            return {
+                is: '<% component %>'
+            }
+        },
+        methods: {
+
+        },
+        components: {
+
+        }
+    }
+</script>
+
+<style lang="less" scoped>
+    @import "../../fin-ui/css/variable.less";
+
+    @name: ~`'@{prefix}' + '<% component %>'`;
+
+    .@{name} {
+
+    }
+</style>
