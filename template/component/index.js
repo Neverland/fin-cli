@@ -1,6 +1,6 @@
 /**
  * @file <% component %>.js
- * @author <% author %>(<% author %>@baidu.com)
+ * @author <% author %>(<% email %>@baidu.com)
  *
  * @since <% date %>
  */
