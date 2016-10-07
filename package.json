@@ -1,6 +1,6 @@
 {
   "name": "fin-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "曼哈顿fin-cli",
   "main": "index.js",
   "bin": {
@@ -36,8 +36,8 @@
   "readme": "# fin-cli\nfin-cli\n",
   "readmeFilename": "README.md",
   "gitHead": "5d60ae65235e8ca14eecbd14586423e865275366",
-  "_id": "fin-cli@0.0.5",
-  "_shasum": "3d5bd1ffd869222008af3be68809f99934bdc294",
-  "_from": "../../WorkSpace/fin-cli",
+  "_id": "fin-cli@0.0.6",
+  "_shasum": "f73eaa6e1575d05ab3b8a3c9d7bf7f2249b9e948",
+  "_from": "fin-cli@latest",
   "_resolved": "file:../../WorkSpace/fin-cli"
 }

@@ -1,7 +1,6 @@
 # fin-cli
------------------
-fin-cli  曼哈顿cli
----------------
+
+-fin-cli  曼哈顿cli
 
 ## start
 ```javascript
@@ -12,7 +11,16 @@ fin-cli  曼哈顿cli
 ## usage
 
 1. fin init 
-   -uri|u git仓库所在的uri
+### option
+    -uri|u git仓库所在的uri
 ```javascript
     fin install -u git.fin.com
+```
+
+2. fin create
+### option
+    -type|t 类型
+        1. type: component
+```javascript
+    fin create -t component
 ```

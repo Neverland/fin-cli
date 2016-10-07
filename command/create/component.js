@@ -20,16 +20,14 @@ ETPL.config( {
 });
 
 let readFile = (fileName) => {
-    console.log(1234);
-    let path = __dirname + '/../template/component/';
-    console.log(`${path}${fileName}`);
-    let file = fs.readFileSync(`${path}${fileName}`, 'utf8').toString();
+    let path = PATH.resolve(__dirname + '/../../template/component');
+    let file = FS.readFileSync(`${path}/${fileName}`, {encoding: 'utf8', flag: 'r'})
+                .toString();
 
     return file;
 };
 
 module.exports = data => {
-    data = {component: 'text', autho: 'text', email: 'email@text.com'};
     let fileType = [
         'index.js',
         'package.json',
@@ -45,6 +43,8 @@ module.exports = data => {
 
     FS.mkdirSync(path);
 
+    data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
+
     fileType.forEach(item => {
         let file = readFile(item);
         let render = ETPL.compile(file);
@@ -55,7 +55,7 @@ module.exports = data => {
             fileName = `${data.component}.vue`;
         }
 
-        fs.writeFileSync(fileName, text, 'utf8');
+        FS.writeFileSync(path + '/' + fileName, text, {encoding: 'utf8', flag: 'w'});
     });
 
     console.log(CHALK.green('\n √ Generation completed!'));

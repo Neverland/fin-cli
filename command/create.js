@@ -28,7 +28,7 @@ module.exports = () => {
         }
 
         if (type === 'component') {
-            /*let component = yield PROMPT('Component name: ');
+            let component = yield PROMPT('Component name: ');
 
             if (!component) {
                 console.log(CHALK.bold.red('\n × `Component name` does not exit!'));
@@ -50,15 +50,16 @@ module.exports = () => {
             }
 
             let alias = component;
+
             if (alias.indexOf('-')) {
                 alias = STRING(alias).camelize().s;
-            }*/
+            }
 
             COMPONENT({
-                /*component,
+                component,
                 author,
                 email,
-                alias*/
+                alias
             });
         }
 
