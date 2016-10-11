@@ -30,4 +30,5 @@ fin-cli  曼哈顿cli
  
 ```javascript
     fin create -t component
+    fin create -t page
 ```
