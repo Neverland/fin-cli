@@ -1,0 +1,19 @@
+{%* @file: <% name %> *%}
+{%* @author: <% author %>(<% email %>@baidu.com) *%}
+{%* @since <% date %> *%}
+
+{%extends file="../../layout.tpl"%}
+    {%block name="main"%}
+
+        {%script%}
+            G = {
+
+            };
+
+            require('./<% name %>.js');
+        {%/script%}
+    {%/block%}
+
+    {%block name="footer"%}
+        <help-service></help-service>
+    {%/block%}

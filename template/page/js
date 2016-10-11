@@ -1,0 +1,34 @@
+/**
+ * @file <% name %>.js
+ * @author <% author %>(<% email %>@baidu.com)
+ *
+ * @since <% date %>
+ */
+
+/**
+ * 导入顺序
+ *
+ * 原则：依赖->业务
+ * 要求：按照下面的分类使用回车分组
+ *
+ * 1. 不需要具名的 e.g: import 'whatwg-fetch';
+ * 2. library
+ * 3. util
+ * 4. 业务
+ */
+
+import Vue from 'vue';
+
+import helpService from 'fin-cs/help-service';
+
+new Vue({
+    el: 'body',
+    data() {
+        return {
+
+        };
+    },
+    components: {
+
+    }
+});

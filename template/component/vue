@@ -5,15 +5,15 @@
 
 <script>
     /**
-     * @file <% component %>
+     * @file <% name %>
      * @author <% author %>(<% email %>@baidu.com)
      *
      * @since <% date %>
      */
 
     /**
-     * <% component %> xxxxxxx
-     * @module <% component %>
+     * <% name %> xxxxxxx
+     * @module <% name %>
      *
      * @property {array} title - 标题
      *
@@ -27,7 +27,7 @@
         },
         data() {
             return {
-                is: '<% component %>'
+                is: '<% name %>'
             }
         },
         methods: {
@@ -47,7 +47,7 @@
      * @require "fin-ui/css/icon.less"
      */
 
-    @name: ~`'@{prefix}' + '<% component %>'`;
+    @name: ~`'@{prefix}' + '<% name %>'`;
 
     .@{name} {
 

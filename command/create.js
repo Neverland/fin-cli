@@ -16,7 +16,7 @@ const PROMPT = require('co-prompt');
 
 const CHALK = require('chalk');
  
-const COMPONENT = require('./create/component');
+const CREATE = require('./create/index');
 
 module.exports = () => {
     CO(function *() {
@@ -27,39 +27,54 @@ module.exports = () => {
             process.exit();
         }
 
-        if (type === 'component') {
-            let component = yield PROMPT('Component name: ');
+        let author = yield PROMPT('Author name: ');
 
-            if (!component) {
+        if (!author) {
+            console.log(CHALK.bold.red('\n × `Author` does not exit!'));
+            process.exit();
+        }
+
+        let email = yield PROMPT('Your email prefix: ');
+
+        if (!author) {
+            console.log(CHALK.bold.red('\n × `Email prefix` does not exit!'));
+            process.exit();
+        }
+
+        if (type === 'component') {
+            let name = yield PROMPT('Component name: ');
+
+            if (!name) {
                 console.log(CHALK.bold.red('\n × `Component name` does not exit!'));
                 process.exit();
             }
 
-            let author = yield PROMPT('Author name: ');
-
-            if (!author) {
-                console.log(CHALK.bold.red('\n × `Author` does not exit!'));
-                process.exit();
-            }
-
-            let email = yield PROMPT('Your email prefix: ');
-
-            if (!author) {
-                console.log(CHALK.bold.red('\n × `Email prefix` does not exit!'));
-                process.exit();
-            }
-
-            let alias = component;
+            let alias = name;
 
             if (alias.indexOf('-')) {
                 alias = STRING(alias).camelize().s;
             }
 
-            COMPONENT({
-                component,
+            CREATE('component', {
+                name,
                 author,
                 email,
                 alias
+            });
+        }
+
+        if (type === 'page') {
+            let name = yield PROMPT('Page name: ');
+
+            if (!name) {
+                console.log(CHALK.bold.red('\n × `Page name` does not exit!'));
+                process.exit();
+            }
+
+            CREATE('page', {
+                name,
+                author,
+                email
             });
         }
 

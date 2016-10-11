@@ -1,10 +1,10 @@
 /**
- * @file <% component %>.js
+ * @file <% name %>.js
  * @author <% author %>(<% email %>@baidu.com)
  *
  * @since <% date %>
  */
 
-import <% alias %> from './<% component %>.vue';
+import <% alias %> from './<% name %>.vue';
 
 export default <% alias %>;

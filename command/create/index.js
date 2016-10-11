@@ -1,8 +1,8 @@
 /**
- * @file component
- * @author ienix(enix@foxmail.com)
+ * @file index.js
+ * @author ienix(guoaimin01@baidu.com)
  *
- * @since 2016/10/7
+ * @since 2016/10/11
  */
 
 'use strict';
@@ -14,27 +14,24 @@ const ETPL = require('etpl');
 
 const CHALK = require('chalk');
 
+const UNIT_TYPE = require('./config');
+
 ETPL.config( {
     variableOpen: '<%',
     variableClose: '%>'
 });
 
-let readFile = (fileName) => {
-    let path = PATH.resolve(__dirname + '/../../template/component');
+let readFile = (type, fileName) => {
+    let path = PATH.resolve(`${__dirname}/../../template/${type}`);
     let file = FS.readFileSync(`${path}/${fileName}`, {encoding: 'utf8', flag: 'r'})
-                .toString();
+        .toString();
 
     return file;
 };
 
-module.exports = data => {
-    let fileType = [
-        'index.js',
-        'package.json',
-        'README.md',
-        'vue'
-    ];
-    let path = process.cwd() + '/' + data.component;
+module.exports = (type, data) => {
+    let fileType = UNIT_TYPE[type];
+    let path = process.cwd() + '/' + data.name;
 
     if (FS.existsSync(data.component)) {
         console.log(CHALK.bold.red(`\n × \`${data.component}\` is already exit!`));
@@ -46,13 +43,13 @@ module.exports = data => {
     data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
 
     fileType.forEach(item => {
-        let file = readFile(item);
+        let file = readFile(type, item);
         let render = ETPL.compile(file);
         let text = render(data);
         let fileName = item;
 
-        if (item === 'vue') {
-            fileName = `${data.component}.vue`;
+        if (fileName.indexOf('.') === -1) {
+            fileName = `${data.name}.${item}`;
         }
 
         FS.writeFileSync(path + '/' + fileName, text, {encoding: 'utf8', flag: 'w'});

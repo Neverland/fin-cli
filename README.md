@@ -25,7 +25,8 @@ fin-cli  曼哈顿cli
 ### option
 
     -type|t 类型
-        1. type: component
+        1. type: component、
+        2. type: page
  
 ```javascript
     fin create -t component
