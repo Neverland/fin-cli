@@ -42,10 +42,10 @@ module.exports = () => {
                 process.exit();
             }
 
-            let email = yield PROMPT('Your email: ');
+            let email = yield PROMPT('Your email prefix: ');
 
             if (!author) {
-                console.log(CHALK.bold.red('\n × `Email` does not exit!'));
+                console.log(CHALK.bold.red('\n × `Email prefix` does not exit!'));
                 process.exit();
             }
 
