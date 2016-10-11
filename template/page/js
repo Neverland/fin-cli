@@ -23,12 +23,21 @@ import helpService from 'fin-cs/help-service';
 
 new Vue({
     el: 'body',
+    props: {
+
+    },
     data() {
         return {
 
         };
     },
+    methods: {
+
+    },
     components: {
+
+    },
+    created() {
 
     }
 });
