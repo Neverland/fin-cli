@@ -42,6 +42,11 @@
 <style lang="less" scoped>
     @import "../../fin-ui/css/variable.less";
 
+     /**
+     * @require "fin-ui/css/util.less"
+     * @require "fin-ui/css/icon.less"
+     */
+
     @name: ~`'@{prefix}' + '<% component %>'`;
 
     .@{name} {

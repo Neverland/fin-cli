@@ -1,6 +1,7 @@
 {
     "description": "",
     "name": "<% component %>",
+    "alias": "中文名称",
     "main": "index.js",
     "version": "0.0.1",
     "tag": "master",
