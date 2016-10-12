@@ -8,7 +8,6 @@
 'use strict';
 
 const FS = require('fs');
-const PATH = require('path');
 
 const PROGRAM = require('commander');
 
@@ -37,8 +36,6 @@ module.exports = () => {
         );
         process.exit();
     }
-
-    process.exit();
 
     // FIXME: 不能使用解构， node版本问题？
     if  (param.author) {
