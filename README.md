@@ -33,15 +33,9 @@
     fin create -t component
 ```
 
-<<<<<<< ef640e6a67605de5e0e7f36ccfd19f360b4a718d
-2. fin config
-
-### option
-=======
 ### fin config
 
 #### option
->>>>>>> fin config
 
     -email|e email前缀
     -author|a auhtor
