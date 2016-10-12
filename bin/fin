@@ -40,6 +40,7 @@ PROGRAM
     .command('config')
     .option('-e, --email <string>', 'email prefix')
     .option('-a, --author <string>', 'author name')
+    .option('-l, --list [boolean]', 'list config')
     .description('Generate fin user config')
     .alias('C')
     .action(() => {

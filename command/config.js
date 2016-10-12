@@ -22,6 +22,24 @@ let path = USER.path;
 module.exports = () => {
     let param = PROGRAM.args[0];
 
+    if (param.list) {
+        let data = USER.data;
+        let list = [];
+
+        Object.keys(data)
+            .forEach(item => {
+                list.push(`\n -${item}: ${data[item]}`);
+            });
+
+        console.log(''
+            + CHALK.green('\n Config list:')
+            + CHALK.gray('\n' + list.join(''))
+        );
+        process.exit();
+    }
+
+    process.exit();
+
     // FIXME: 不能使用解构， node版本问题？
     if  (param.author) {
         config.author = param.author;
