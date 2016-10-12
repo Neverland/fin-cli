@@ -1,6 +1,7 @@
+
 # fin-cli
 
-fin-cli  曼哈顿cli
+ fin-cli  曼哈顿cli
 
 ## start
 ```javascript
@@ -30,5 +31,17 @@ fin-cli  曼哈顿cli
  
 ```javascript
     fin create -t component
-    fin create -t page
+```
+
+2. fin config
+
+### option
+
+    -email|e email前缀
+    -author|a auhtor
+ 
+```javascript
+    fin config -e abc
+    fin config -a abc
+    fin config -e abc -a abc
 ```

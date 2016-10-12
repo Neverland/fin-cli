@@ -36,6 +36,16 @@ PROGRAM
         require('../command/create')();
     });
 
+PROGRAM
+    .command('config')
+    .option('-e, --email <string>', 'email prefix')
+    .option('-a, --author <string>', 'author name')
+    .description('Generate fin user config')
+    .alias('C')
+    .action(() => {
+    require('../command/config')();
+});
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {

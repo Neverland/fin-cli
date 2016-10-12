@@ -7,7 +7,8 @@
 
 'use strict';
 
-const EXEC = require('child_process').exec;
+const FS = require('fs');
+const PATH = require('path');
 
 const STRING = require('string');
 const PROGRAM = require('commander');
@@ -18,26 +19,20 @@ const CHALK = require('chalk');
  
 const CREATE = require('./create/index');
 
+const USER = require('./user').data;
+
+let userData = {
+    author: USER.author,
+    email: USER.email
+};
+
 module.exports = () => {
+
     CO(function *() {
         let type = PROGRAM.args[0].type;
 
         if (!type) {
             console.log(CHALK.bold.red('\n × `type` does not exit!'));
-            process.exit();
-        }
-
-        let author = yield PROMPT('Author name: ');
-
-        if (!author) {
-            console.log(CHALK.bold.red('\n × `Author` does not exit!'));
-            process.exit();
-        }
-
-        let email = yield PROMPT('Your email prefix: ');
-
-        if (!author) {
-            console.log(CHALK.bold.red('\n × `Email prefix` does not exit!'));
             process.exit();
         }
 
@@ -55,12 +50,7 @@ module.exports = () => {
                 alias = STRING(alias).camelize().s;
             }
 
-            CREATE('component', {
-                name,
-                author,
-                email,
-                alias
-            });
+            CREATE('component', Object.assign({}, {name, alias}, userData));
         }
 
         if (type === 'page') {
@@ -71,11 +61,7 @@ module.exports = () => {
                 process.exit();
             }
 
-            CREATE('page', {
-                name,
-                author,
-                email
-            });
+            CREATE('page', Object.assign({}, {name}, userData));
         }
 
         console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));
