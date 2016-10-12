@@ -11,9 +11,9 @@
 
 ## usage
 
-1. fin init
+### fin init
 
-### option
+#### option
 
     -uri|u git仓库所在的uri
 
@@ -21,9 +21,9 @@
     fin install -u git.fin.com
 ```
 
-2. fin create
+### fin create
 
-### option
+#### option
 
     -type|t 类型
         1. type: component、
@@ -33,9 +33,15 @@
     fin create -t component
 ```
 
+<<<<<<< ef640e6a67605de5e0e7f36ccfd19f360b4a718d
 2. fin config
 
 ### option
+=======
+### fin config
+
+#### option
+>>>>>>> fin config
 
     -email|e email前缀
     -author|a auhtor
