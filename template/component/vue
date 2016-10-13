@@ -3,7 +3,7 @@
     </section>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     /**
      * @file <% name %>
      * @author <% author %>(<% email %>@baidu.com)
@@ -39,7 +39,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="less" scoped rel="stylesheet/less">
     @import "../../fin-ui/css/variable.less";
 
      /**

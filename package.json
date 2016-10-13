@@ -1,5 +1,6 @@
 {
   "name": "fin-cli",
+<<<<<<< e47f6cacb2da751120bbfaa8970b772958fa376d
 <<<<<<< 9c3d9bcaeafc48fc6911c7b5aefc782601a4ae5f
 <<<<<<< 3b9c9399fd11fc9f946634a43813e5c2e48b3b76
   "version": "0.1.5",
@@ -8,6 +9,9 @@
 >>>>>>> 修改模板
 =======
   "version": "0.1.6",
+>>>>>>> 修改模板
+=======
+  "version": "0.1.7",
 >>>>>>> 修改模板
   "description": "曼哈顿fin-cli",
   "bin": {
