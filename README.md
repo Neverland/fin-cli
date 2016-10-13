@@ -1,7 +1,7 @@
-
 # fin-cli
+----------------------
 
- fin-cli  曼哈顿cli
+fin-cli  曼哈顿cli
 
 ## start
 ```javascript
