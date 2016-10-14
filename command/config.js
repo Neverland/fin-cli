@@ -15,14 +15,11 @@ const CHALK = require('chalk');
 
 const USER = require('./user');
 
-let config = USER.data;
-let path = USER.path;
-
 module.exports = () => {
+    let data = USER.getRcData();
     let param = PROGRAM.args[0];
 
     if (param.list) {
-        let data = USER.data;
         let list = [];
 
         Object.keys(data)
@@ -39,14 +36,14 @@ module.exports = () => {
 
     // FIXME: 不能使用解构， node版本问题？
     if  (param.author) {
-        config.author = param.author;
+        data.author = param.author;
     }
 
     if  (param.email) {
-        config.email = param.email;
+        data.email = param.email;
     }
 
-    FS.writeFileSync(path, JSON.stringify(config), {encoding: 'utf8', flag: 'w'});
+    USER.createRC(data);
 
     console.log(CHALK.green('\n √ Generation completed!'));
     process.exit();
