@@ -4,7 +4,9 @@
 
 {%extends file="../../layout.tpl"%}
     {%block name="main"%}
+        <section class="page-<% name %>">
 
+        </section>
         {%script%}
             G = {
 
