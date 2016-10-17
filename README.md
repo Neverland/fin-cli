@@ -26,11 +26,14 @@ fin-cli  曼哈顿cli
 #### option
 
     -type|t 类型
-        1. type: component、
+        1. type: component、input
         2. type: page
  
 ```javascript
+    // 创建普通component
     fin create -t component
+    // 创建普通input component
+    fin create -t component -i
 ```
 
 ### fin config

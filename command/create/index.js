@@ -30,11 +30,16 @@ let readFile = (type, fileName) => {
 };
 
 module.exports = (type, data) => {
-    let fileType = UNIT_TYPE[type];
+
+    let fileType = UNIT_TYPE(type);
     let path = process.cwd() + '/' + data.name;
 
-    if (FS.existsSync(data.component)) {
-        console.log(CHALK.bold.red(`\n × \`${data.component}\` is already exit!`));
+    if (data.input && type === 'component') {
+        fileType = UNIT_TYPE(type, {input: true});
+    }
+
+    if (FS.existsSync(data.name)) {
+        console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exit!`));
         process.exit();
     }
 
@@ -43,16 +48,32 @@ module.exports = (type, data) => {
     data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
 
     fileType.forEach(item => {
-        let file = readFile(type, item);
+        let fileName = item[0];
+        let file = readFile(type, item[0]);
         let render = ETPL.compile(file);
         let text = render(data);
-        let fileName = item;
+        let extension = item[1];
 
-        if (fileName.indexOf('.') === -1) {
+        // [vue, vue]
+        if (extension) {
+            fileName = `${data.name}.${extension}`;
+        }
+        //['index.js']
+        else if (fileName.indexOf('.') > -1) {
+            fileName = `${item}`;
+        }
+        // ['tpl', 'vue']
+        else {
             fileName = `${data.name}.${item}`;
         }
 
-        FS.writeFileSync(path + '/' + fileName, text, {encoding: 'utf8', flag: 'w'});
+        try {
+            FS.writeFileSync(path + '/' + fileName, text, {encoding: 'utf8', flag: 'w'});
+        }
+        catch (error) {
+            console.log(CHALK.green('\n × Generation failure!'));
+            process.exit();
+        }
     });
 
     console.log(CHALK.green('\n √ Generation completed!'));

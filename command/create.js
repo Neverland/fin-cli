@@ -7,9 +7,6 @@
 
 'use strict';
 
-const FS = require('fs');
-const PATH = require('path');
-
 const STRING = require('string');
 const PROGRAM = require('commander');
 const CO = require('co');
@@ -37,6 +34,9 @@ module.exports = () => {
         }
 
         if (type === 'component') {
+            let input = {
+                input: PROGRAM.args[0].input || false
+            };
             let name = yield PROMPT('Component name: ');
 
             if (!name) {
@@ -50,7 +50,7 @@ module.exports = () => {
                 alias = STRING(alias).camelize().s;
             }
 
-            CREATE('component', Object.assign({}, {name, alias}, userData));
+            CREATE('component', Object.assign({}, {name, alias}, userData, input));
         }
 
         if (type === 'page') {

@@ -13,4 +13,6 @@
  * @require "fin-ui/css/icon.less"
  */
 
+.page-<% name %> {
 
+}

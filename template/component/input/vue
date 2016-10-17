@@ -1,0 +1,140 @@
+<template>
+    <div class="fin-{{is}}">
+        <input-base :value="value"
+            :fieldname="fieldname"
+            :fieldset="fieldset"
+            :rules="rules"
+            :category="category"
+            :type="type"
+            :readonly="readonly"
+            :title="title"
+            :title-width="titleWidth"
+            :subtitle="subtitle"
+            :placeholder="placeholder"
+            :tip="tip"
+            :border="border">
+        </input-base>
+    </div>
+</template>
+
+<script type="text/ecmascript-6">
+    /**
+     * @file <% name %>
+     * @author <% author %>(<% email %>@baidu.com)
+     *
+     * @since <% date %>
+     */
+
+    /**
+     * <% name %> xxxxxxx
+     * @module <% name %>
+     *
+     * @property {array} title - 标题
+     *
+     * @example
+     *
+     */
+
+    import Vue from 'vue';
+
+    import inputBase from 'fin-rm/input-base';
+    import {validator} from 'fin-fg/util';
+
+    export default {
+        props: {
+            value: {
+                type: String,
+                default: ''
+            },
+            // 字段名
+            fieldname: {
+                type: String,
+                default: ''
+            },
+            // 验证名，可以和上面的字段名一样
+            fieldset: {
+                type: String,
+                default: ''
+            },
+            // 如果必填加required，选填一定不能加
+            rules: {
+                type: Object,
+                default() {
+                    return {
+                        required: {
+                            rule: true,
+                            message: '请填写'
+                        }
+                    };
+                }
+            },
+            // 输入框大类
+            category: {
+                type: String,
+                default: ''
+            },
+            // input type
+            type: {
+                type: String,
+                default: 'text'
+            },
+            readonly: {
+                type: Boolean,
+                default: false
+            },
+            title: {
+                type: String,
+                default: ''
+            },
+            titleWidth: {
+                type: String,
+                default: ''
+            },
+            // 副标题
+            subtitle: {
+                type: String,
+                default: ''
+            },
+            placeholder: {
+                type: String,
+                default: ''
+            },
+            // 提示语（最下面的部分）
+            tip: {
+                type: String,
+                default: ''
+            },
+            // 底部是否有border
+            border: {
+                type: Boolean,
+                default: false
+            }
+        },
+        data() {
+            return {
+                is: ''
+            };
+        },
+        components: {
+            inputBase
+        },
+        methods: {
+
+        }
+    };
+</script>
+
+<style lang="less" scoped rel="stylesheet/less">
+    @import "../../fin-ui/css/variable.less";
+
+    /**
+    * @require "fin-ui/css/util.less"
+    * @require "fin-ui/css/icon.less"
+    */
+
+    @name: ~`'@{prefix}' + '<% name %>'`;
+
+    .@{name} {
+
+    }
+</style>
