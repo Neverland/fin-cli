@@ -22,7 +22,8 @@ ETPL.config( {
 });
 
 let readFile = (type, fileName) => {
-    let path = PATH.resolve(`${__dirname}/../../template/${type}`);
+    let path = PATH.join(__dirname, '/../../template/', type);
+
     let file = FS.readFileSync(`${path}/${fileName}`, {encoding: 'utf8', flag: 'r'})
         .toString();
 
@@ -30,9 +31,8 @@ let readFile = (type, fileName) => {
 };
 
 module.exports = (type, data) => {
-
     let fileType = UNIT_TYPE(type);
-    let path = process.cwd() + '/' + data.name;
+    let path = PATH.join(process.cwd(), '/', data.name);
 
     if (data.input && type === 'component') {
         fileType = UNIT_TYPE(type, {input: true});
@@ -59,7 +59,7 @@ module.exports = (type, data) => {
             fileName = `${data.name}.${extension}`;
         }
         //['index.js']
-        else if (fileName.indexOf('.') > -1) {
+        else if (PATH.extname(fileName)) {
             fileName = `${item}`;
         }
         // ['tpl', 'vue']
@@ -68,7 +68,10 @@ module.exports = (type, data) => {
         }
 
         try {
-            FS.writeFileSync(path + '/' + fileName, text, {encoding: 'utf8', flag: 'w'});
+            FS.writeFileSync(
+                PATH.join(path, '/', fileName),
+                text, {encoding: 'utf8', flag: 'w'}
+            );
         }
         catch (error) {
             console.log(CHALK.green('\n × Generation failure!'));

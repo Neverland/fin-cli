@@ -7,8 +7,6 @@
 
 'use strict';
 
-const FS = require('fs');
-
 const PROGRAM = require('commander');
 
 const CHALK = require('chalk');
@@ -45,6 +43,5 @@ module.exports = () => {
 
     USER.createRC(data);
 
-    console.log(CHALK.green('\n √ Generation completed!'));
     process.exit();
 };
