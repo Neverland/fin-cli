@@ -19,7 +19,7 @@ const CHALK = require('chalk');
  
 const CREATE = require('./create/index');
 
-const USER = require('./user').data;
+const USER = require('./user').getRcData();
 
 let userData = {
     author: USER.author,
