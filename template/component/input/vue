@@ -112,7 +112,7 @@
         },
         data() {
             return {
-                is: ''
+                is: '<% name %>'
             };
         },
         components: {
