@@ -9,9 +9,7 @@
         </section>
         {%script%}
             define('page/<% name %>', function () {
-                return {
-
-                };
+                return JSON.parse('{%$data|@json_encode%}');
             });
 
             require('./<% name %>.js');
