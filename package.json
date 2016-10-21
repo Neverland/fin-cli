@@ -1,6 +1,6 @@
 {
   "name": "fin-cli",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "曼哈顿fin-cli",
   "bin": {
     "fin": "bin/fin"

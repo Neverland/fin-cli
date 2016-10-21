@@ -29,9 +29,7 @@ new Vue({
 
     },
     data() {
-        return {
-
-        };
+        return pageData;
     },
     methods: {
 
