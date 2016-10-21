@@ -21,6 +21,8 @@ import Vue from 'vue';
 
 import helpService from 'fin-cs/help-service';
 
+import pageData from 'page/<% name %>';
+
 new Vue({
     el: 'body',
     props: {
