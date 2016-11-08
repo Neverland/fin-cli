@@ -94,8 +94,34 @@ module.exports = () => {
                 }
                 console.log(stdout, stderr);
 
+                createBuild();
+            });
+        };
+
+        let createBuild = () => {
+            let command = [];
+            let purePath = PATH.join(pathName.slice(1))
+
+            const ORIGIN_URL = ROOT_URI + PATH.join(pathName);
+
+            command.push(`cd ${projectName}`);
+            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${ORIGIN_URL} -c "cd ${purePath}`);
+            command.push('mkdir output');
+            command.push(`cp BCLOUD ./output/" -u ./' > BCLOUD`);
+            command.push('git add BCLOUD');
+            command.push('git commit -m "init finland"');
+
+            console.log(CHALK.bold.yellow(`\n create build file... \n`));
+
+            EXEC(command.join(' && '), (error, stdout, stderr) => {
+                if (error) {
+                    console.log(CHALK.bold.red(`\n × ${error}`));
+                    process.exit();
+                }
+                console.log(stdout, stderr);
+
                 if (pathName) {
-                    pushToURepertory();
+                    pushToURepertory(purePath, ORIGIN_URL);
                 }
                 else {
                     console.log(CHALK.green('\n √ Generation completed!'));
@@ -104,16 +130,10 @@ module.exports = () => {
             });
         };
 
-        let pushToURepertory = () => {
+        let pushToURepertory = (purePath, ORIGIN_URL) => {
             let command = [];
-            let purePath = projectName.slice(1);
-
-            const ORIGIN_URL = PATH.join(ROOT_URI, pathName);
 
             command.push(`cd ${projectName}`);
-            command.push(`echo 'BUILD_SUBMITTER -x -m ${purePath} -c "cd ${purePath}`);
-            command.push('mkdir output');
-            command.push(`cp BCLOUD ./output/" -u ./' > BCLOUD`);
             command.push(`git remote add origin ${ORIGIN_URL}`);
             command.push(`scp -p -P 8235 git@${uri}:hooks/commit-msg .git/hooks/`);
             command.push('git push -u origin --all');
