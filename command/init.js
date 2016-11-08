@@ -7,6 +7,8 @@
 
 'use strict';
 
+const PATH = require('path');
+
 const EXEC = require('child_process').exec;
 
 const PROGRAM = require('commander');
@@ -104,11 +106,17 @@ module.exports = () => {
 
         let pushToURepertory = () => {
             let command = [];
+            let purePath = projectName.slice(1);
+
+            const ORIGIN_URL = PATH.join(ROOT_URI, pathName);
 
             command.push(`cd ${projectName}`);
-            command.push(`git remote add origin ${ROOT_URI}${pathName}`);
-            command.push (`scp -p -P 8235 git@${uri}:hooks/commit-msg .git/hooks/`);
-            command.push ('git push -u origin --all');
+            command.push(`echo 'BUILD_SUBMITTER -x -m ${purePath} -c "cd ${purePath}`);
+            command.push('mkdir output');
+            command.push(`cp BCLOUD ./output/" -u ./' > BCLOUD`);
+            command.push(`git remote add origin ${ORIGIN_URL}`);
+            command.push(`scp -p -P 8235 git@${uri}:hooks/commit-msg .git/hooks/`);
+            command.push('git push -u origin --all');
 
             EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
