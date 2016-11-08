@@ -105,7 +105,7 @@ module.exports = () => {
             const ORIGIN_URL = ROOT_URI + PATH.join(pathName);
 
             command.push(`cd ${projectName}`);
-            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${ORIGIN_URL} -c "cd ${purePath}`);
+            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath}`);
             command.push('mkdir output');
             command.push(`cp BCLOUD ./output/" -u ./' > BCLOUD`);
             command.push('git add BCLOUD');
