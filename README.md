@@ -14,10 +14,12 @@ fin-cli  曼哈顿cli
 
 #### option
 
-    -uri|u git仓库所在的uri
+    -uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
+    -path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
-    fin install -u git.fin.com
+    fin init -u git.github.com -p  /git/${path}
+    
 ```
 
 ### fin create

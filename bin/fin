@@ -28,6 +28,7 @@ PROGRAM
 PROGRAM
     .command('init')
     .option('-u, --uri <string>', 'icode Uri')
+    .option('-p, --path <string>', 'Your project icode patch `/baidu/${path}`')
     .description('Generate a new fin project')
     .alias('i')
     .action(() => {

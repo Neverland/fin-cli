@@ -17,12 +17,16 @@ const CHALK = require('chalk');
 
 module.exports = () => {
     CO(function *() {
-        let uri = PROGRAM.args[0].uri;
+        let args = PROGRAM.args[0];
+        let uri = args.uri;
+        let pathName = args.path;
 
         if (!uri) {
             console.log(CHALK.bold.red('\n × `uri` does not exit!'));
             process.exit();
         }
+
+        const ROOT_URI = `ssh://git@${uri}:8235`;
 
         let projectName = yield PROMPT('Project name: ');
 
@@ -34,7 +38,7 @@ module.exports = () => {
         console.log(CHALK.white('\n Start generating...'));
 
         let cloneInit = () => {
-            let command = `git clone ${uri}/baidu/finland/init ${projectName}`;
+            let command = `git clone ${ROOT_URI}/baidu/finland/init ${projectName}`;
 
             EXEC(command, (error, stdout, stderr) => {
                 if (error) {
@@ -76,12 +80,33 @@ module.exports = () => {
             console.log(CHALK.bold.yellow(`\n add submodule... \n`));
 
             modules.forEach(item => {
-                command.push(`git submodule add ${uri}/baidu/finland/${item[0]} components/${item[1]}`);
+                command.push(`git submodule add ${ROOT_URI}/baidu/finland/${item[0]} components/${item[1]}`);
             });
 
-            command = `cd ${projectName} && ${command.join(' && ')}`;
+            command = `cd ${projectName} && ${command.join(' && ')} && git remote rm origin`;
 
             EXEC(command, (error, stdout, stderr) => {
+                if (error) {
+                    console.log(CHALK.bold.red(`\n × ${error}`));
+                    process.exit();
+                }
+                console.log(stdout, stderr);
+
+                if (pathName) {
+                    pushToURepertory();
+                }
+            });
+        };
+
+        let pushToURepertory = () => {
+            let command = [];
+
+            command.push(`cd ${projectName}`);
+            command.push(`git remote add origin ${ROOT_URI}${pathName}`);
+            command.push (`scp -p -P 8235 git@${uri}:hooks/commit-msg .git/hooks/`);
+            command.push ('git push -u origin --all');
+
+            EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
                     console.log(CHALK.bold.red(`\n × ${error}`));
                     process.exit();
