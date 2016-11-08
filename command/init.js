@@ -95,6 +95,10 @@ module.exports = () => {
                 if (pathName) {
                     pushToURepertory();
                 }
+                else {
+                    console.log(CHALK.green('\n √ Generation completed!'));
+                    process.exit();
+                }
             });
         };
 
