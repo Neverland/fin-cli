@@ -27,6 +27,7 @@ import Vue from 'vue';
 
 import helpService from 'fin-cs/help-service';
 
+// 不要在页面中直接使用pageData.xxx， 应该使用this.xxx
 import pageData from 'page/<% name %>';
 
 new Vue({
@@ -36,6 +37,7 @@ new Vue({
     },
     data() {
         // return u.extend({}, pageData, {xxx: 1});
+        // 不要在页面中直接使用pageData.xxx， 应该使用this.xxx
         return pageData;
     },
     methods: {
