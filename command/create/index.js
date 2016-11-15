@@ -34,10 +34,6 @@ module.exports = (type, data) => {
     let fileType = UNIT_TYPE(type);
     let path = PATH.join(process.cwd(), '/', data.name);
 
-    if (data.input && type === 'component') {
-        fileType = UNIT_TYPE(type, {input: true});
-    }
-
     if (FS.existsSync(data.name)) {
         console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exit!`));
         process.exit();

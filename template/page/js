@@ -15,9 +15,15 @@
  * 2. library
  * 3. util
  * 4. 业务
+ *
+ *  导入模块顺序
+ *     - fg 模块
+ *     - ui 模块
+ *     - 其他业务模块
  */
 
 import Vue from 'vue';
+// import u from 'underscore';
 
 import helpService from 'fin-cs/help-service';
 
@@ -29,6 +35,7 @@ new Vue({
 
     },
     data() {
+        // return u.extend({}, pageData, {xxx: 1});
         return pageData;
     },
     methods: {

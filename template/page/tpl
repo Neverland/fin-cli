@@ -14,6 +14,10 @@
 
             require('./<% name %>.js');
         {%/script%}
+
+        <!-- // 删除*注释可以打印后端返回的数据 -->
+        {%*$data|var_dump*%}
+
     {%/block%}
 
     {%block name="footer"%}

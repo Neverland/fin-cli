@@ -22,12 +22,6 @@ fin-cli  曼哈顿cli
     
 ```
 
------------------
-
-    创建完成后项目默认名称为finland， 需要全局greap替换
-
------------------
-
 ### fin create
 
 #### option
@@ -39,8 +33,6 @@ fin-cli  曼哈顿cli
 ```javascript
     // 创建普通component
     fin create -t component
-    // 创建普通input component
-    fin create -t component -i
 ```
 
 ### fin config

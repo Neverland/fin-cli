@@ -34,9 +34,7 @@ module.exports = () => {
         }
 
         if (type === 'component') {
-            let input = {
-                input: PROGRAM.args[0].input || false
-            };
+
             let name = yield PROMPT('Component name: ');
 
             if (!name) {
@@ -50,7 +48,7 @@ module.exports = () => {
                 alias = STRING(alias).camelize().s;
             }
 
-            CREATE('component', Object.assign({}, {name, alias}, userData, input));
+            CREATE('component', Object.assign({}, {name, alias}, userData));
         }
 
         if (type === 'page') {
