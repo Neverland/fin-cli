@@ -1,0 +1,15 @@
+<!-- for: ${data} as ${item}, ${key} -->
+* [${key}](components/${key}/README.md)
+    <!-- for: ${item} as ${val}, ${key} -->
+        <!-- if: ${val.length} === 1 -->
+        * [${val[0]}](components/${val[0]}/README.md)
+        <!-- else -->
+        <!-- for: ${item} as ${one}, ${index} -->
+        <!-- var: line = new Array(${index} * 4).join(' '); -->
+        <!-- var: path = ${one}.slice(0, ${index} + 1); -->
+        <!-- var: realPath = ${path}.toString().replace(/,/g, '/'); -->
+        ${line}* [${one}](components/${realPath}/README.md)
+        <!-- /for -->
+        <!-- /if -->
+    <!-- /for -->
+<!-- /for -->

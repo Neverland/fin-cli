@@ -55,6 +55,15 @@ PROGRAM
     require('../command/config')();
 });
 
+PROGRAM
+    .command('documentation')
+    .description('Generate fin documentation')
+    .option('-c, --create [boolean]', 'create doc')
+    .alias('d')
+    .action(() => {
+    require('../command/doc/index')();
+});
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {
