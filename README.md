@@ -47,3 +47,15 @@ fin-cli  曼哈顿cli
     fin config -a abc
     fin config -e abc -a abc
 ```
+
+### fin documentation
+
+#### option
+
+    -sever|s 启动doc server 默认port 4000
+    -create|c 生成文档
+ 
+```javascript
+    fin documentation -c
+    fin documentation -s
+```
