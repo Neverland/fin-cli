@@ -9,7 +9,8 @@
 
 const PATH = require('path');
 const FS = require('fs');
-const EXEC = require('child_process').execSync;
+const EXEC_SYNC = require('child_process').execSync;
+const EXEC = require('child_process').exec;
 
 const PROGRAM = require('commander');
 const CO = require('co');
@@ -58,7 +59,7 @@ let moveFile = (target) => {
     let dir = path.slice(0, path.lastIndexOf('/'));
 
     try {
-        EXEC(`mkdir -p ${dir}`);
+        EXEC_SYNC(`mkdir -p ${dir}`);
         FS.writeFileSync(path, text);
     }
     catch (e) {
@@ -76,11 +77,14 @@ module.exports = () => {
 
         let args = PROGRAM.args[0];
         let create = args.create;
+        let server = args.server;
+        let port = args.port || 4000;
 
         // create doc!
         if (create) {
+
             if (FS.existsSync(DOC_DIR)) {
-                EXEC(`rm -rf ${DOC_DIR}`);
+                EXEC_SYNC(`rm -rf ${DOC_DIR}`);
             }
 
             try {
@@ -88,11 +92,50 @@ module.exports = () => {
                 CREATE_SUMMARY(fileTree);
             }
             catch (e) {
-                // console.log(e);
+                console.log(e);
             }
 
-            console.log(CHALK.green('\n √ Collection documentation complete!'));
+            let command = [];
+
+            command.push(`cd ${DOC_SOURCE}`);
+            command.push('gitbook build');
+
+            EXEC(command.join(' && '), (error, stdout, stderr) => {
+
+                if (error) {
+                    console.log(CHALK.bold.red(`\n × ${error}`));
+                    process.exit();
+                }
+
+                console.log(stdout, stderr);
+
+                console.log(CHALK.green('\n √ Generation completed!'));
+                process.exit();
+            });
+
+        }
+
+        if (server) {
+            let command = [];
+
+            command.push(`cd ${DOC_SOURCE}`);
+            command.push(`gitbook serve -p ${port}`);
+
+            console.log(CHALK.bold.yellow(`\n请粘贴该命令至Teminal 运行\n sh ${__dirname}/doc.sh`));
             process.exit();
+
+            EXEC(command.join(' && '), (error, stdout, stderr) => {
+
+                if (error) {
+                    console.log(CHALK.bold.red(`\n × ${error}`));
+                    process.exit();
+                }
+
+                console.log(stdout, stderr);
+
+                console.log(CHALK.green('\n √ Server start!'));
+                process.exit();
+            });
         }
     });
 };
