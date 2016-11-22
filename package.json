@@ -1,6 +1,6 @@
 {
   "name": "fin-cli",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "曼哈顿fin-cli",
   "bin": {
     "fin": "bin/fin"
@@ -11,7 +11,6 @@
     "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
     "etpl": "^3.2.0",
-    "gitbook-cli": "^2.3.0",
     "os-homedir": "^1.0.2",
     "string": "^3.3.1"
   },
