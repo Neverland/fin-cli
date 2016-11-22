@@ -29,7 +29,7 @@ module.exports = () => {
         let type = PROGRAM.args[0].type;
 
         if (!type) {
-            console.log(CHALK.bold.red('\n × `type` does not exit!'));
+            console.log(CHALK.bold.red('\n × `type` does not exist!'));
             process.exit();
         }
 
@@ -38,7 +38,7 @@ module.exports = () => {
             let name = yield PROMPT('Component name: ');
 
             if (!name) {
-                console.log(CHALK.bold.red('\n × `Component name` does not exit!'));
+                console.log(CHALK.bold.red('\n × `Component name` does not exist!'));
                 process.exit();
             }
 
@@ -55,7 +55,7 @@ module.exports = () => {
             let name = yield PROMPT('Page name: ');
 
             if (!name) {
-                console.log(CHALK.bold.red('\n × `Page name` does not exit!'));
+                console.log(CHALK.bold.red('\n × `Page name` does not exist!'));
                 process.exit();
             }
 

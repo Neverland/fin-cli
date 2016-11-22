@@ -24,7 +24,7 @@ module.exports = () => {
         let pathName = args.path;
 
         if (!uri) {
-            console.log(CHALK.bold.red('\n × `uri` does not exit!'));
+            console.log(CHALK.bold.red('\n × `uri` does not exist!'));
             process.exit();
         }
 
@@ -33,7 +33,7 @@ module.exports = () => {
         let projectName = yield PROMPT('Project name: ');
 
         if (!projectName) {
-            console.log(CHALK.bold.red('\n × `Project` name does not exit!'));
+            console.log(CHALK.bold.red('\n × `Project` name does not exist!'));
             process.exit();
         }
 

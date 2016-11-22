@@ -63,15 +63,24 @@ let moveFile = (target) => {
         FS.writeFileSync(path, text);
     }
     catch (e) {
-        // console.log(e);
+        console.log(e);
     }
 };
 
 module.exports = () => {
     CO(function *() {
 
+        try {
+            EXEC_SYNC('gitbook -h');
+        }
+        catch (e) {
+            console.log(CHALK.green('\n × The gitbook is not exit! \n Please run `npm i gitbook-cli -g` !'));
+            process.exit();
+        }
+
+
         if (!FS.existsSync(TARGET_DIR)) {
-            console.log(CHALK.bold.red(`\n × The components directory is not exit!`));
+            console.log(CHALK.bold.red(`\n × The components directory is not exist!`));
             process.exit();
         }
 

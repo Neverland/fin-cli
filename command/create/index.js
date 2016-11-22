@@ -35,7 +35,7 @@ module.exports = (type, data) => {
     let path = PATH.join(process.cwd(), '/', data.name);
 
     if (FS.existsSync(data.name)) {
-        console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exit!`));
+        console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exist!`));
         process.exit();
     }
 
