@@ -1,8 +1,8 @@
 {
   "name": "fin-cli",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "曼哈顿fin-cli",
-  "author": "",
+  "author": "enix@foxmail.com",
   "bin": {
     "fin": "bin/fin"
   },
@@ -40,5 +40,6 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  },
+  "license": "MIT"
 }
