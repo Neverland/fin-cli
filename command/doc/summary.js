@@ -25,6 +25,7 @@ module.exports = fileTree => {
         let path = item.split('/')
             .slice(1, -1);
         let key = path[0];
+
         if (!summary[key]) {
             summary[key] = [];
         }

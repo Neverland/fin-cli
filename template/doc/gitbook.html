@@ -5,12 +5,8 @@
     <!-- if: ${val.length} === 1 -->
     * [${val[0]}](${url}${key}/${val[0]}/README.md)
     <!-- else -->
-    <!-- for: ${item} as ${one}, ${index} -->
-    <!-- var: line = new Array(${index} * 4).join(' '); -->
-    <!-- var: path = ${one}.slice(0, ${index} + 1); -->
-    <!-- var: realPath = ${path}.toString().replace(/,/g, '/'); -->
-        * [${one}](${url}${key}/${realPath}/README.md)
-    <!-- /for -->
+    <!-- var: path = ${val}.toString().replace(/,/g, '/'); -->
+        * [${path}](${url}${key}/${path}/README.md)
     <!-- /if -->
     <!-- /for -->
 <!-- /for -->

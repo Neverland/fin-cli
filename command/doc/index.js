@@ -9,13 +9,14 @@
 
 const PATH = require('path');
 const FS = require('fs');
+const EXEC = require('child_process').exec;
+const OS = require('os');
 
-const RUN = require('exec-cmd');
 const PROGRAM = require('commander');
 const CO = require('co');
+const RUN = require('exec-cmd');
 
 const CHALK = require('chalk');
-const OS = require('os');
 
 const ROOT_DIR = 'components';
 const TARGET_DIR = PATH.join('./', ROOT_DIR);
@@ -53,9 +54,13 @@ let createGitBookCopy = path => {
 };
 let moveFile = (target) => {
     let path = PATH.join(GITBOOK_DIR, '/', target);
+    let text = FS.readFileSync(target);
     let dir = path.slice(0, path.lastIndexOf('/'));
 
     RUN('mkdir', ['-p', dir])
+        .then(response => {
+            FS.writeFileSync(path, text);
+        })
         .catch(error => {
             console.log(CHALK.bold.red(`\n × ${error}!`));
             process.exit();
@@ -74,18 +79,19 @@ let createGitBook = () => {
         console.log(e);
     }
 
-    RUN('cd', [DOC_SOURCE])
-        .then(() => {
-            return  RUN('gitbook', ['build'])
-        })
-        .then(response => {
+    let command = [];
 
-            console.log(response[0]);
+    command.push(`cd ${DOC_SOURCE}`);
+    command.push('gitbook build');
+
+    EXEC(command.join(' && '), (error, stdout, stderr) => {
+            if (error) {
+                console.log(CHALK.bold.red(`\n × ${error[0]}`));
+                process.exit();
+            }
+
+            console.log(stdout, stderr);
             console.log(CHALK.green('\n √ Generation documentation completed!'));
-            process.exit();
-        })
-        .catch(error => {
-            console.log(CHALK.bold.red(`\n × ${error[0]}`));
             process.exit();
         });
 };
@@ -116,9 +122,14 @@ module.exports = () => {
         let server = args.server;
 
         if (server) {
+            let message = OS.platform() === 'win32'
+                ? `${__dirname}/doc.cmd`
+                : `sh ${__dirname}/doc.sh`;
+
+
             console.log( ''
-                + CHALK.green('\n Unexpected exception! \n Plz run this command on Terminal!')
-                + CHALK.gray(`\n \n \`sh ${__dirname}/doc.sh\` `)
+                + CHALK.bold.red('\n × Unexpected exception! Plz run this command on Terminal!')
+                + CHALK.white(` \n\n ${message}`)
             );
             process.exit();
         }
