@@ -59,7 +59,6 @@ PROGRAM
     .command('documentation')
     .description('Generate fin documentation')
     .option('-g, --gitbook [boolean]', 'create gitbook doc')
-    .option('-j, --jsdoc [boolean]', 'create jsdoc doc')
     .option('-s, --server [boolean]', 'server start')
     .alias('d')
     .action(() => {
