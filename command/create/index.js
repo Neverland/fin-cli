@@ -1,6 +1,6 @@
 /**
  * @file index.js
- * @author ienix(guoaimin01@baidu.com)
+ * @author ienix(enix@foxmail.com)
  *
  * @since 2016/10/11
  */

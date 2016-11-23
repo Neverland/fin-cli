@@ -1,6 +1,6 @@
 /**
- * @file documentation.js
- * @author ienix(guoaimin01@baidu.com)
+ * @file index.js
+ * @author ienix(enix@foxmail.com)
  *
  * @since 2016/11/21
  */
@@ -9,13 +9,13 @@
 
 const PATH = require('path');
 const FS = require('fs');
-const EXEC_SYNC = require('child_process').execSync;
-const EXEC = require('child_process').exec;
 
+const RUN = require('exec-cmd');
 const PROGRAM = require('commander');
 const CO = require('co');
 
 const CHALK = require('chalk');
+const OS = require('os');
 
 const ROOT_DIR = 'components';
 const TARGET_DIR = PATH.join('./', ROOT_DIR);
@@ -46,105 +46,81 @@ let createGitBookCopy = path => {
                 createGitBookCopy(target);
             }
             else if (/.+\.md$/gi.test(target)) {
-
                 fileTree.push(target);
                 moveFile(target);
-
             }
         });
 };
 let moveFile = (target) => {
     let path = PATH.join(GITBOOK_DIR, '/', target);
-    let text = FS.readFileSync(target);
     let dir = path.slice(0, path.lastIndexOf('/'));
 
+    RUN('mkdir', ['-p', dir])
+        .catch(error => {
+            console.log(CHALK.bold.red(`\n × ${error}!`));
+            process.exit();
+        });
+};
+let createGitBook = () => {
+    if (FS.existsSync(DOC_DIR)) {
+        RUN('rm', ['-rf', 'DOC_DIR']);
+    }
+
     try {
-        EXEC_SYNC(`mkdir -p ${dir}`);
-        FS.writeFileSync(path, text);
+        createGitBookCopy();
+        CREATE_SUMMARY(fileTree);
     }
     catch (e) {
         console.log(e);
     }
+
+    RUN('cd', [DOC_SOURCE])
+        .then(() => {
+            return  RUN('gitbook', ['build'])
+        })
+        .then(response => {
+
+            console.log(response[0]);
+            console.log(CHALK.green('\n √ Generation documentation completed!'));
+            process.exit();
+        })
+        .catch(error => {
+            console.log(CHALK.bold.red(`\n × ${error[0]}`));
+            process.exit();
+        });
 };
 
 module.exports = () => {
     CO(function *() {
-
-        try {
-            EXEC_SYNC('gitbook -h');
-        }
-        catch (e) {
-            console.log(CHALK.green('\n × The gitbook is not exit! \n Please run `npm i gitbook-cli -g` !'));
-            process.exit();
-        }
-
-
         if (!FS.existsSync(TARGET_DIR)) {
-            console.log(CHALK.bold.red(`\n × The components directory is not exist!`));
+            console.log(CHALK.bold.red('\n × The `components` directory is not exist!'));
             process.exit();
         }
 
         let args = PROGRAM.args[0];
-        let create = args.create;
-        let server = args.server;
-        let port = args.port || 4000;
+        let gitbook = args.gitbook;
 
         // create doc!
-        if (create) {
+        if (gitbook) {
+            RUN('gitbook', ['-h'])
+                .catch(error => {
+                    let message = '\n × The gitbook command is not exit! \n Please run `npm i gitbook-cli -g` !';
 
-            if (FS.existsSync(DOC_DIR)) {
-                EXEC_SYNC(`rm -rf ${DOC_DIR}`);
-            }
-
-            try {
-                createGitBookCopy();
-                CREATE_SUMMARY(fileTree);
-            }
-            catch (e) {
-                console.log(e);
-            }
-
-            let command = [];
-
-            command.push(`cd ${DOC_SOURCE}`);
-            command.push('gitbook build');
-
-            EXEC(command.join(' && '), (error, stdout, stderr) => {
-
-                if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
+                    console.log(error);
+                    console.log(CHALK.green(message));
                     process.exit();
-                }
-
-                console.log(stdout, stderr);
-
-                console.log(CHALK.green('\n √ Generation completed!'));
-                process.exit();
-            });
-
+                });
+            createGitBook();
         }
 
+        let server = args.server;
+
         if (server) {
-            let command = [];
-
-            command.push(`cd ${DOC_SOURCE}`);
-            command.push(`gitbook serve -p ${port}`);
-
-            console.log(CHALK.bold.yellow(`\n请粘贴该命令至Teminal 运行\n sh ${__dirname}/doc.sh`));
+            console.log( ''
+                + CHALK.green('\n Unexpected exception! \n Plz run this command on Terminal!')
+                + CHALK.gray(`\n \n \`sh ${__dirname}/doc.sh\` `)
+            );
             process.exit();
-
-            EXEC(command.join(' && '), (error, stdout, stderr) => {
-
-                if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
-                }
-
-                console.log(stdout, stderr);
-
-                console.log(CHALK.green('\n √ Server start!'));
-                process.exit();
-            });
         }
     });
 };

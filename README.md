@@ -11,19 +11,19 @@ fin-cli  曼哈顿cli
 ## usage
 
 ### fin init
-
+    fin init|i
 #### option
 
     -uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
     -path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
-    fin init -u git.github.com -p  /git/${path}
+    fin i -u git.github.com -p  /git/${path}
     
 ```
 
 ### fin create
-
+    fin create|c
 #### option
 
     -type|t 类型
@@ -36,7 +36,7 @@ fin-cli  曼哈顿cli
 ```
 
 ### fin config
-
+    fin config|C
 #### option
 
     -email|e email前缀
@@ -49,13 +49,13 @@ fin-cli  曼哈顿cli
 ```
 
 ### fin documentation
-
+    fin documentation|d
 #### option
 
-    -sever|s 启动doc server 默认port 4000
-    -create|c 生成文档
+    -sever|s 打印启动server命令
+    -gitbook|g 生成gitbook文档
  
 ```javascript
-    fin documentation -c
-    fin documentation -s
+    fin d -g
+    fin d -s
 ```

@@ -1,7 +1,8 @@
 {
   "name": "fin-cli",
-  "version": "0.5.4",
+  "version": "0.5.5"
   "description": "曼哈顿fin-cli",
+  "author": "",
   "bin": {
     "fin": "bin/fin"
   },
@@ -11,32 +12,33 @@
     "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
     "etpl": "^3.2.0",
-    "os-homedir": "^1.0.2",
+    "exec-cmd": "^2.0.1",
     "string": "^3.3.1"
   },
+
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {},
+  "bugs": {
+    "url": "https://github.com/Neverland/fin-cli/issues"
   },
+  "homepage": "https://github.com/Neverland/fin-cli#readme",
   "keywords": [
     "fin",
     "Manhattan",
     "fin-cli"
   ],
-  "author": "",
+  "license": "ISC",
+  "maintainers": [
+    {
+      "name": "neverland",
+      "email": "enix@foxmail.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Neverland/fin-cli.git"
   },
-  "bugs": {
-    "url": "https://github.com/Neverland/fin-cli/issues"
-  },
-  "homepage": "https://github.com/Neverland/fin-cli#readme",
-  "license": "ISC",
-  "readme": "# fin-cli\n\nfin-cli  曼哈顿cli\n\n## start\n```javascript\n    npm install fin-cli -g\n\n```\n\n## usage\n\n### fin init\n\n#### option\n\n    -uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]\n    -path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]\n\n```javascript\n    fin init -u git.github.com -p  /git/${path}\n    \n```\n\n### fin create\n\n#### option\n\n    -type|t 类型\n        1. type: component、input\n        2. type: page\n \n```javascript\n    // 创建普通component\n    fin create -t component\n```\n\n### fin config\n\n#### option\n\n    -email|e email前缀\n    -author|a auhtor\n \n```javascript\n    fin config -e abc\n    fin config -a abc\n    fin config -e abc -a abc\n```\n",
-  "readmeFilename": "README.md",
-  "gitHead": "b97c025bd11fdd85f573ebf3ec74b409a0e7c903",
-  "_id": "fin-cli@0.4.5",
-  "_shasum": "67572f02e306b502638ce8540a7b202c2ec8b4f4",
-  "_from": "fin-cli@latest"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }

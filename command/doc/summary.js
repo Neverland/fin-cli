@@ -1,6 +1,6 @@
 /**
- * @file documentation.js
- * @author ienix(guoaimin01@baidu.com)
+ * @file index.js
+ * @author ienix(enix@foxmail.com)
  *
  * @since 2016/11/21
  */
@@ -9,7 +9,7 @@
 
 const PATH = require('path');
 const FS = require('fs');
-const EXEC = require('child_process').execSync;
+const RUN = require('exec-cmd');
 
 const CHALK = require('chalk');
 const ETPL = require('etpl');
@@ -35,20 +35,21 @@ module.exports = fileTree => {
         return path;
     });
 
-    let template = FS.readFileSync(__dirname + '/doc.html', 'utf8');
+    let path = PATH.join(__dirname, '../../template/doc/gitbook.html');
+    let template = FS.readFileSync(path, 'utf8');
     let render = ETPL.compile(template);
     let text = render({data: summary, url: 'gitbook/components/'});
 
     text = text.replace(/^[\s\t]*(\r\n|\n|\r)/gm,'');
 
-    try {
-        EXEC(`cp ./README.md ${DOC_SOURCE}/README.md`);
-    }
-    catch(e) {
-        console.log(e);
-    }
+    RUN('cp', ['./README.md', `${DOC_SOURCE}/README.md`])
+        .catch(response => {
+            console.log(response[0]);
+            process.exit();
+        });
 
     FS.writeFileSync(`${DOC_SOURCE}/SUMMARY.md`, text);
 
     console.log(CHALK.green('\n √ Generation summary completed!'));
+    console.log(CHALK.gray('\n Wait for a moment! Doc generating...'));
 };

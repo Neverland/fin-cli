@@ -58,9 +58,9 @@ PROGRAM
 PROGRAM
     .command('documentation')
     .description('Generate fin documentation')
-    .option('-c, --create [boolean]', 'create doc')
+    .option('-g, --gitbook [boolean]', 'create gitbook doc')
+    .option('-j, --jsdoc [boolean]', 'create jsdoc doc')
     .option('-s, --server [boolean]', 'server start')
-    .option('-p, --port <string>', 'server port')
     .alias('d')
     .action(() => {
     require('../command/doc/index')();

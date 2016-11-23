@@ -11,7 +11,7 @@ const FS = require('fs');
 const PATH = require('path');
 
 const CHALK = require('chalk');
-const HOME_PATH = require('os-homedir')();
+const HOME_PATH = require('os').homedir();
 
 const FIN_RC = PATH.join(HOME_PATH, '/.finrc');
 
