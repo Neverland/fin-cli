@@ -1,46 +1,48 @@
-#<% name %>
-----------------------
+# <% name %>
 
-### UI 效果
+## Description
 
+A vue component
 
-### 组件介绍
-*
-
-### 依赖组件
-*
-
-### 依赖接口
-
-
-### 使用方法
-**1. 使用默认参数**
+## Useage
 
 ```html
 <component></component>
 ```
 
-**2. 使用全部参数**
+## Dependencies
 
-```html
+### 顶级依赖
 
-```
+- vue
+- vue-touch
+- api
 
-Vue 实例 data
+## 组件依赖
 
-```javascript
-data: {
-    uuid: '53e4e824c250ab3e3833e2cc656d1052'
-}
-```
+- fin-ui/ui-demo
 
-### 参数说明
-* uuid：字符串
+## Property
 
-### 更新日志
-* 版本：0.0.1
-* 日期：<% date %>，
-* 描述：创建文档
+|property|type|require|default|description|
+|---|---|---|---|---|
+|is|string|false|rm-city-picker|组件名|
 
-### 维护人员
- [xxxx](xxxx)
+## Method
+
+|method|type|parameter|value|description|
+|---|---|---|---|---|
+|get|private||key(string:key)|xxx|
+
+## Event
+|type|description|
+|---|---|
+|||
+
+## Changelog
+
+* 版本：0.0.1，日期：<% date %>，描述：create
+
+## Author
+
+HI：[xxx](baidu://message/?id=xxx)
