@@ -45,4 +45,4 @@ A vue component
 
 ## Author
 
-HI：[xxx](baidu://message/?id=xxx)
+HI：[<% author %>](baidu://message/?id=xxx)
