@@ -1,6 +1,6 @@
 {
   "name": "fin-cli",
-  "version": "0.5.9",
+  "version": "0.6.0",
   "description": "曼哈顿fin-cli",
   "author": "enix@foxmail.com",
   "bin": {

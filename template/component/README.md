@@ -2,7 +2,7 @@
 
 ## Description
 
-A vue component
+> A vue component
 
 ## Useage
 
