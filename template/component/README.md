@@ -12,13 +12,13 @@
 
 ## Dependencies
 
-### 顶级依赖
+### Global dependencies
 
 - vue
 - vue-touch
 - api
 
-## 组件依赖
+## Component dependencies
 
 - fin-ui/ui-demo
 
