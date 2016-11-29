@@ -94,7 +94,15 @@ module.exports = () => {
                 }
                 console.log(stdout, stderr);
 
-                createBuild();
+
+                if (pathName) {
+                    createBuild();
+                }
+                else {
+                    console.log(CHALK.green('\n √ Generation completed!'));
+                    process.exit();
+                }
+
             });
         };
 
