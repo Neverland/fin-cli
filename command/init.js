@@ -113,8 +113,7 @@ module.exports = () => {
             const ORIGIN_URL = ROOT_URI + PATH.join(pathName);
 
             command.push(`cd ${projectName}`);
-            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath}`);
-            command.push(`sh build.sh"`);
+            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh build.sh"' > BCLOUD`);
             command.push('git add BCLOUD');
             command.push('git commit -m "init finland"');
 
