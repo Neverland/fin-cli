@@ -4,31 +4,36 @@ fin-cli  曼哈顿cli
 
 ## start
 ```javascript
+
     npm install fin-cli -g
 
 ```
 
 ## usage
 
+### fin --version
+
+### fin --help
+
 ### fin init
     fin init|i
 #### option
 
-    -uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
-    -path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
+ - uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
+ - path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
+
     fin i -u git.github.com -p  /git/${path}
-    
 ```
 
 ### fin create
     fin create|c
 #### option
 
-    -type|t 类型
-        1. type: component、input
-        2. type: page
+ - type|t 类型
+    1. type: component、input
+    2. type: page
  
 ```javascript
     // 创建普通component
@@ -39,10 +44,11 @@ fin-cli  曼哈顿cli
     fin config|C
 #### option
 
-    -email|e email前缀
-    -author|a auhtor
+ - email|e email前缀
+ - author|a auhtor
  
 ```javascript
+
     fin config -e abc
     fin config -a abc
     fin config -e abc -a abc
@@ -52,8 +58,8 @@ fin-cli  曼哈顿cli
     fin documentation|d
 #### option
 
-    -sever|s 打印启动server命令
-    -gitbook|g 生成gitbook文档
+ - sever|s 打印启动server命令
+ - gitbook|g 生成gitbook文档
  
 ```javascript
     fin d -g
