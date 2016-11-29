@@ -106,8 +106,7 @@ module.exports = () => {
 
             command.push(`cd ${projectName}`);
             command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath}`);
-            command.push('mkdir output');
-            command.push(`cp BCLOUD ./output/" -u ./' > BCLOUD`);
+            command.push(`sh build.sh"`);
             command.push('git add BCLOUD');
             command.push('git commit -m "init finland"');
 
