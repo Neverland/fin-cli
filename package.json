@@ -1,6 +1,6 @@
 {
   "name": "fin-cli",
-  "version": "0.6.6",
+  "version": "0.6.8",
   "description": "曼哈顿fin-cli",
   "author": "enix@foxmail.com",
   "bin": {
@@ -39,6 +39,6 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "./figlet/index.js"
+    "postinstall": "node ./figlet/index.js --harmory"
   }
 }
