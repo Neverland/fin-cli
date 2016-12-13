@@ -17,7 +17,7 @@ const FIN_CLI = [
 ];
 
 
-console.log(`\n ${PACKAGE.version}`);
+console.log(`\n Version: ${process.env.npm_package_version}`);
 
 console.log(`\n ${FIN_CLI.join('\n')} \n`);
 
