@@ -11,10 +11,6 @@ fin-cli  曼哈顿cli
 
 ## usage
 
-### fin --version
-
-### fin --help
-
 ### fin init
     fin init|i
 #### option
