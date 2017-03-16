@@ -3,6 +3,9 @@
 {%* @since <% date %> *%}
 
 {%extends file="../../layout.tpl"%}
+    {%block name="block_title"%}
+    有钱花
+    {%/block%}
     {%block name="main"%}
         <section class="page-<% name %>">
 
