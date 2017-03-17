@@ -2,7 +2,7 @@
 
 <center>
 
-![](./static/image/logo.gif =100x)
+![](./static/image/logo.gif =100px)
 
 </center>
 
