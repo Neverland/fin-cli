@@ -20,11 +20,6 @@
   "description": "曼哈顿fin-cli",
   "devDependencies": {},
   "directories": {},
-  "dist": {
-    "shasum": "51db8caca378b2dfb1e9630e188592632d5fd406",
-    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-0.7.0.tgz"
-  },
-  "gitHead": "471268bef79fe67fe88b9a584ce293404e0f5cfa",
   "homepage": "https://github.com/Neverland/fin-cli#readme",
   "keywords": [
     "fin",
