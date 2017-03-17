@@ -2,7 +2,7 @@
 
 <center>
 
-![](./static/image/logo.gif)
+![](./static/image/logo.gif =100x)
 
 </center>
 
@@ -54,6 +54,8 @@ fin-cli  曼哈顿cli
 ```javascript
 
     fin config -e abc
+    fin config -N abc-xyz
+    fin config -p abc
     fin config -a abc
     fin config -e abc -a abc
 ```
