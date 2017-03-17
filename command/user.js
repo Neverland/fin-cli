@@ -15,7 +15,14 @@ const HOME_PATH = require('os').homedir();
 
 const FIN_RC = PATH.join(HOME_PATH, '/.finrc');
 
-let rcData = {email: 'fin', author: 'fin'};
+let rcData = {
+    email: 'fin',
+    author: 'fin',
+    project: {
+        name: 'fin',
+        id: '-fin-'
+    }
+};
 
 exports.path = HOME_PATH;
 

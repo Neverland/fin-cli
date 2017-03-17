@@ -1,5 +1,11 @@
 # fin-cli
 
+<center>
+
+![](./static/image/logo.gif =100x100)
+
+</center>
+
 fin-cli  曼哈顿cli
 
 ## start
@@ -42,6 +48,8 @@ fin-cli  曼哈顿cli
 
  - email|e email前缀
  - author|a auhtor
+ - projectName|N fin init时录入的名称
+ - p|projectId 项目唯一识别
  
 ```javascript
 

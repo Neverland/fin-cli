@@ -22,7 +22,7 @@ module.exports = () => {
 
         Object.keys(data)
             .forEach(item => {
-                list.push(`\n -${item}: ${data[item]}`);
+                list.push(`\n -${item}: ${JSON.stringify(data[item])}`);
             });
 
         console.log(''
@@ -39,6 +39,14 @@ module.exports = () => {
 
     if  (param.email) {
         data.email = param.email;
+    }
+
+    if  (param.projectName) {
+        data.project.name = param.projectName;
+    }
+
+    if  (param.projectId) {
+        data.project.id = param.projectId;
     }
 
     USER.createRC(data);

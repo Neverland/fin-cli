@@ -15,12 +15,13 @@ const PROMPT = require('co-prompt');
 const CHALK = require('chalk');
  
 const CREATE = require('./create/index');
-
 const USER = require('./user').getRcData();
+const SERVER_CONF = require('../action/createServerConf');
 
 let userData = {
     author: USER.author,
-    email: USER.email
+    email: USER.email,
+    project: USER.project
 };
 
 module.exports = () => {
@@ -59,6 +60,7 @@ module.exports = () => {
                 process.exit();
             }
 
+            SERVER_CONF(name, userData.project);
             CREATE('page', Object.assign({}, {name}, userData));
         }
 

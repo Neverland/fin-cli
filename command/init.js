@@ -17,6 +17,15 @@ const PROMPT = require('co-prompt');
 
 const CHALK = require('chalk');
 
+const USER = require('./user');
+
+let initProjectName = function (name) {
+    let data = USER.getRcData();
+
+    data.project.name = name;
+    USER.createRC(data);
+};
+
 module.exports = () => {
     CO(function *() {
         let args = PROGRAM.args[0];
@@ -36,6 +45,9 @@ module.exports = () => {
             console.log(CHALK.bold.red('\n × `Project` name does not exist!'));
             process.exit();
         }
+
+        // record project name
+        initProjectName(projectName);
 
         console.log(CHALK.white('\n Start generating...'));
 
