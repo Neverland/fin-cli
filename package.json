@@ -20,6 +20,11 @@
   "description": "曼哈顿fin-cli",
   "devDependencies": {},
   "directories": {},
+  "dist": {
+    "shasum": "9525e77761fefe68b9d06ac68e0513c97b8a857b",
+    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-0.7.2.tgz"
+  },
+  "gitHead": "9ba962382eb5abcbc4c761e53052753e8e1a4b5d",
   "homepage": "https://github.com/Neverland/fin-cli#readme",
   "keywords": [
     "fin",
@@ -35,6 +40,7 @@
   ],
   "name": "fin-cli",
   "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Neverland/fin-cli.git"
@@ -43,5 +49,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.7.2"
+  "version": "0.7.3"
 }

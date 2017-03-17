@@ -51,8 +51,24 @@ module.exports = (name, project) => {
 
     const ROUTER = `\n\r## page ${REAL_PATH_NAME}:\n${regReg} ${currentPath}\n\r`;
 
+    if (ROOT_DIR.split('/').indexOf(PROJECT_NAME) === -1) {
+
+        console.log(CHALK.bold.red(`\n × \`Project name\` or \`Project id\` is error!`));
+        return;
+    }
+
     // server.conf string
-    let serverConfPath = ROOT_DIR.slice(0, ROOT_DIR.indexOf(PROJECT_NAME) + PROJECT_NAME.length + 1) + 'server.conf';
+    let serverConfPath = ROOT_DIR.slice(0, ROOT_DIR.indexOf(PROJECT_NAME) + PROJECT_NAME.length + 1);
+
+    serverConfPath = PATH.join(serverConfPath, 'server.conf');
+
+    try {
+        FS.existsSync(serverConfPath);
+    }
+    catch (e) {
+        console.log(CHALK.red('\n ${e.message} '));
+        process.exit();
+    }
 
     // server.conf path
     const SERVER_CONF_PATH = PATH.join(serverConfPath);
