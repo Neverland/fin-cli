@@ -1,9 +1,7 @@
 # fin-cli
 
 <center>
-
-![](./static/image/logo.gif =100px)
-
+![](./static/image/logo.jpg)
 </center>
 
 fin-cli  曼哈顿cli
