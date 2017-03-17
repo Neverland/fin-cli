@@ -44,7 +44,7 @@ module.exports = (name, project) => {
     let parsePath = CWD.match(/(\w+)/g);
 
     // x/y/z/a-b-c.tpl - baseDir = z;
-    let baseDir = parsePath[parsePath.length - 1];
+    let baseDir = parsePath[parsePath.length - 1].toString();
     let browseUrl = `localhost:8080/${PROJECT_ID}/${baseDir}/${REAL_PATH_NAME}`;
 
     let regReg = `template ^(\\/${PROJECT_ID})?\\/${baseDir}\\/${REAL_PATH_NAME}($|\\?.*)$`;
