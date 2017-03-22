@@ -70,3 +70,9 @@ fin-cli  曼哈顿cli
     fin d -g
     fin d -s
 ```
+
+## changelog
+
+ |version|type|description|date|
+ |---|---|---|---|
+ |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
