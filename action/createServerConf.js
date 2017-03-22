@@ -8,6 +8,8 @@
 const PATH = require('path');
 const FS = require('fs');
 
+const RUN = require('exec-cmd');
+
 const STRING = require('string');
 const CHALK = require('chalk');
 
@@ -84,4 +86,5 @@ module.exports = (name, project) => {
     );
 
     console.log(CHALK.gray('\n Browse ') + CHALK.bold.green(browseUrl));
+    RUN('open', [`http://${browseUrl}`]);
 };
