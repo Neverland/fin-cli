@@ -33,20 +33,20 @@ module.exports = () => {
     }
 
     // FIXME: 不能使用解构， node版本问题？
-    if  (param.author) {
-        data.author = param.author;
-    }
 
-    if  (param.email) {
-        data.email = param.email;
-    }
-
-    if  (param.projectName) {
-        data.project.name = param.projectName;
-    }
-
-    if  (param.projectId) {
-        data.project.id = param.projectId;
+    switch(param) {
+        case 'author':
+            data.author = param.author;
+        break;
+        case 'email':
+            data.email = param.email;
+            break;
+        case 'projectName':
+            data.project.name = param.projectName;
+            break;
+        case 'projectId':
+            data.project.id = param.projectId;
+            break;
     }
 
     USER.createRC(data);

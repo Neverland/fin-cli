@@ -23,7 +23,7 @@ let initProjectName = function (name) {
     let data = USER.getRcData();
 
     data.project.name = name;
-    USER.createRC(data);
+    USER.upgradeRC(data);
 };
 
 module.exports = () => {
