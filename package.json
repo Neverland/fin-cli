@@ -1,50 +1,4 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "fin-cli",
-        "scope": null,
-        "escapedName": "fin-cli",
-        "name": "fin-cli",
-        "rawSpec": "",
-        "spec": "latest",
-        "type": "tag"
-      },
-      "/WorkSpace/fin-cli"
-    ]
-  ],
-  "_from": "fin-cli@latest",
-  "_id": "fin-cli@0.7.4",
-  "_inCache": true,
-  "_location": "/fin-cli",
-  "_nodeVersion": "6.9.1",
-  "_npmOperationalInternal": {
-    "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/fin-cli-0.7.4.tgz_1490152299195_0.6544953240081668"
-  },
-  "_npmUser": {
-    "name": "neverland",
-    "email": "enix@foxmail.com"
-  },
-  "_npmVersion": "3.10.8",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "fin-cli",
-    "scope": null,
-    "escapedName": "fin-cli",
-    "name": "fin-cli",
-    "rawSpec": "",
-    "spec": "latest",
-    "type": "tag"
-  },
-  "_requiredBy": [
-    "#USER"
-  ],
-  "_resolved": "https://registry.npmjs.org/fin-cli/-/fin-cli-0.7.4.tgz",
-  "_shasum": "81b8e136cb6f9d4e799ab672339248cb1635ef2f",
-  "_shrinkwrap": null,
-  "_spec": "fin-cli",
-  "_where": "/WorkSpace/fin-cli",
   "author": {
     "name": "enix@foxmail.com"
   },
@@ -95,5 +49,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.7.5"
+  "version": "0.7.6"
 }
