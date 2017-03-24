@@ -75,5 +75,4 @@ fin-cli  曼哈顿cli
 
  |version|type|description|date|
  |---|---|---|---|
- |0.7.5|bugfixed|可以自动合并user data|2017/3/24|
  |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|

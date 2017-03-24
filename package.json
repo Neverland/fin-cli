@@ -21,8 +21,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "81b8e136cb6f9d4e799ab672339248cb1635ef2f",
-    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-0.7.4.tgz"
+    "shasum": "bc52e12133c5d1ee7b9ac454b677824fd0cd545a",
+    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-0.7.5.tgz"
   },
   "gitHead": "9ba962382eb5abcbc4c761e53052753e8e1a4b5d",
   "homepage": "https://github.com/Neverland/fin-cli#readme",
@@ -49,5 +49,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "0.7.6"
+  "version": "0.7.5"
 }

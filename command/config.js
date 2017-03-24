@@ -15,9 +15,13 @@ const USER = require('./user');
 
 module.exports = () => {
     let data = USER.getRcData();
-    let param = PROGRAM.args[0];
+    let {
+            list, author,
+            email, projectName,
+            projectId
+        } = PROGRAM.args[0];
 
-    if (param.list) {
+    if (list) {
         let list = [];
 
         Object.keys(data)
@@ -31,22 +35,17 @@ module.exports = () => {
         );
         process.exit();
     }
-
-    // FIXME: 不能使用解构， node版本问题？
-
-    switch(param) {
-        case 'author':
-            data.author = param.author;
-        break;
-        case 'email':
-            data.email = param.email;
-            break;
-        case 'projectName':
-            data.project.name = param.projectName;
-            break;
-        case 'projectId':
-            data.project.id = param.projectId;
-            break;
+    else if (email) {
+        data.email = email;
+    }
+    else if (author) {
+        data.author = author;
+    }
+    else if (projectName) {
+        data.project.name = projectName;
+    }
+    else if (projectId) {
+        data.project.id = projectId;
     }
 
     USER.createRC(data);

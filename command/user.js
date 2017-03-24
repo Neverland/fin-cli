@@ -38,24 +38,26 @@ let getRcData = function () {
 
     return data
 };
+let upgradeRC = (data = {}) => {
+    let oldUserData = getRcData();
+    let newUserData = Object.assign({}, DEFAULT_RC_DATA, oldUserData, data);
+
+    FS.writeFileSync(FIN_RC_LOCAL_DATA_PATH, JSON.stringify(newUserData), {encoding: 'utf8', flag: 'w'});
+
+    console.log(CHALK.green('\n √ User information configure completed!'));
+    console.log(CHALK.gray(`\n ${JSON.stringify(newUserData)} \n`));
+};
 
 exports.finrc = FIN_RC_LOCAL_DATA_PATH;
 
 exports.getRcData = getRcData;
 
+exports.upgradeRC = upgradeRC;
+
 exports.createRC = data => {
     if (!data) {
-        data = DEFAULT_RC_DATA;
+     data = DEFAULT_RC_DATA;
     }
 
-    FS.writeFileSync(FIN_RC_LOCAL_DATA_PATH, JSON.stringify(data), {encoding: 'utf8', flag: 'w'});
-
-    console.log(CHALK.green('\n √ User information configure completed!'));
-};
-
-exports.upgradeRC = (data = {}) => {
-    let oldUserData = getRcData();
-    let newUserData = Object.assign({}, DEFAULT_RC_DATA, oldUserData, data);
-
-    FS.writeFileSync(FIN_RC_LOCAL_DATA_PATH, JSON.stringify(newUserData), {encoding: 'utf8', flag: 'w'});
+    upgradeRC(data);
 };
