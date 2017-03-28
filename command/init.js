@@ -128,8 +128,7 @@ module.exports = () => {
             command.push(`cd ${projectName}`);
             command.push(publishCommand);
             command.push(`${publishCommand}.qa`);
-            command.push('git add BCLOUD');
-            command.push('git add BCLOUD.qa');
+            command.push('git add BCLOUD BCLOUD.qa');
             command.push('git commit -m "init finland"');
 
             console.log(CHALK.bold.yellow(`\n create build file... \n`));
