@@ -124,7 +124,7 @@ module.exports = () => {
 
             const ORIGIN_URL = ROOT_URI + PATH.join(pathName);
 
-            let publishCommand = `echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh `;
+            let publishCommand = `echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh`;
             command.push(`cd ${projectName}`);
             command.push(`${publishCommand} build.sh"' > BCLOUD`);
             command.push(`${publishCommand} build-qa.sh"' > BCLOUD.qa`);
