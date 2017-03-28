@@ -1,5 +1,5 @@
 <template>
-    <section class="fin-{{is}}">
+    <section class="fin-{{ is }}">
     </section>
 </template>
 
