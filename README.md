@@ -75,4 +75,5 @@ fin-cli  曼哈顿cli
 
  |version|type|description|date|
  |---|---|---|---|
+ |0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
  |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
