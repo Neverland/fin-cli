@@ -120,13 +120,16 @@ module.exports = () => {
 
         let createBuild = () => {
             let command = [];
-            let purePath = PATH.join(pathName.slice(1))
+            let purePath = PATH.join(pathName.slice(1));
 
             const ORIGIN_URL = ROOT_URI + PATH.join(pathName);
 
+            let publishCommand = `echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh build.sh"' > BCLOUD`;
             command.push(`cd ${projectName}`);
-            command.push(`echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh build.sh"' > BCLOUD`);
+            command.push(publishCommand);
+            command.push(`${publishCommand}.qa`);
             command.push('git add BCLOUD');
+            command.push('git add BCLOUD.qa');
             command.push('git commit -m "init finland"');
 
             console.log(CHALK.bold.yellow(`\n create build file... \n`));
