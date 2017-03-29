@@ -126,10 +126,10 @@ module.exports = () => {
 
             let publishCommand = `echo 'BUILD_SUBMITTER -u . -x -e FIS -m ${purePath} -c "cd ${purePath} && sh`;
             command.push(`cd ${projectName}`);
-            command.push(`${publishCommand} build.sh"' > BCLOUD`);
-            command.push(`${publishCommand} build-qa.sh"' > BCLOUD.qa`);
+            command.push(`${publishCommand} build.sh prod"' > BCLOUD`);
+            command.push(`${publishCommand} build.sh qa"' > BCLOUD.qa`);
             command.push('git add BCLOUD BCLOUD.qa');
-            command.push('git commit -m "init finland"');
+            command.push('git commit -m "init finland sdk"');
 
             console.log(CHALK.bold.yellow(`\n create build file... \n`));
 

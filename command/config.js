@@ -31,7 +31,7 @@ module.exports = () => {
 
         console.log(''
             + CHALK.green('\n Config list:')
-            + CHALK.gray('\n' + list.join(''))
+            + CHALK.white('\n' + list.join(''))
         );
         process.exit();
     }
