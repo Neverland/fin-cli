@@ -10,6 +10,7 @@
 const PATH = require('path');
 const FS = require('fs');
 const EXEC = require('child_process').exec;
+const SPAWN = require('child_process').spawn;
 const OS = require('os');
 
 const PROGRAM = require('commander');
@@ -122,16 +123,19 @@ module.exports = () => {
         let server = args.server;
 
         if (server) {
-            let message = OS.platform() === 'win32'
+            let commmand = OS.platform() === 'win32'
                 ? `${__dirname}/doc.cmd`
-                : `sh ${__dirname}/doc.sh`;
+                : ['sh', [`${__dirname}/doc.sh`]];
 
+            let gitbookServer = SPAWN(...commmand);
 
-            console.log( ''
-                + CHALK.bold.red('\n × Unexpected exception! Plz run this command on Terminal!')
-                + CHALK.white(` \n\n ${message}`)
-            );
-            process.exit();
+            gitbookServer.stdout.on('data', (data) => {
+                console.log(data.toString());
+            });
+
+            gitbookServer.stderr.on('data', (data) => {
+                console.log(data.toString());
+            });
         }
     });
 };
