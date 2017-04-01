@@ -7,7 +7,6 @@
 
 const HOME_PATH = require('os').homedir();
 const PATH = require('path');
-const FS = require('fs');
 
 const PROGRAM = require('commander');
 const BS = require('browser-sync').create();
@@ -24,6 +23,4 @@ module.exports = () => {
         files: [path],
         reloadDelay: 1000
     });
-
-
 };
