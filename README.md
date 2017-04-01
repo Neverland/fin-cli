@@ -88,7 +88,7 @@ fin-cli  曼哈顿cli
  |version|type|description|date|
  |---|---|---|---|
  |1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|
- |1.0.0|feature|自动吊起gitbook服务|2017/4/1|
+ |1.0.0|feature|自动调起gitbook服务|2017/4/1|
  |0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
  |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
  
