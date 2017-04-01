@@ -67,6 +67,16 @@ PROGRAM
     require('../command/doc/index')();
 });
 
+PROGRAM
+    .command('live')
+    .description('Browser live load')
+    .option('-p, --port <string>', 'monitor port `default 8080`')
+    .option('-u, --url <string>', 'url `default localhost`')
+    .alias('l')
+    .action(() => {
+    require('../command/live')();
+});
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {

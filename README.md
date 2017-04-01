@@ -71,9 +71,24 @@ fin-cli  曼哈顿cli
     fin d -s
 ```
 
+### fin live
+    fin live|l
+#### option
+
+ - url|u 需要代理的url default: http://localhost
+ - port|p 需要监听的端口 default: 8080
+ 
+```javascript
+    fin l
+    fin l -u http://111.111.111 -p 8000
+```
+
 ## changelog
 
  |version|type|description|date|
  |---|---|---|---|
+ |1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|
+ |1.0.0|feature|自动吊起gitbook服务|2017/4/1|
  |0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
  |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
+ 
