@@ -8,6 +8,7 @@
 const PATH = require('path');
 const FS = require('fs');
 
+const RUN = require('exec-cmd');
 const FSE = require('fs-extra');
 const STRING = require('string');
 const CHALK = require('chalk');
