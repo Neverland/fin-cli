@@ -72,6 +72,7 @@ PROGRAM
     .description('Browser live load')
     .option('-p, --port <string>', 'monitor port `default 8080`')
     .option('-u, --url <string>', 'url `default localhost`')
+    .option('-d, --dir <string>', 'watch directory')
     .alias('l')
     .action(() => {
     require('../command/live')();

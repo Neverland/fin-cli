@@ -12,15 +12,21 @@ const PROGRAM = require('commander');
 const BS = require('browser-sync').create();
 
 module.exports = () => {
-    let {url = 'http://localhost', port = '8080'} = PROGRAM.args[0];
-    let path = PATH.join(HOME_PATH, '/', '.fis3-tmp');
+    let {url = 'http://localhost', port = '8080', dir = ''} = PROGRAM.args[0];
+    // TODO: need path?
+    // let path = PATH.join(HOME_PATH, '/', '.fis3-tmp');
+    let files = ['**'];
+
+    if (dir) {
+        files.push(dir);
+    }
 
     BS.init({
         proxy: {
             target: url + ':' + port,
             ws: true
         },
-        files: [path],
+        files: files,
         reloadDelay: 1000
     });
 };

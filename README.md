@@ -77,6 +77,7 @@ fin-cli  曼哈顿cli
 
  - url|u 需要代理的url default: http://localhost
  - port|p 需要监听的端口 default: 8080
+ - dir|d 指定需要监听的文件夹
  
 ```javascript
     fin l
@@ -87,6 +88,7 @@ fin-cli  曼哈顿cli
 
  |version|type|description|date|
  |---|---|---|---|
+ |1.0.1|feature|live 可以监听指定目录|
  |1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|
  |1.0.0|feature|自动调起gitbook服务|2017/4/1|
  |0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
