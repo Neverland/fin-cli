@@ -86,11 +86,12 @@ fin-cli  曼哈顿cli
 
 ## changelog
 
- |version|type|description|date|
- |---|---|---|---|
- |1.0.1|feature|live 可以监听指定目录|
- |1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|
- |1.0.0|feature|自动调起gitbook服务|2017/4/1|
- |0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
- |0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
+|version|type|description|date|
+|---|---|---|---|
+|1.1.0|feature|使用fin create -t page创建page时会创建好mockup|2017/4/5|
+|1.0.1|bugfixed|live 可以监听指定目录|2017/4/5|
+|1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|
+|1.0.0|feature|自动调起gitbook服务|2017/4/1|
+|0.7.8|feature|自动创建production和develop两个编译配置文件|2017/3/28|
+|0.7.4|feature|浏览器中打开创建的page URL|2017/3/22|
  
