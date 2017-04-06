@@ -89,7 +89,7 @@ let serverConf = (ENV) => {
     let truePath = TRUE_PATH.replace(/\//g, '\\/');
     let regReg = `template ^(\\/${PROJECT_ID})?${truePath}\\/${REAL_PAGE_NAME}($|\\?.*)$`;
 
-    const ROUTER = `\n\r## page ${truePath}/${REAL_PAGE_NAME}:\n${regReg} ${currentTplPath}\n\r`;
+    const ROUTER = `\n\r## page /${PROJECT_ID}${truePath.replace(/\\/g, '')}/${REAL_PAGE_NAME}:\n${regReg} ${currentTplPath}\n\r`;
 
     if (WORK_DIR.split('/').indexOf(PROJECT_NAME) === -1) {
 
