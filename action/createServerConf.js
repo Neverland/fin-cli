@@ -173,7 +173,7 @@ let createMock = (ENV) => {
 };
 
 module.exports = (name, project) => {
-    let ENV = {
+    const ENV = {
         PROJECT_NAME,
         PROJECT_ID,
         CWD,
