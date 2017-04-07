@@ -32,9 +32,6 @@ import pageData from 'page/<% name %>';
 
 new Vue({
     el: 'body',
-    props: {
-
-    },
     data() {
         // return u.extend({}, pageData, {xxx: 1});
         // 不要在页面中直接使用pageData.xxx， 应该使用this.xxx
