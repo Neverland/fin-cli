@@ -17,11 +17,17 @@ const CHALK = require('chalk');
 const CREATE = require('./create/index');
 const USER = require('./user').getRcData();
 const SERVER_CONF = require('../action/createServerConf');
+const BATCH_CREATE_PAGE = require('../action/batchCreatePage');
 
 let userData = {
     author: USER.author,
     email: USER.email,
     project: USER.project
+};
+
+let createPage = (name, userData, targetDir = '') => {
+    SERVER_CONF(name, userData.project, targetDir);
+    CREATE('page', Object.assign({}, {name}, userData), targetDir);
 };
 
 module.exports = () => {
@@ -51,8 +57,7 @@ module.exports = () => {
 
             CREATE('component', Object.assign({}, {name, alias}, userData));
         }
-
-        if (type === 'page') {
+        else if (type === 'page') {
             let name = yield PROMPT('Page name: ');
 
             if (!name) {
@@ -60,8 +65,13 @@ module.exports = () => {
                 process.exit();
             }
 
-            SERVER_CONF(name, userData.project);
-            CREATE('page', Object.assign({}, {name}, userData));
+            createPage(name, userData);
+
+            console.log(CHALK.green('\n √ Generation completed!'));
+            process.exit();
+        }
+        else if (type === 'batch') {
+            BATCH_CREATE_PAGE(userData, createPage);
         }
 
         console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));

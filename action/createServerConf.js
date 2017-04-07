@@ -13,11 +13,11 @@ const FSE = require('fs-extra');
 const STRING = require('string');
 const CHALK = require('chalk');
 
-let env = (name, project) => {
+let env = (name, project, targetDir) => {
     const PROJECT_NAME = project.name;
     const PROJECT_ID = project.id;
 
-    const CWD = process.cwd();
+    const CWD = targetDir || process.cwd();
     const WORK_DIR = PATH.resolve(CWD);
 
     const WORK_DIR_ARRAY = WORK_DIR.split('/');
@@ -172,7 +172,7 @@ let createMock = (ENV) => {
     }
 };
 
-module.exports = (name, project) => {
+module.exports = (name, project, targetDir = '') => {
     const ENV = {
         PROJECT_NAME,
         PROJECT_ID,
@@ -184,9 +184,12 @@ module.exports = (name, project) => {
         REAL_PAGE_NAME,
         PARSE_PATH,
         BASE_DIR
-    } = env(name, project);
+    } = env(name, project, targetDir);
 
     serverConf(ENV);
     createMock(ENV);
-    openUrl(ENV);
+
+    if (!targetDir) {
+        openUrl(ENV);
+    }
 };

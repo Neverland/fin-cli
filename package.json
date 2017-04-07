@@ -17,14 +17,15 @@
     "etpl": "^3.2.0",
     "exec-cmd": "^2.0.1",
     "fs-extra": "^2.1.2",
+    "js-yaml": "^3.8.3",
     "string": "^3.3.1"
   },
   "description": "曼哈顿fin-cli",
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "72599a1d5734e748143adebae705e96a090456df",
-    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-1.0.1.tgz"
+    "shasum": "f3420642b4d2ff8bdf9385282745ef4e7d76f3dc",
+    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-1.1.1.tgz"
   },
   "gitHead": "2348a2ac934a1d9f416c850389773cdf403fc927",
   "homepage": "https://github.com/Neverland/fin-cli#readme",
@@ -51,5 +52,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.1.2"
+  "version": "1.2.1"
 }

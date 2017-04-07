@@ -35,6 +35,7 @@ fin-cli  曼哈顿cli
  - type|t 类型
     1. type: component、input
     2. type: page
+    3. type: bath
  
 ```javascript
     // 创建普通component
@@ -57,6 +58,23 @@ fin-cli  曼哈顿cli
     fin config -p abc
     fin config -a abc
     fin config -e abc -a abc
+```
+
+##### batch create
+
+1. 对应`模块`下必须有，`index.yal` 文件${module}/index.yml
+2. yml样例如下
+```
+preApply:           // ${category} required
+  - name: index     // ${pageName} required
+    title: '首页'   // ${title}
+  - name: home
+    title: '主页'
+apply:
+  - name: index     // ${pageName} required
+    title: '首页'   // ${title}
+  - name: home
+    title: '主页'
 ```
 
 ### fin documentation
@@ -88,6 +106,7 @@ fin-cli  曼哈顿cli
 
 |version|type|description|date|
 |---|---|---|---|
+|1.2.0|feature|使用fin create -t batch 可以根据yml批量创建page|2017/4/7|
 |1.1.0|feature|使用fin create -t page创建page时会创建好mockup|2017/4/5|
 |1.0.1|bugfixed|live 可以监听指定目录|2017/4/5|
 |1.0.0|feature|可以同步各浏览器状态并监听文件变化|2017/4/1|

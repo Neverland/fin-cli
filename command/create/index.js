@@ -30,16 +30,24 @@ let readFile = (type, fileName) => {
     return file;
 };
 
-module.exports = (type, data) => {
+module.exports = (type, data, targetDir = '') => {
     let fileType = UNIT_TYPE(type);
-    let path = PATH.join(process.cwd(), '/', data.name);
+    let path = targetDir || process.cwd();
+
+    path = PATH.join(path, '/', data.name);
 
     if (FS.existsSync(data.name)) {
         console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exist!`));
-        process.exit();
+
+        return false;
     }
 
-    FS.mkdirSync(path);
+    try {
+        FS.mkdirSync(path);
+    }
+    catch (error) {
+        console.log(error);
+    }
 
     data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
 
@@ -74,7 +82,4 @@ module.exports = (type, data) => {
             process.exit();
         }
     });
-
-    console.log(CHALK.green('\n √ Generation completed!'));
-    process.exit();
 };
