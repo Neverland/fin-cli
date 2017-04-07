@@ -4,7 +4,7 @@
 
 {%extends file="../../layout.tpl"%}
     {%block name="block_title"%}
-    有钱花
+    <!-- if: <% title %> --><% title %><!-- else -->有钱花<!-- /if -->
     {%/block%}
     {%block name="main"%}
         <section class="page-<% name %>">
