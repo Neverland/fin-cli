@@ -23,9 +23,11 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
                 return false;
             }
 
+            let {name, title} = item;
             let pageName = STRING(item.name).dasherize().s;
+            let data = Object.assign({}, userData, {title})
 
-            createPage(pageName, userData, dirPath);
+            createPage(pageName, data, dirPath);
         });
     }
 };

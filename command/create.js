@@ -25,9 +25,9 @@ let userData = {
     project: USER.project
 };
 
-let createPage = (name, userData, targetDir = '') => {
+let createPage = (name, data, targetDir = '') => {
     SERVER_CONF(name, userData.project, targetDir);
-    CREATE('page', Object.assign({}, {name}, userData), targetDir);
+    CREATE('page', Object.assign({}, {name}, data), targetDir);
 };
 
 module.exports = () => {
