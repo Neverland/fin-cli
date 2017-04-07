@@ -13,7 +13,7 @@ const CO = require('co');
 const PROMPT = require('co-prompt');
 
 const CHALK = require('chalk');
- 
+
 const CREATE = require('./create/index');
 const USER = require('./user').getRcData();
 const SERVER_CONF = require('../action/createServerConf');
@@ -33,7 +33,7 @@ let createPage = (name, data, targetDir = '') => {
 module.exports = () => {
 
     CO(function *() {
-        let type = PROGRAM.args[0].type;
+        let {type, title = ''} = PROGRAM.args[0];
 
         if (!type) {
             console.log(CHALK.bold.red('\n × `type` does not exist!'));
@@ -65,7 +65,7 @@ module.exports = () => {
                 process.exit();
             }
 
-            createPage(name, userData);
+            createPage(name, Object.assign({}, {title}, userData));
 
             console.log(CHALK.green('\n √ Generation completed!'));
             process.exit();

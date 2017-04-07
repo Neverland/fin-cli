@@ -38,6 +38,7 @@ PROGRAM
 PROGRAM
     .command('create')
     .option('-t, --type <string>', 'create')
+    .option('-T, --title <string>', 'page title')
     .description('Generate a new fin unit [component, page, batch, ...]')
     .alias('c')
     .action(() => {
