@@ -36,7 +36,7 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
 
             createPage(pageName, data, dirPath);
 
-            pageTrace.push({'Page Name': pageName, Time: `${+(new Date())- START}ms`});
+            pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});
         });
     }
 
