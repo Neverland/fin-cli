@@ -46,7 +46,7 @@ module.exports = (type, data, targetDir = '') => {
         FS.mkdirSync(path);
     }
     catch (error) {
-        console.log(error);
+        console.log(CHALK.bold.red(`\n × Directory \`${error.path}\` is already exist!`));
     }
 
     data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});

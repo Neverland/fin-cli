@@ -14,6 +14,7 @@
     "co": "^4.6.0",
     "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
+    "console.table": "^0.8.0",
     "etpl": "^3.2.0",
     "exec-cmd": "^2.0.1",
     "fs-extra": "^2.1.2",
@@ -24,8 +25,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "f3420642b4d2ff8bdf9385282745ef4e7d76f3dc",
-    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-1.1.1.tgz"
+    "shasum": "d84dc76470496fc1831df2a5d97dd8197b8a4047",
+    "tarball": "https://registry.npmjs.org/fin-cli/-/fin-cli-1.2.5.tgz"
   },
   "gitHead": "2348a2ac934a1d9f416c850389773cdf403fc927",
   "homepage": "https://github.com/Neverland/fin-cli#readme",

@@ -5,6 +5,10 @@
  * @since 2017/4/7
  */
 
+'use strict';
+
+require('console.table');
+
 const FS = require('fs');
 const PATH = require('path');
 
@@ -15,6 +19,7 @@ const STRING = require('string');
 const CHALK = require('chalk');
 
 let batchCreatePage = (userData, list, dirPath, createPage) => {
+    let pageTrace = [];
 
     if (Array.isArray(list)) {
         list.forEach(item => {
@@ -23,16 +28,23 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
                 return false;
             }
 
+            const START = +(new Date());
+
             let {name, title} = item;
             let pageName = STRING(item.name).dasherize().s;
             let data = Object.assign({}, userData, {title})
 
             createPage(pageName, data, dirPath);
+
+            pageTrace.push({'Page Name': pageName, Time: `${+(new Date())- START}ms`});
         });
     }
+
+    return pageTrace;
 };
 
 module.exports = (userData, createPage) => {
+    const START = + (new Date());
     const CWD = process.cwd();
     const ymlPath = PATH.join(CWD, 'index.yml');
 
@@ -50,6 +62,8 @@ module.exports = (userData, createPage) => {
        process.exit();
     }
 
+    let pagesMessage = [];
+
     Object.keys(INDEX_DOC).forEach(key => {
         let dirName = STRING(key).dasherize().s;
         let dirPath = PATH.join(CWD, 'page', dirName);
@@ -58,9 +72,15 @@ module.exports = (userData, createPage) => {
             FSE.ensureDirSync(dirPath);
         }
 
-        batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage);
+        let page = batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage);
+
+        pagesMessage = pagesMessage.concat(page);
     });
 
-    console.log(CHALK.green('\n √ Batch generation completed!'));
+
+    console.log(CHALK.green('\n √ Batch generation completed! \n'));
+    console.table(pagesMessage);
+    console.log(CHALK.green(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms.`));
+
     process.exit();
 };

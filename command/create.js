@@ -7,6 +7,8 @@
 
 'use strict';
 
+require('console.table');
+
 const STRING = require('string');
 const PROGRAM = require('commander');
 const CO = require('co');
