@@ -9,6 +9,8 @@
 
 require('console.table');
 
+const PATH = require('path');
+
 const STRING = require('string');
 const PROGRAM = require('commander');
 const CO = require('co');
@@ -18,8 +20,9 @@ const CHALK = require('chalk');
 
 const CREATE = require('./create/index');
 const USER = require('./user').getRcData();
-const SERVER_CONF = require('../action/createServerConf');
+const CREATE_PAGE_SERVICE = require('../action/createPageService');
 const BATCH_CREATE_PAGE = require('../action/batchCreatePage');
+const CREATE_INDEX_PAGE = require('../action/createIndexPage');
 
 let userData = {
     author: USER.author,
@@ -28,7 +31,7 @@ let userData = {
 };
 
 let createPage = (name, data, targetDir = '') => {
-    SERVER_CONF(name, userData.project, targetDir);
+    CREATE_PAGE_SERVICE(name, userData.project, targetDir);
     CREATE('page', Object.assign({}, {name}, data), targetDir);
 };
 
@@ -75,8 +78,29 @@ module.exports = () => {
         else if (type === 'batch') {
             BATCH_CREATE_PAGE(userData, createPage);
         }
+        else if (type === 'index') {
+            const PAGE_NAME = 'index';
+            const DEV_DIR = 'fin-dev';
+            const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
 
-        console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));
-        process.exit();
+            CREATE_INDEX_PAGE(PAGE_NAME, userData, TARGET_DIR)
+                .then(result => {
+                    let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {pageData: result});
+
+                    CREATE('index', pageData, TARGET_DIR);
+
+                    console.log(CHALK.green('\n √ Generation completed!'));
+                    process.exit();
+                })
+                .catch(error => {
+                    console.log(CHALK.bold.red(`\n × \`${error}\``));
+                    process.exit();
+                });
+
+        }
+        else {
+            console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));
+            process.exit();
+        }
     });
 };

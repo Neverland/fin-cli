@@ -13,10 +13,12 @@ const FS = require('fs');
 const PATH = require('path');
 
 const FSE = require('fs-extra');
-const YAML = require('js-yaml');
+
 const STRING = require('string');
 
 const CHALK = require('chalk');
+
+const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 
 let batchCreatePage = (userData, list, dirPath, createPage) => {
     let pageTrace = [];
@@ -32,10 +34,9 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
 
             let {name, title} = item;
             let pageName = STRING(item.name).dasherize().s;
-            let data = Object.assign({}, userData, {title})
+            let data = Object.assign({}, userData, {title});
 
             createPage(pageName, data, dirPath);
-
             pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});
         });
     }
@@ -46,14 +47,7 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
 module.exports = (userData, createPage) => {
     const START = + (new Date());
     const CWD = process.cwd();
-    const ymlPath = PATH.join(CWD, 'index.yml');
-
-    if (!FS.existsSync(ymlPath)) {
-        console.log(CHALK.bold.red('\n × `index.yml` does not exist!'));
-        process.exit();
-    }
-
-    const INDEX_DOC = YAML.safeLoad(FS.readFileSync(ymlPath, 'utf8'));
+    const INDEX_DOC = READ_PROJECT_YAML(CWD);
 
     let keyMap = Object.keys(INDEX_DOC);
 

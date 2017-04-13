@@ -10,6 +10,8 @@
 const FS = require('fs');
 const PATH = require('path');
 
+const FSE = require('fs-extra');
+
 const ETPL = require('etpl');
 
 const CHALK = require('chalk');
@@ -43,7 +45,7 @@ module.exports = (type, data, targetDir = '') => {
     }
 
     try {
-        FS.mkdirSync(path);
+        FSE.ensureDirSync(path);
     }
     catch (error) {
         console.log(CHALK.bold.red(`\n × Directory \`${error.path}\` is already exist!`));

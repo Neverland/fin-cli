@@ -1,0 +1,16 @@
+{%* @file: <% name %> *%}
+{%* @author: <% author %>(<% email %>@baidu.com) *%}
+{%* @since <% date %> *%}
+
+{%extends file="../../layout.tpl"%}
+    {%block name="block_title"%}
+    <!-- if: <% title %> --><% title %><!-- else -->有钱花<!-- /if -->
+    {%/block%}
+    {%block name="main"%}
+
+
+    {%/block%}
+
+    {%block name="footer"%}
+        <help-service></help-service>
+    {%/block%}

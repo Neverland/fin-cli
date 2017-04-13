@@ -21,6 +21,11 @@ module.exports = function(type, extra) {
             ['js'],
             ['less'],
             ['tpl']
+        ],
+        index: [
+            ['js'],
+            ['less'],
+            ['tpl']
         ]
     }[type]
 };
