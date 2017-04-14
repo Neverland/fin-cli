@@ -1,5 +1,5 @@
 /**
- * @file createServerConf
+ * @file create mock
  * @author ienix(enix@foxmail.com)
  *
  * @since 2017/4/13
