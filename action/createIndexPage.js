@@ -8,7 +8,8 @@
 const QRCODE = require('qrcode');
 
 const IP = require('ip');
-const CHALK = require('chalk');
+
+const LOG = require('../util/log');
 
 const GET_PAGE_ENV = require('../util/getPageEnv');
 
@@ -36,43 +37,51 @@ let createIndexServerConf = (pageName, project, targetDir) => {
     OPEN_URL(ENV);
 };
 
+let createQrCode = (page, category, id) => {
+    let url = `/${id}/${category}/${page.name}`;
+    let {name, title} = page;
+
+    return new Promise((resolve, reject) => {
+
+        QRCODE.toDataURL(`http://${IP_ADDRESS}:8080${url}`, (error, result) => {
+
+            if (error) {
+                reject(error);
+
+                LOG(`${error}`);
+            }
+
+            resolve({url, title: title ? title : name, name, qrCode: result, category});
+        });
+
+    });
+};
+let filterData = data => {
+    let list = {};
+
+    data.forEach(item => {
+        let key = item.category;
+
+        list[key] || (list[key] = []);
+
+        list[key].push(item);
+    });
+
+    return Promise.resolve(list);
+};
+
 module.exports = (pageName, userData, targetDir) => {
     const CWD = process.cwd();
     const INDEX_DOC = READ_PROJECT_YAML(CWD);
 
     createIndexServerConf(pageName, userData.project, targetDir);
 
-    let pageList = {};
     let queue = [];
 
-    Object.keys(INDEX_DOC).forEach(category => {
-        pageList[category] = [];
-
-        INDEX_DOC[category].forEach((page, index) => {
-            let url = `/${userData.project.id}/${category}/${page.name}`;
-            let promise = new Promise((resolve, reject) => {
-
-                QRCODE.toDataURL(`http://${IP_ADDRESS}:8080${url}`, (error, result) => {
-
-                    if (error) {
-                        reject(error);
-
-                        console.log(CHALK.bold.red(`\n × ${error}`));
-                        process.exit();
-                    }
-
-                    pageList[category].push({url, title: page.title || page.name, index, qrCode: result});
-                    resolve({success: true});
-                });
-
-            });
-
-            queue.push(promise);
-        });
-    });
+    Object.keys(INDEX_DOC).forEach(category => INDEX_DOC[category].forEach(page => {
+        return queue.push(createQrCode(page, category, userData.project.id))
+    }));
 
     return Promise.all(queue)
-        .then(result => {
-            return Promise.resolve(pageList);
-        });
+        .then(result => filterData(result));
 };

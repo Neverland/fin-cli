@@ -8,7 +8,7 @@
 const PATH = require('path');
 
 const STRING = require('string');
-const CHALK = require('chalk');
+const LOG = require('./log');
 
 /**
  * 获取要创建page的环境常量
@@ -28,7 +28,8 @@ module.exports = (name, project, targetDir) => {
     const WORK_DIR_ARRAY = WORK_DIR.split('/');
 
     if (WORK_DIR_ARRAY.indexOf(PROJECT_NAME) === -1) {
-        console.log(CHALK.bold.red(`\n × \`Project id\` is error!`));
+
+        LOG('× \`Project id\` is error!', 'red');
 
         return false;
     }

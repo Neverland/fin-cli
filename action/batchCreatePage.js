@@ -16,7 +16,7 @@ const FSE = require('fs-extra');
 
 const STRING = require('string');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 
@@ -26,7 +26,7 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
     if (Array.isArray(list)) {
         list.forEach(item => {
             if (!item.name) {
-                console.log(CHALK.bold.red('\n × Page `name` does not exist!'));
+                LOG('× Page `name` does not exist!', 'red');
                 return false;
             }
 
@@ -52,8 +52,8 @@ module.exports = (userData, createPage) => {
     let keyMap = Object.keys(INDEX_DOC);
 
     if (keyMap === 0) {
-       console.log(CHALK.bold.red('\n × `index.yml` has some error!'));
-       process.exit();
+
+        LOG('`index.yml` has some error!', 'fail');
     }
 
     let pagesMessage = [];
@@ -71,10 +71,9 @@ module.exports = (userData, createPage) => {
         pagesMessage = pagesMessage.concat(page);
     });
 
-
-    console.log(CHALK.green('\n √ Batch generation completed! \n'));
+    LOG('√ Batch generation completed! \n', 'green');
     console.table(pagesMessage);
-    console.log(CHALK.green(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms.`));
+    LOG(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms. \n`, 'green');
 
     process.exit();
 };

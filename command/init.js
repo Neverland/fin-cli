@@ -15,7 +15,7 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
 const USER = require('./user');
 
@@ -33,8 +33,7 @@ module.exports = () => {
         let pathName = args.path;
 
         if (!uri) {
-            console.log(CHALK.bold.red('\n × `uri` does not exist!'));
-            process.exit();
+            LOG('`uri` does not exist!');
         }
 
         const ROOT_URI = `ssh://git@${uri}:8235`;
@@ -42,22 +41,20 @@ module.exports = () => {
         let projectName = yield PROMPT('Project name: ');
 
         if (!projectName) {
-            console.log(CHALK.bold.red('\n × `Project` name does not exist!'));
-            process.exit();
+            LOG('`Project` name does not exist!');
         }
 
         // record project name
         initProjectName(projectName);
 
-        console.log(CHALK.white('\n Start generating...'));
+        LOG('Start generating... \n', 'yellow');
 
         let cloneInit = () => {
             let command = `git clone ${ROOT_URI}/baidu/finland/init ${projectName}`;
 
             EXEC(command, (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × Command failed: ${error.cmd}`));
-                    process.exit();
+                    LOG(`Command failed: ${error.cmd}`, 'fail');
                 }
                 console.log(stderr);
 
@@ -66,12 +63,11 @@ module.exports = () => {
         };
 
         let npmInstall = () => {
-            console.log(CHALK.bold.yellow(`\n npm install... \n`));
+            LOG('\n npm install... \n', 'yellow');
 
             EXEC(`cd ${projectName} && npm install --production`,  (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
                 console.log(stdout, stderr);
 
@@ -91,7 +87,7 @@ module.exports = () => {
             ];
             let command = [];
 
-            console.log(CHALK.bold.yellow(`\n add submodule... \n`));
+            LOG('\n add submodule... \n', 'yellow');
 
             modules.forEach(item => {
                 command.push(`git submodule add ${ROOT_URI}/baidu/finland/${item[0]} components/${item[1]}`);
@@ -101,8 +97,7 @@ module.exports = () => {
 
             EXEC(command, (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
                 console.log(stdout, stderr);
 
@@ -111,8 +106,7 @@ module.exports = () => {
                     createBuild();
                 }
                 else {
-                    console.log(CHALK.green('\n √ Generation completed!'));
-                    process.exit();
+                    LOG('Generation completed!', 'success');
                 }
 
             });
@@ -131,12 +125,11 @@ module.exports = () => {
             command.push('git add BCLOUD BCLOUD.qa');
             command.push('git commit -m "init finland sdk"');
 
-            console.log(CHALK.bold.yellow(`\n create build file... \n`));
+            LOG('\n create build file... \n', 'yellow');
 
             EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
                 console.log(stdout, stderr);
 
@@ -144,8 +137,7 @@ module.exports = () => {
                     pushToURepertory(purePath, ORIGIN_URL);
                 }
                 else {
-                    console.log(CHALK.green('\n √ Generation completed!'));
-                    process.exit();
+                    LOG('Generation completed!', 'success');
                 }
             });
         };
@@ -160,13 +152,11 @@ module.exports = () => {
 
             EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
                 console.log(stdout, stderr);
 
-                console.log(CHALK.green('\n √ Generation completed!'));
-                process.exit();
+                LOG('Generation completed!', 'success');
             });
         };
 

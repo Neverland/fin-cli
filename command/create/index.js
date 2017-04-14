@@ -14,7 +14,7 @@ const FSE = require('fs-extra');
 
 const ETPL = require('etpl');
 
-const CHALK = require('chalk');
+const LOG = require('../../util/log');
 
 const UNIT_TYPE = require('./config');
 
@@ -39,8 +39,7 @@ module.exports = (type, data, targetDir = '') => {
     path = PATH.join(path, '/', data.name);
 
     if (FS.existsSync(data.name)) {
-        console.log(CHALK.bold.red(`\n × \`${data.name}\` is already exist!`));
-
+        LOG(`\`${data.name}\` is already exist!`, 'red');
         return false;
     }
 
@@ -48,7 +47,7 @@ module.exports = (type, data, targetDir = '') => {
         FSE.ensureDirSync(path);
     }
     catch (error) {
-        console.log(CHALK.bold.red(`\n × Directory \`${error.path}\` is already exist!`));
+        LOG(`Directory \`${error.path}\` is already exist!`, 'red');
     }
 
     data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
@@ -80,8 +79,7 @@ module.exports = (type, data, targetDir = '') => {
             );
         }
         catch (error) {
-            console.log(CHALK.green('\n × Generation failure!'));
-            process.exit();
+            LOG(`Directory \`${error.path}\` is already exist!`, 'fail');
         }
     });
 };

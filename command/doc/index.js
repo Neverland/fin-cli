@@ -17,7 +17,7 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const RUN = require('exec-cmd');
 
-const CHALK = require('chalk');
+const LOG = require('../../util/log');
 
 const ROOT_DIR = 'components';
 const TARGET_DIR = PATH.join('./', ROOT_DIR);
@@ -59,12 +59,11 @@ let moveFile = (target) => {
     let dir = path.slice(0, path.lastIndexOf('/'));
 
     RUN('mkdir', ['-p', dir])
-        .then(response => {
+        .then(() => {
             FS.writeFileSync(path, text);
         })
         .catch(error => {
-            console.log(CHALK.bold.red(`\n × ${error}!`));
-            process.exit();
+            LOG(`${error}!`, 'fail');
         });
 };
 let createGitBook = () => {
@@ -86,22 +85,21 @@ let createGitBook = () => {
     command.push('gitbook build');
 
     EXEC(command.join(' && '), (error, stdout, stderr) => {
-            if (error) {
-                console.log(CHALK.bold.red(`\n × ${error[0]}`));
-                process.exit();
-            }
-
-            console.log(stdout, stderr);
-            console.log(CHALK.green('\n √ Generation documentation completed!'));
+        if (error) {
+            console.log(CHALK.bold.red(`\n × ${error[0]}`));
             process.exit();
-        });
+        }
+
+        console.log(stdout, stderr);
+
+        LOG('Generation documentation completed!', 'success');
+    });
 };
 
 module.exports = () => {
     CO(function *() {
         if (!FS.existsSync(TARGET_DIR)) {
-            console.log(CHALK.bold.red('\n × The `components` directory is not exist!'));
-            process.exit();
+            LOG('The `components` directory is not exist!', 'fail');
         }
 
         let args = PROGRAM.args[0];
@@ -111,11 +109,11 @@ module.exports = () => {
         if (gitbook) {
             RUN('gitbook', ['-h'])
                 .catch(error => {
-                    let message = '\n × The gitbook command is not exit! \n Please run `npm i gitbook-cli -g` !';
+                    let message = 'The gitbook command is not exit! \n Please run `npm i gitbook-cli -g` !';
 
                     console.log(error);
-                    console.log(CHALK.green(message));
-                    process.exit();
+
+                    LOG(message, 'fail');
                 });
             createGitBook();
         }
