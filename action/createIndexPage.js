@@ -52,7 +52,7 @@ module.exports = (pageName, userData, targetDir) => {
             let url = `/${userData.project.id}/${category}/${page.name}`;
             let promise = new Promise((resolve, reject) => {
 
-                QRCODE.toDataURL(`http//:${IP_ADDRESS}:8080${url}`, (error, result) => {
+                QRCODE.toDataURL(`http://${IP_ADDRESS}:8080${url}`, (error, result) => {
 
                     if (error) {
                         reject(error);
