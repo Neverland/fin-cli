@@ -10,8 +10,9 @@
 const FS = require('fs');
 const PATH = require('path');
 
-const CHALK = require('chalk');
 const HOME_PATH = require('os').homedir();
+
+const LOG = require('../util/log');
 
 const FIN_RC_LOCAL_DATA_PATH = PATH.join(HOME_PATH, '/.finrc');
 
@@ -44,8 +45,8 @@ let upgradeRC = (data = {}) => {
 
     FS.writeFileSync(FIN_RC_LOCAL_DATA_PATH, JSON.stringify(newUserData), {encoding: 'utf8', flag: 'w'});
 
-    console.log(CHALK.green('\n √ User information configure completed!'));
-    console.log(`\n ${JSON.stringify(newUserData)} \n`);
+    LOG('√ User information configure completed!', 'green');
+    LOG(`\n ${JSON.stringify(newUserData)} \n`, 'white');
 };
 
 exports.finrc = FIN_RC_LOCAL_DATA_PATH;

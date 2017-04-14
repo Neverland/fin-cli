@@ -10,7 +10,7 @@ const FS = require('fs');
 
 const STRING = require('string');
 
-const CHALK = require('chalk');
+const LOG = require('../../util/log');
 
 module.exports = (ENV) => {
     let {
@@ -32,7 +32,8 @@ module.exports = (ENV) => {
 
     if (WORK_DIR.split('/').indexOf(PROJECT_NAME) === -1) {
 
-        console.log(CHALK.bold.red(`\n × \`Project name\` or \`Project id\` is error!`));
+        LOG('\n × \`Project name\` or \`Project id\` is error!', 'red');
+
         return false;
     }
 
@@ -45,8 +46,7 @@ module.exports = (ENV) => {
         FS.existsSync(serverConfPath);
     }
     catch (e) {
-        console.log(CHALK.red('\n ${e.message} '));
-        process.exit();
+        LOG(`${e.message}`);
     }
 
     // server.conf path

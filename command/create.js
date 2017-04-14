@@ -16,7 +16,7 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
 const CREATE = require('./create/index');
 const USER = require('./user').getRcData();
@@ -41,8 +41,7 @@ module.exports = () => {
         let {type, title = ''} = PROGRAM.args[0];
 
         if (!type) {
-            console.log(CHALK.bold.red('\n × `type` does not exist!'));
-            process.exit();
+            LOG('`type` does not exist!');
         }
 
         if (type === 'component') {
@@ -50,8 +49,7 @@ module.exports = () => {
             let name = yield PROMPT('Component name: ');
 
             if (!name) {
-                console.log(CHALK.bold.red('\n × `Component name` does not exist!'));
-                process.exit();
+                LOG('`Component name` does not exist!');
             }
 
             let alias = name;
@@ -61,19 +59,18 @@ module.exports = () => {
             }
 
             CREATE('component', Object.assign({}, {name, alias}, userData));
+
+            LOG('Generation completed!', 'success');
         }
         else if (type === 'page') {
             let name = yield PROMPT('Page name: ');
 
             if (!name) {
-                console.log(CHALK.bold.red('\n × `Page name` does not exist!'));
-                process.exit();
+                LOG('`Page name` does not exist!');
             }
 
             createPage(name, Object.assign({}, {title}, userData));
-
-            console.log(CHALK.green('\n √ Generation completed!'));
-            process.exit();
+            LOG('Generation completed!', 'success');
         }
         else if (type === 'batch') {
             BATCH_CREATE_PAGE(userData, createPage);
@@ -88,19 +85,16 @@ module.exports = () => {
                     let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {page: result});
 
                     CREATE('index', pageData, TARGET_DIR);
-
-                    console.log(CHALK.green('\n √ Generation completed!'));
-                    process.exit();
+                    LOG('Generation completed!', 'success');
                 })
                 .catch(error => {
-                    console.log(CHALK.bold.red(`\n × \`${error}\``));
-                    process.exit();
+
+                    LOG(`\n × \`${error}\``);
                 });
 
         }
         else {
-            console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));
-            process.exit();
+            LOG('The type \`${type}\` does not support!');
         }
     });
 };

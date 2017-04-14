@@ -10,12 +10,13 @@ const PATH = require('path');
 
 const YAML = require('js-yaml');
 
+const LOG = require('./log');
+
 module.exports = (root) => {
     const ymlPath = PATH.join(root, 'index.yml');
 
     if (!FS.existsSync(ymlPath)) {
-        console.log(CHALK.bold.red('\n × `index.yml` does not exist!'));
-        process.exit();
+        LOG('`index.yml` does not exist!', 'fail');
     }
 
     return YAML.safeLoad(FS.readFileSync(ymlPath, 'utf8'));

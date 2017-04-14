@@ -11,7 +11,8 @@ const PATH = require('path');
 const FS = require('fs');
 const RUN = require('exec-cmd');
 
-const CHALK = require('chalk');
+const LOG = require('../../util/log');
+
 const ETPL = require('etpl');
 
 const DOC_DIR = PATH.join('./', 'doc');
@@ -51,6 +52,6 @@ module.exports = fileTree => {
 
     FS.writeFileSync(`${DOC_SOURCE}/SUMMARY.md`, text);
 
-    console.log(CHALK.green('\n √ Generation summary completed!'));
-    console.log(CHALK.gray('\n Wait for a moment! Doc generating...'));
+    LOG('√ Generation summary completed!', 'green');
+    LOG('Wait for a moment! Doc generating...', 'gray');
 };
