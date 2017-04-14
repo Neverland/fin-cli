@@ -38,7 +38,7 @@ module.exports = (pageName, userData, targetDir) => {
     const CWD = process.cwd();
     const INDEX_DOC = READ_PROJECT_YAML(CWD);
 
-    // createIndexServerConf(pageName, userData.project, targetDir);
+    createIndexServerConf(pageName, userData.project, targetDir);
 
     let pageList = {};
     let queue = [];
