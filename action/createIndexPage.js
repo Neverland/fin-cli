@@ -14,6 +14,7 @@ const GET_PAGE_ENV = require('../util/getPageEnv');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 const CREATE_SERVER_CONF = require('../action/page/createServerConf');
+const OPEN_URL = require('../action/page/openURL');
 
 const IP_ADDRESS = IP.address();
 
@@ -32,6 +33,7 @@ let createIndexServerConf = (pageName, project, targetDir) => {
     } = GET_PAGE_ENV(pageName, project, targetDir);
 
     CREATE_SERVER_CONF(ENV);
+    OPEN_URL(ENV);
 };
 
 module.exports = (pageName, userData, targetDir) => {
