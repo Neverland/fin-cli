@@ -1,7 +1,5 @@
 # fin-cli
 
-[TOC]
-
 <center>
 
 ![](./static/image/logo.jpg)
