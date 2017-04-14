@@ -1,5 +1,7 @@
 # fin-cli
 
+[TOC]
+
 <center>
 
 ![](./static/image/logo.jpg)
@@ -33,7 +35,7 @@ fin-cli  曼哈顿cli
 #### option
 
  - type|t 类型
-    1. type: component、input
+    1. type: component
     2. type: page
     3. type: bath
     4. type: index
