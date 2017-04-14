@@ -5,4 +5,66 @@
  * @since <% date %>
  */
 
-2
+@import "/components/fin-ui/css/variable.less";
+@import "/components/fin-ui/css/mixin.less";
+
+/**
+ * @require "fin-ui/css/util.less"
+ * @require "fin-ui/css/icon.less"
+ */
+
+.page-<% name %> {
+padding: 20px;
+    padding: 20px;
+
+    h1 {
+      margin: 20px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    h2  {
+    font-size: 24px;
+    margin-bottom: 20px;
+    }
+
+    #index {
+    li {
+
+    }
+    a {
+        font-size: 16px;
+        line-height: 30px;
+    }
+    margin-bottom: 20px;
+    }
+
+    #pageList {
+      table {
+        width: 100%;
+        margin-bottom: 20px;
+        td {
+          vertical-align: middle;
+          padding: 5px;
+        }
+        th {
+          font-size: 16px;
+          padding: 10px 0;
+          font-weight: bold;
+          text-align: left;
+          background: #eee;
+        }
+      }
+      .link {
+          font-size: 16px;
+          color: #00f;
+          &:hover {
+            text-decoration: underline;
+          }
+      }
+      .preview {
+        width: 150px;
+        height: 150px;
+      }
+    }
+}

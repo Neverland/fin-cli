@@ -7,12 +7,15 @@
 
 const QRCODE = require('qrcode');
 
+const IP = require('ip');
 const CHALK = require('chalk');
 
 const GET_PAGE_ENV = require('../util/getPageEnv');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 const CREATE_SERVER_CONF = require('../action/page/createServerConf');
+
+const IP_ADDRESS = IP.address();
 
 let createIndexServerConf = (pageName, project, targetDir) => {
     const ENV = {
@@ -44,10 +47,10 @@ module.exports = (pageName, userData, targetDir) => {
         pageList[category] = [];
 
         INDEX_DOC[category].forEach((page, index) => {
-            let url = `//:localhost:8080/${userData.project.id}/${category}/${page.name}`;
+            let url = `/${userData.project.id}/${category}/${page.name}`;
             let promise = new Promise((resolve, reject) => {
 
-                QRCODE.toDataURL(`http${url}`, (error, result) => {
+                QRCODE.toDataURL(`http//:${IP_ADDRESS}:8080${url}`, (error, result) => {
 
                     if (error) {
                         reject(error);
@@ -56,8 +59,8 @@ module.exports = (pageName, userData, targetDir) => {
                         process.exit();
                     }
 
-                    pageList[category].push({url: result, title: page.title || page.name});
-                    resolve({url, qrCode: result, title: page.title || page.name, index});
+                    pageList[category].push({url, title: page.title || page.name, index, qrCode: result});
+                    resolve({success: true});
                 });
 
             });
@@ -68,6 +71,6 @@ module.exports = (pageName, userData, targetDir) => {
 
     return Promise.all(queue)
         .then(result => {
-
+            return Promise.resolve(pageList);
         });
 };

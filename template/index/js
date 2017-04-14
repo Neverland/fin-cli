@@ -4,3 +4,16 @@
  *
  * @since <% date %>
  */
+
+import Vue from 'vue';
+
+import {redirect} from 'fin-fg/util/index';
+
+new Vue({
+    el: 'body',
+    methods: {
+        jumpTo(url) {
+            redirect(url);
+        }
+    }
+});

@@ -85,7 +85,7 @@ module.exports = () => {
 
             CREATE_INDEX_PAGE(PAGE_NAME, userData, TARGET_DIR)
                 .then(result => {
-                    let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {pageData: result});
+                    let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {page: result});
 
                     CREATE('index', pageData, TARGET_DIR);
 

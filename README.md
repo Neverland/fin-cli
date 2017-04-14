@@ -36,6 +36,7 @@ fin-cli  曼哈顿cli
     1. type: component、input
     2. type: page
     3. type: bath
+    4. type: index
  
 ```javascript
     // 创建普通component
@@ -106,6 +107,7 @@ apply:
 
 |version|type|description|date|
 |---|---|---|---|
+|1.3.0|feature|使用fin create -t index 可以根据yml创建page index|2017/4/14|
 |1.2.0|feature|使用fin create -t batch 可以根据yml批量创建page|2017/4/7|
 |1.1.0|feature|使用fin create -t page创建page时会创建好mockup|2017/4/5|
 |1.0.1|bugfixed|live 可以监听指定目录|2017/4/5|
