@@ -69,7 +69,7 @@ fin-cli  曼哈顿cli
 
 ##### batch create
 
-1. 对应`模块`下必须有，`index.yal` 文件${module}/index.yml
+1. 对应`模块`下必须有，`index.yml` 文件${module}/index.yml
 2. yml样例如下
 ```
 preApply:           // ${category} required
