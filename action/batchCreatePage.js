@@ -20,7 +20,7 @@ const LOG = require('../util/log');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 
-let batchCreatePage = (userData, list, dirPath, createPage) => {
+let batchCreatePage = (userData, list, dirPath, createPage, extra) => {
     let pageTrace = [];
 
     if (Array.isArray(list)) {
@@ -36,7 +36,7 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
             let pageName = STRING(item.name).dasherize().s;
             let data = Object.assign({}, userData, {title});
 
-            createPage(pageName, data, dirPath);
+            createPage({type: extra, name: pageName, data, targetDir: dirPath});
             pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});
         });
     }
@@ -44,7 +44,7 @@ let batchCreatePage = (userData, list, dirPath, createPage) => {
     return pageTrace;
 };
 
-module.exports = (userData, createPage) => {
+module.exports = (userData, createPage, extra) => {
     const START = + (new Date());
     const CWD = process.cwd();
     const INDEX_DOC = READ_PROJECT_YAML(CWD);
@@ -66,7 +66,7 @@ module.exports = (userData, createPage) => {
             FSE.ensureDirSync(dirPath);
         }
 
-        let page = batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage);
+        let page = batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage, extra);
 
         pagesMessage = pagesMessage.concat(page);
     });

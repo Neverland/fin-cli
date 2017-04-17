@@ -16,6 +16,7 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
+const PROGRESS = require('../util/progress')();
 const LOG = require('../util/log');
 
 const CREATE = require('./create/index');
@@ -29,72 +30,96 @@ let userData = {
     email: USER.email,
     project: USER.project
 };
+let createPage = (option) => {
+    let {type = 'page', name, data, targetDir = ''} = option;
 
-let createPage = (name, data, targetDir = '') => {
     CREATE_PAGE_SERVICE(name, userData.project, targetDir);
-    CREATE('page', Object.assign({}, {name}, data), targetDir);
+    CREATE(type, Object.assign({}, {name}, data), targetDir);
+};
+
+const ACTION = {
+    component(option) {
+        let {name} = option;
+        let alias = name;
+
+        if (alias.indexOf('-')) {
+            alias = STRING(alias).camelize().s;
+        }
+
+        CREATE('component', Object.assign({}, {name, alias}, userData));
+
+        LOG('Generation completed!', 'success');
+    },
+    widget(option) {
+        let {name} = option;
+        let alias = name;
+
+        if (alias.indexOf('-')) {
+            alias = STRING(alias).camelize().s;
+        }
+
+        CREATE('widget', Object.assign({}, {name, alias}, userData));
+
+        LOG('Generation completed!', 'success');
+    },
+    page(option) {
+        let {name, title} = option;
+        let data  = Object.assign({}, {title}, userData);
+
+        createPage({name, data});
+        LOG('Generation completed!', 'success');
+    },
+    webpage(option) {
+        let {name, title} = option;
+        let data  = Object.assign({}, {title}, userData);
+
+        createPage({name, data, type: 'webpage'});
+        LOG('Generation completed!', 'success');
+    },
+    batch(option) {
+        let {extra} = option;
+
+        BATCH_CREATE_PAGE(userData, createPage, extra);
+    },
+    index() {
+        const PAGE_NAME = 'index';
+        const DEV_DIR = 'fin-dev';
+        const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
+
+        CREATE_INDEX_PAGE(PAGE_NAME, userData, TARGET_DIR)
+            .then(result => {
+                let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {page: result});
+
+                CREATE('index', pageData, TARGET_DIR);
+                LOG('Generation completed!', 'success');
+            })
+            .catch(error => {
+
+                LOG(`\n × \`${error}\``);
+            });
+    }
 };
 
 module.exports = () => {
-
     CO(function *() {
-        let {type, title = ''} = PROGRAM.args[0];
+        let {type, title = '', extra = 'page'} = PROGRAM.args[0];
 
         if (!type) {
-            LOG('`type` does not exist!');
+            LOG(` The \`${type}\` does not support!`);
         }
 
-        if (type === 'component') {
+        if (type in ACTION) {
+            let name = '';
+            let action = STRING(type).capitalize().s;
 
-            let name = yield PROMPT('Component name: ');
-
-            if (!name) {
-                LOG('`Component name` does not exist!');
+            if (!/^(index|batch)$/g.test(type)) {
+                name = yield PROMPT(`${action} name: `)
             }
 
-            let alias = name;
-
-            if (alias.indexOf('-')) {
-                alias = STRING(alias).camelize().s;
-            }
-
-            CREATE('component', Object.assign({}, {name, alias}, userData));
-
-            LOG('Generation completed!', 'success');
-        }
-        else if (type === 'page') {
-            let name = yield PROMPT('Page name: ');
-
-            if (!name) {
-                LOG('`Page name` does not exist!');
-            }
-
-            createPage(name, Object.assign({}, {title}, userData));
-            LOG('Generation completed!', 'success');
-        }
-        else if (type === 'batch') {
-            BATCH_CREATE_PAGE(userData, createPage);
-        }
-        else if (type === 'index') {
-            const PAGE_NAME = 'index';
-            const DEV_DIR = 'fin-dev';
-            const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
-
-            CREATE_INDEX_PAGE(PAGE_NAME, userData, TARGET_DIR)
-                .then(result => {
-                    let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {page: result});
-
-                    CREATE('index', pageData, TARGET_DIR);
-                    LOG('Generation completed!', 'success');
-                })
-                .catch(error => {
-
-                    LOG(`\n × \`${error}\``);
-                });
-
+            ACTION[type]({type, name, title, extra});
         }
         else {
-            LOG('The type \`${type}\` does not support!');
+            LOG(`The type \`${type}\` does not support!`);
         }
     });
 };

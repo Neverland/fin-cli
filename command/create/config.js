@@ -17,7 +17,17 @@ module.exports = function(type, extra) {
             ['README.md'],
             [(option.input ? 'input/vue' : 'vue'), 'vue']
         ],
+        widget: [
+            ['js'],
+            ['less'],
+            ['tpl']
+        ],
         page: [
+            ['js'],
+            ['less'],
+            ['tpl']
+        ],
+        webpage: [
             ['js'],
             ['less'],
             ['tpl']
