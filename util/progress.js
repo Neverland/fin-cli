@@ -25,9 +25,7 @@ const SPINNER =  [
     'earth', 'moon', 'runner', 'pong', 'shark', 'dqpb'
 ];
 
-let random = (max = 0,  min = 0) => {
-    return Math.floor(Math.random() * max + min)
-};
+let random = (max = 0,  min = 0) => Math.floor(Math.random() * max + min);
 
 let setProps = function(option = {}) {
     Object.assign({}, this, option);
