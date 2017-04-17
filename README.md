@@ -7,14 +7,14 @@
 
 fin-cli  曼哈顿cli
 
-## start
+## START
 ```javascript
 
     npm install fin-cli -g
 
 ```
 
-## usage
+## USAGE
 
 ### fin init
     fin init|i
@@ -109,7 +109,7 @@ apply:
     fin l -u http://111.111.111 -p 8000
 ```
 
-## changelog
+## CHANGELOG
 
 |version|type|description|date|
 |---|---|---|---|
