@@ -9,7 +9,7 @@
 
 const PROGRAM = require('commander');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
 const USER = require('./user');
 
@@ -29,10 +29,9 @@ module.exports = () => {
                 list.push(`\n -${item}: ${JSON.stringify(data[item])}`);
             });
 
-        console.log(''
-            + CHALK.green('\n Config list:')
-            + CHALK.white('\n' + list.join(''))
-        );
+        LOG('Config list:', 'green');
+        LOG(list.join(''), 'white');
+
         process.exit();
     }
     else if (email) {

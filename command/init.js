@@ -15,7 +15,9 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
-const CHALK = require('chalk');
+const PROGRESS = require('../util/progress')();
+
+const LOG = require('../util/log');
 
 const USER = require('./user');
 
@@ -28,13 +30,11 @@ let initProjectName = function (name) {
 
 module.exports = () => {
     CO(function *() {
-        let args = PROGRAM.args[0];
-        let uri = args.uri;
-        let pathName = args.path;
+        let {uri, path} = PROGRAM.args[0];
+        let pathName = path;
 
         if (!uri) {
-            console.log(CHALK.bold.red('\n × `uri` does not exist!'));
-            process.exit();
+            LOG('`uri` does not exist!');
         }
 
         const ROOT_URI = `ssh://git@${uri}:8235`;
@@ -42,38 +42,46 @@ module.exports = () => {
         let projectName = yield PROMPT('Project name: ');
 
         if (!projectName) {
-            console.log(CHALK.bold.red('\n × `Project` name does not exist!'));
-            process.exit();
+            LOG('`Project` name does not exist!');
         }
 
         // record project name
         initProjectName(projectName);
 
-        console.log(CHALK.white('\n Start generating...'));
+        LOG('Start generating... \n', 'yellow');
 
         let cloneInit = () => {
             let command = `git clone ${ROOT_URI}/baidu/finland/init ${projectName}`;
 
+            PROGRESS.set('text', 'Finland SDK installing!')
+                .start();
+
             EXEC(command, (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × Command failed: ${error.cmd}`));
-                    process.exit();
+                    LOG(`Command failed: ${error.cmd}`, 'fail');
                 }
-                console.log(stderr);
+                console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
+
+                PROGRESS.succeed('Finland sdk installed! \n')
+                    .clear();
 
                 npmInstall();
             });
         };
 
         let npmInstall = () => {
-            console.log(CHALK.bold.yellow(`\n npm install... \n`));
+
+            PROGRESS.set('text', 'Npm install...')
+                .start();
 
             EXEC(`cd ${projectName} && npm install --production`,  (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
-                console.log(stdout, stderr);
+                console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
+
+                PROGRESS.succeed('Node modules installed! \n')
+                    .clear();
 
                 addComponent();
             });
@@ -91,7 +99,10 @@ module.exports = () => {
             ];
             let command = [];
 
-            console.log(CHALK.bold.yellow(`\n add submodule... \n`));
+            // LOG('\n add submodule... \n', 'yellow');
+
+            PROGRESS.set('text', 'Add git submodule...')
+                .start();
 
             modules.forEach(item => {
                 command.push(`git submodule add ${ROOT_URI}/baidu/finland/${item[0]} components/${item[1]}`);
@@ -101,18 +112,15 @@ module.exports = () => {
 
             EXEC(command, (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
-                console.log(stdout, stderr);
-
+                console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
 
                 if (pathName) {
                     createBuild();
                 }
                 else {
-                    console.log(CHALK.green('\n √ Generation completed!'));
-                    process.exit();
+                    LOG('Generation completed! \n', 'success');
                 }
 
             });
@@ -131,21 +139,20 @@ module.exports = () => {
             command.push('git add BCLOUD BCLOUD.qa');
             command.push('git commit -m "init finland sdk"');
 
-            console.log(CHALK.bold.yellow(`\n create build file... \n`));
+            PROGRESS.set('text', 'Create build file... \n')
+                .start();
 
             EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
-                console.log(stdout, stderr);
+                console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
 
                 if (pathName) {
                     pushToURepertory(purePath, ORIGIN_URL);
                 }
                 else {
-                    console.log(CHALK.green('\n √ Generation completed!'));
-                    process.exit();
+                    LOG('Generation completed! \n', 'success');
                 }
             });
         };
@@ -158,15 +165,16 @@ module.exports = () => {
             command.push(`scp -p -P 8235 git@${uri}:hooks/commit-msg .git/hooks/`);
             command.push('git push -u origin --all');
 
+            PROGRESS.set('text', 'Push code to repository...')
+                .start();
+
             EXEC(command.join(' && '), (error, stdout, stderr) => {
                 if (error) {
-                    console.log(CHALK.bold.red(`\n × ${error}`));
-                    process.exit();
+                    LOG(`${error}`, 'fail');
                 }
-                console.log(stdout, stderr);
+                console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
 
-                console.log(CHALK.green('\n √ Generation completed!'));
-                process.exit();
+                LOG('Generation completed! \n', 'success');
             });
         };
 

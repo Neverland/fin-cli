@@ -1,7 +1,5 @@
 # fin-cli
 
-[TOC]
-
 <center>
 
 ![](./static/image/logo.jpg)
@@ -109,6 +107,7 @@ apply:
 
 |version|type|description|date|
 |---|---|---|---|
+|1.4.0|feature|创建，安装流程中添加loading|2017/4/17|
 |1.3.0|feature|使用fin create -t index 可以根据yml创建page index|2017/4/14|
 |1.2.0|feature|使用fin create -t batch 可以根据yml批量创建page|2017/4/7|
 |1.1.0|feature|使用fin create -t page创建page时会创建好mockup|2017/4/5|
