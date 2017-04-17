@@ -14,11 +14,11 @@ module.exports = (text, type = 'fail') => {
 
     switch (type) {
         case 'success':
-            prefix += '√ ';
+            prefix += '✔ ';
             log = CHALK.green;
             break;
         case 'fail':
-            prefix += '× ';
+            prefix += '✖ ';
             log = CHALK.red;
             break;
     }

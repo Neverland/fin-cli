@@ -45,7 +45,7 @@ let upgradeRC = (data = {}) => {
 
     FS.writeFileSync(FIN_RC_LOCAL_DATA_PATH, JSON.stringify(newUserData), {encoding: 'utf8', flag: 'w'});
 
-    LOG('√ User information configure completed!', 'green');
+    LOG('User information configure completed!', 'green');
     LOG(`\n ${JSON.stringify(newUserData)} \n`, 'white');
 };
 

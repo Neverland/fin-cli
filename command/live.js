@@ -27,6 +27,6 @@ module.exports = () => {
             ws: true
         },
         files: files,
-        reloadDelay: 1000
+        reloadDelay: 500
     });
 };

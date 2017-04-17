@@ -17,6 +17,8 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const RUN = require('exec-cmd');
 
+const PROGRESS = require('../../util/progress')();
+
 const LOG = require('../../util/log');
 
 const ROOT_DIR = 'components';
@@ -92,6 +94,7 @@ let createGitBook = () => {
 
         console.log(stdout, stderr);
 
+        PROGRESS.clear();
         LOG('Generation documentation completed!', 'success');
     });
 };
@@ -106,6 +109,10 @@ module.exports = () => {
         let gitbook = args.gitbook;
 
         // create doc!
+
+        PROGRESS.set('text', 'Start generating...')
+            .start();
+
         if (gitbook) {
             RUN('gitbook', ['-h'])
                 .catch(error => {
