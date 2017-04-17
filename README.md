@@ -35,12 +35,18 @@ fin-cli  曼哈顿cli
  - type|t 类型
     1. type: component
     2. type: page
-    3. type: bath
+    3. type: batch
     4. type: index
+ - extra|x 附加page类型page|webpage(default: page)
  
 ```javascript
-    // 创建普通component
-    fin create -t component
+    fin create -t component             // 创建普通component
+    fin create -t widget                // 创建fis widget
+    fin create -t page                  // 创建page
+    fin create -t webpage               // 创建fis page
+    fin create -t batch                 // 批量创建page
+    fin create -t batch -x webpage      // 批量创建fis page
+    fin create -t index                 // 创建项目的聚合页
 ```
 
 ### fin config
@@ -107,6 +113,7 @@ apply:
 
 |version|type|description|date|
 |---|---|---|---|
+|1.5.0|feature|可以创建fis widget，fis page|2017/4/17|
 |1.4.0|feature|创建，安装流程中添加loading|2017/4/17|
 |1.3.0|feature|使用fin create -t index 可以根据yml创建page index|2017/4/14|
 |1.2.0|feature|使用fin create -t batch 可以根据yml批量创建page|2017/4/7|
