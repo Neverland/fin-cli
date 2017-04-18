@@ -10,7 +10,7 @@
         <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
             <h1>* <% project.name %> Index</h1>
 
-            <h4>创建时间：<% ENV.TIME_STRING_CN %></h4>
+            <h3>创建时间：<% ENV.TIME_STRING_CN %></h3>
             <div id="index">
                 <ul>
                 <!-- for: <%page%> as <%item%>, <%title%> -->
