@@ -10,10 +10,14 @@ const CREATE_SERVER_CONF = require('../action/page/createServerConf');
 const OPEN_URL = require('../action/page/openURL');
 
 module.exports = (data) => {
+    if (!data.ENV.MODULE_NAME) {
+        return false;
+    }
+
     CREATE_SERVER_CONF(data);
     CREATE_MOCK(data);
 
     if (data.createType === 'single') {
-        OPEN_URL(data.ENV);
+        OPEN_URL(data);
     }
 };

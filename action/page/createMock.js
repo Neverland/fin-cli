@@ -22,6 +22,10 @@ module.exports = (data) => {
         NAME
     } = data.ENV;
 
+    if (!MODULE_NAME) {
+        return false;
+    }
+
     let filePath = PATH.join(ROOT_DIR, PROJECT_NAME, MODULE_NAME, 'test/page', TRUE_PATH, NAME);
     let file = `${filePath}/${NAME}.php`;
 

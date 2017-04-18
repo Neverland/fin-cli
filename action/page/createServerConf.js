@@ -16,31 +16,29 @@ module.exports = (data) => {
     let {
         PROJECT_NAME,
         PROJECT_ID,
-        WORK_DIR,
+        ROOT_DIR,
+        WORK_DIR_ARRAY,
         CURRENT_DIR,
+        PARENT_DIR,
+        PARENT_DIR_ALIAS,
         REAL_NAME,
-        TRUE_PATH,
         NAME
     } = data.ENV;
 
     // 当前创建的page的相对根的路径: ${projectId}/${module}/page/abc/abc-def/abc-def.tpl
-    let currentTplPath = `${PROJECT_ID}${CURRENT_DIR}/${NAME}/${NAME}.tpl`;
-    let truePath = TRUE_PATH.replace(/\//g, '\\/');
+    let currentTplPath = `${PROJECT_ID}${CURRENT_DIR}${PARENT_DIR}/${NAME}/${NAME}.tpl`;
+    let truePath = PARENT_DIR_ALIAS.replace(/\//g, '\\/');
     let regReg = `template ^(\\/${PROJECT_ID})?${STRING(truePath).camelize().s}\\/${REAL_NAME}($|\\?.*)$`;
 
-    const ROUTER = `\n\r## page /${PROJECT_ID}${truePath.replace(/\\/g, '')}/${REAL_NAME}:\n${regReg} ${currentTplPath}\n\r`;
+    const ROUTER = `\n\r## page ${PROJECT_ID}${truePath.replace(/\\/g, '')}/${NAME}:\n${regReg} ${currentTplPath}\n\r`;
 
-    if (WORK_DIR.split('/').indexOf(PROJECT_NAME) === -1) {
+    if (WORK_DIR_ARRAY.indexOf(PROJECT_NAME) === -1) {
 
-        LOG('\n × \`Project name\` or \`Project id\` is error!', 'red');
-
-        return false;
+        LOG('\n \`Project id\` or \`Project name\` is error!', 'red');
     }
 
     // server.conf string
-    let serverConfPath = WORK_DIR.slice(0, WORK_DIR.indexOf(PROJECT_NAME) + PROJECT_NAME.length + 1);
-
-    serverConfPath = PATH.join(serverConfPath, 'server.conf');
+    let serverConfPath = PATH.join(ROOT_DIR, PROJECT_NAME, 'server.conf');
 
     try {
         FS.existsSync(serverConfPath);
