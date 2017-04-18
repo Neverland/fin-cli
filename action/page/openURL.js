@@ -11,14 +11,14 @@ const STRING = require('string');
 
 const LOG = require('../../util/log');
 
-module.exports = (ENV) => {
+module.exports = (data) => {
     let {
         PROJECT_ID,
-        REAL_PAGE_NAME,
+        REAL_NAME,
         TRUE_PATH
-    } = ENV;
+    } = data.ENV;
 
-    let browseUrl = `localhost:8080/${PROJECT_ID}${STRING(TRUE_PATH).camelize().s}/${REAL_PAGE_NAME}`;
+    let browseUrl = `localhost:8080/${PROJECT_ID}${STRING(TRUE_PATH).camelize().s}/${REAL_NAME}`;
 
     LOG(`\n Browse ${browseUrl}`, 'green');
     RUN('open', [`http://${browseUrl}`]);

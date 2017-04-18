@@ -16,79 +16,62 @@ const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
-const PROGRESS = require('../util/progress')();
 const LOG = require('../util/log');
 
 const CREATE = require('./create/index');
-const USER = require('./user').getRcData();
+
+const GET_PAGE_ENV = require('../util/getPageEnv');
+
 const CREATE_PAGE_SERVICE = require('../action/createPageService');
 const BATCH_CREATE_PAGE = require('../action/batchCreatePage');
 const CREATE_INDEX_PAGE = require('../action/createIndexPage');
 
-let userData = {
-    author: USER.author,
-    email: USER.email,
-    project: USER.project
-};
 let createPage = (option) => {
-    let {type = 'page', name, data, targetDir = ''} = option;
+    let {type = 'page', targetDir = ''} = option;
 
-    CREATE_PAGE_SERVICE(name, userData.project, targetDir);
-    CREATE(type, Object.assign({}, {name}, data), targetDir);
+    CREATE(type, option, targetDir);
+    CREATE_PAGE_SERVICE(option, targetDir);
 };
 
 const ACTION = {
     component(option) {
-        let {name} = option;
-        let alias = name;
-
-        if (alias.indexOf('-')) {
-            alias = STRING(alias).camelize().s;
-        }
-
-        CREATE('component', Object.assign({}, {name, alias}, userData));
+        CREATE('component', option);
 
         LOG('Generation completed!', 'success');
     },
     widget(option) {
-        let {name} = option;
-        let alias = name;
-
-        if (alias.indexOf('-')) {
-            alias = STRING(alias).camelize().s;
-        }
-
-        CREATE('widget', Object.assign({}, {name, alias}, userData));
+        CREATE('widget', option);
 
         LOG('Generation completed!', 'success');
     },
     page(option) {
-        let {name, title} = option;
-        let data  = Object.assign({}, {title}, userData);
-
-        createPage({name, data});
+        createPage(option);
         LOG('Generation completed!', 'success');
     },
     webpage(option) {
-        let {name, title} = option;
-        let data  = Object.assign({}, {title}, userData);
+        let data  = Object.assign({}, option, {type: 'webpage'});
 
-        createPage({name, data, type: 'webpage'});
+        createPage(data);
         LOG('Generation completed!', 'success');
     },
     batch(option) {
-        let {extra} = option;
 
-        BATCH_CREATE_PAGE(userData, createPage, extra);
+        BATCH_CREATE_PAGE(createPage, option);
     },
-    index() {
+    index(option) {
         const PAGE_NAME = 'index';
         const DEV_DIR = 'fin-dev';
         const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
 
-        CREATE_INDEX_PAGE(PAGE_NAME, userData, TARGET_DIR)
+        CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR)
             .then(result => {
-                let pageData = Object.assign({}, {name: PAGE_NAME}, userData, {page: result});
+                let {list, ENV} = result;
+
+                let pageData = Object.assign(
+                        {},
+                        {name: PAGE_NAME},
+                        {page: list, ENV, overwrite: true}
+                    );
 
                 CREATE('index', pageData, TARGET_DIR);
                 LOG('Generation completed!', 'success');
@@ -99,6 +82,9 @@ const ACTION = {
             });
     }
 };
+
+const CREATE_TYPE = 'single';
+const OVERWRITE = false;
 
 module.exports = () => {
     CO(function *() {
@@ -113,10 +99,28 @@ module.exports = () => {
             let action = STRING(type).capitalize().s;
 
             if (!/^(index|batch)$/g.test(type)) {
-                name = yield PROMPT(`${action} name: `)
+                name = yield PROMPT(`${action} name: `);
+
+                if (!name) {
+                    LOG(`The type \`${type}\` name is required!`);
+                }
             }
 
-            ACTION[type]({type, name, title, extra});
+            let alias = STRING(name).camelize().s;
+
+            const ENV = GET_PAGE_ENV(name) || {};
+
+            try {
+                ACTION[type]({
+                    ENV,
+                    overwrite: OVERWRITE,
+                    createType: CREATE_TYPE,
+                    type, name, title, alias, extra
+                });
+            }
+            catch (e) {
+                LOG(`${e}`);
+            }
         }
         else {
             LOG(`The type \`${type}\` does not support!`);

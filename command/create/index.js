@@ -11,10 +11,12 @@ const FS = require('fs');
 const PATH = require('path');
 
 const FSE = require('fs-extra');
+const STRING = require('string');
 
 const ETPL = require('etpl');
 
 const LOG = require('../../util/log');
+const USER = require('../user').getRcData();
 
 const UNIT_TYPE = require('./config');
 
@@ -38,8 +40,9 @@ module.exports = (type, data, targetDir = '') => {
 
     path = PATH.join(path, '/', data.name);
 
-    if (FS.existsSync(data.name)) {
-        LOG(`\`${data.name}\` is already exist!`, 'red');
+    if (FS.existsSync(path) && data.overwrite === false) {
+
+        LOG(`${STRING(type).capitalize().s} \`${data.name}\` is already exist!`, 'red');
         return false;
     }
 
@@ -50,7 +53,7 @@ module.exports = (type, data, targetDir = '') => {
         LOG(`Directory \`${error.path}\` is already exist!`, 'red');
     }
 
-    data = Object.assign({}, data, {date: (new Date()).toLocaleDateString()});
+    data = Object.assign({}, data, USER);
 
     fileType.forEach(item => {
         let fileName = item[0];

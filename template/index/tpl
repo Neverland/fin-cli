@@ -1,14 +1,16 @@
 {%* @file: <% name %> *%}
 {%* @author: <% author %>(<% email %>@baidu.com) *%}
-{%* @since <% date %> *%}
+{%* @since <% ENV.TIME_STRING_CN %> *%}
 
 {%extends file="../../layout.tpl"%}
     {%block name="block_title"%}
     <% project.name %> Index Page
     {%/block%}
     {%block name="main"%}
-        <section class="page-<% name %>">
+        <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
             <h1>* <% project.name %> Index</h1>
+
+            <h4>创建时间：<% ENV.TIME_STRING_CN %></h4>
             <div id="index">
                 <ul>
                 <!-- for: <%page%> as <%item%>, <%title%> -->

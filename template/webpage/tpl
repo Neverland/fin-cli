@@ -1,13 +1,13 @@
 {%* @file: <% name %> *%}
 {%* @author: <% author %>(<% email %>@baidu.com) *%}
-{%* @since <% date %> *%}
+{%* @since <% ENV.TIME_STRING_CN %> *%}
 
 {%extends file="../../layout.tpl"%}
     {%block name="block_title"%}
     <!-- if: <% title %> --><% title %><!-- else -->有钱花<!-- /if -->
     {%/block%}
     {%block name="main"%}
-        <section class="page-<% name %>">
+        <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
 
         </section>
         <!-- // 删除*注释可以打印后端返回的数据 -->

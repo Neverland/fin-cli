@@ -15,11 +15,12 @@ const GET_PAGE_ENV = require('../util/getPageEnv');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 const CREATE_SERVER_CONF = require('../action/page/createServerConf');
+
 const OPEN_URL = require('../action/page/openURL');
 
 const IP_ADDRESS = IP.address();
 
-let createIndexServerConf = (pageName, project, targetDir) => {
+let createIndexServerConf = (pageName, targetDir) => {
     const ENV = {
         PROJECT_NAME,
         PROJECT_ID,
@@ -28,13 +29,15 @@ let createIndexServerConf = (pageName, project, targetDir) => {
         WORK_DIR_ARRAY,
         CURRENT_DIR,
         MODULE_NAME,
-        REAL_PAGE_NAME,
+        REAL_NAME,
         PARSE_PATH,
         BASE_DIR
-    } = GET_PAGE_ENV(pageName, project, targetDir);
+    } = GET_PAGE_ENV(pageName, targetDir);
 
-    CREATE_SERVER_CONF(ENV);
-    OPEN_URL(ENV);
+    CREATE_SERVER_CONF({ENV});
+    OPEN_URL({ENV});
+
+    return ENV;
 };
 
 let createQrCode = (page, category, id) => {
@@ -42,8 +45,9 @@ let createQrCode = (page, category, id) => {
     let {name, title} = page;
 
     return new Promise((resolve, reject) => {
+        let path = `http://${IP_ADDRESS}:8080${url}`;
 
-        QRCODE.toDataURL(`http://${IP_ADDRESS}:8080${url}`, (error, result) => {
+        QRCODE.toDataURL(path, (error, result) => {
 
             if (error) {
                 reject(error);
@@ -56,7 +60,7 @@ let createQrCode = (page, category, id) => {
 
     });
 };
-let filterData = data => {
+let filterData = (data, ENV) => {
     let list = {};
 
     data.forEach(item => {
@@ -67,21 +71,21 @@ let filterData = data => {
         list[key].push(item);
     });
 
-    return Promise.resolve(list);
+    return Promise.resolve({list, ENV});
 };
 
-module.exports = (pageName, userData, targetDir) => {
+module.exports = (option, pageName, targetDir) => {
     const CWD = process.cwd();
     const INDEX_DOC = READ_PROJECT_YAML(CWD);
+    const ENV = createIndexServerConf(pageName, targetDir);
 
-    createIndexServerConf(pageName, userData.project, targetDir);
-
+    let id = ENV.PROJECT_ID;
     let queue = [];
 
     Object.keys(INDEX_DOC).forEach(category => INDEX_DOC[category].forEach(page => {
-        return queue.push(createQrCode(page, category, userData.project.id))
+        return queue.push(createQrCode(page, category, id))
     }));
 
     return Promise.all(queue)
-        .then(result => filterData(result));
+        .then(result => filterData(result, ENV));
 };

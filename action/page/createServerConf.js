@@ -12,23 +12,23 @@ const STRING = require('string');
 
 const LOG = require('../../util/log');
 
-module.exports = (ENV) => {
+module.exports = (data) => {
     let {
         PROJECT_NAME,
         PROJECT_ID,
         WORK_DIR,
         CURRENT_DIR,
-        REAL_PAGE_NAME,
+        REAL_NAME,
         TRUE_PATH,
         NAME
-    } = ENV;
+    } = data.ENV;
 
     // 当前创建的page的相对根的路径: ${projectId}/${module}/page/abc/abc-def/abc-def.tpl
     let currentTplPath = `${PROJECT_ID}${CURRENT_DIR}/${NAME}/${NAME}.tpl`;
     let truePath = TRUE_PATH.replace(/\//g, '\\/');
-    let regReg = `template ^(\\/${PROJECT_ID})?${STRING(truePath).camelize().s}\\/${REAL_PAGE_NAME}($|\\?.*)$`;
+    let regReg = `template ^(\\/${PROJECT_ID})?${STRING(truePath).camelize().s}\\/${REAL_NAME}($|\\?.*)$`;
 
-    const ROUTER = `\n\r## page /${PROJECT_ID}${truePath.replace(/\\/g, '')}/${REAL_PAGE_NAME}:\n${regReg} ${currentTplPath}\n\r`;
+    const ROUTER = `\n\r## page /${PROJECT_ID}${truePath.replace(/\\/g, '')}/${REAL_NAME}:\n${regReg} ${currentTplPath}\n\r`;
 
     if (WORK_DIR.split('/').indexOf(PROJECT_NAME) === -1) {
 

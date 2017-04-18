@@ -2,7 +2,7 @@
  * @file <% name %>.js
  * @author <% author %>(<% email %>@baidu.com)
  *
- * @since <% date %>
+ * @since <% ENV.TIME_STRING_CN %>
  */
 
 import Vue from 'vue';

@@ -18,15 +18,17 @@ const STRING = require('string');
 
 const LOG = require('../util/log');
 
+const GET_PAGE_ENV = require('../util/getPageEnv');
+
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 
-let batchCreatePage = (userData, list, dirPath, createPage, extra) => {
+let batchCreatePage = (list, dirPath, createPage, option) => {
     let pageTrace = [];
 
     if (Array.isArray(list)) {
         list.forEach(item => {
             if (!item.name) {
-                LOG('× Page `name` does not exist!', 'red');
+                LOG('✖ Page `name` does not exist!', 'red');
                 return false;
             }
 
@@ -34,9 +36,17 @@ let batchCreatePage = (userData, list, dirPath, createPage, extra) => {
 
             let {name, title} = item;
             let pageName = STRING(item.name).dasherize().s;
-            let data = Object.assign({}, userData, {title});
+            let data = Object.assign(
+                    {},
+                    option,
+                    {title},
+                    {type: option.extra, createType: 'batch', overwrite: true}
+                );
+            let alias = STRING(name).camelize().s;
 
-            createPage({type: extra, name: pageName, data, targetDir: dirPath});
+            const ENV = GET_PAGE_ENV(pageName, dirPath);
+
+            createPage(Object.assign({}, data, {ENV}, {name: pageName, alias, targetDir: dirPath}));
             pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});
         });
     }
@@ -44,7 +54,7 @@ let batchCreatePage = (userData, list, dirPath, createPage, extra) => {
     return pageTrace;
 };
 
-module.exports = (userData, createPage, extra) => {
+module.exports = (createPage, option) => {
     const START = + (new Date());
     const CWD = process.cwd();
     const INDEX_DOC = READ_PROJECT_YAML(CWD);
@@ -66,14 +76,14 @@ module.exports = (userData, createPage, extra) => {
             FSE.ensureDirSync(dirPath);
         }
 
-        let page = batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage, extra);
+        let page = batchCreatePage(INDEX_DOC[key], dirPath, createPage, option);
 
         pagesMessage = pagesMessage.concat(page);
     });
 
-    LOG('√ Batch generation completed! \n', 'green');
-    console.table(pagesMessage);
-    LOG(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms. \n`, 'green');
 
-    process.exit();
+    console.table(pagesMessage);
+    LOG(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms.`, 'green');
+
+    LOG('Batch generation completed! \n', 'success');
 };

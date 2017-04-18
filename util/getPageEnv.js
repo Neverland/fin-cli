@@ -10,15 +10,23 @@ const PATH = require('path');
 const STRING = require('string');
 const LOG = require('./log');
 
+const USER = require('../command/user').getRcData();
+
 /**
  * 获取要创建page的环境常量
  *
- * @param  {string} name - page name
- * @param {Object} project - {name, id}
+ * @param  {string} name - name(page, component)
  * @param {string} targetDir - output dist(resolve url)
+ * @return {Object}
  */
 
-module.exports = (name, project, targetDir) => {
+module.exports = (name, targetDir) => {
+    if (!name) {
+        return false;
+    }
+
+    let project = USER.project;
+
     const PROJECT_NAME = project.name;
     const PROJECT_ID = project.id;
 
@@ -54,13 +62,25 @@ module.exports = (name, project, targetDir) => {
      * @const
      * @type {string}
      */
-    const REAL_PAGE_NAME = STRING(name).camelize().s;
+    const REAL_NAME = STRING(name).camelize().s;
 
     // 以当前工作目录解析
     const PARSE_PATH = PATH.parse(WORK_DIR);
 
     // ${projectId}/${module}/page/x/y/z/a-b-c.tpl baseDir = z;
     const BASE_DIR = PARSE_PATH.base;
+
+
+    // ${module}/page/abc/xyz/x-ya-zb -> /abc/xyz/xYaZb
+    const PARENT_DIR_ALIAS = STRING(TRUE_PATH).camelize().s;
+
+    const NOW = new Date();
+
+    const TIME_STRING = +(NOW);
+
+    const TIME_STRING_CN = NOW.toLocaleString();
+
+    const TIME_STRING_32 = TIME_STRING.toString(32);
 
     return  {
         ROOT_DIR,
@@ -71,10 +91,14 @@ module.exports = (name, project, targetDir) => {
         WORK_DIR_ARRAY,
         CURRENT_DIR,
         MODULE_NAME,
-        REAL_PAGE_NAME,
+        REAL_NAME,
         PARSE_PATH,
         BASE_DIR,
         TRUE_PATH,
+        PARENT_DIR_ALIAS,
+        TIME_STRING,
+        TIME_STRING_32,
+        TIME_STRING_CN,
         NAME: name
     }
 };
