@@ -40,7 +40,7 @@ let batchCreatePage = (list, dirPath, createPage, option) => {
                     {},
                     option,
                     {title},
-                    {type: option.extra, createType: 'batch', overwrite: true}
+                    {type: option.extra, createType: 'batch', overwrite: false}
                 );
             let alias = STRING(name).camelize().s;
 
