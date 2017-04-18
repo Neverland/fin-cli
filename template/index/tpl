@@ -11,6 +11,7 @@
             <h1>* <% project.name %> Index</h1>
 
             <h3>创建时间：<% ENV.TIME_STRING_CN %></h3>
+            <h3>共<%categoryCount%>个分类, <%pageCount%>个page</h3>
             <div id="index">
                 <ul>
                 <!-- for: <%page%> as <%item%>, <%title%> -->

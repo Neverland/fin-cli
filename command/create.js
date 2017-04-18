@@ -65,12 +65,11 @@ const ACTION = {
 
         CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR)
             .then(result => {
-                let {list, ENV} = result;
-
+                let {list, ENV, pageCount, categoryCount} = result;
                 let pageData = Object.assign(
                         {},
                         {name: PAGE_NAME},
-                        {page: list, ENV, overwrite: true}
+                        {page: list, ENV, pageCount, categoryCount, overwrite: true}
                     );
 
                 CREATE('index', pageData, TARGET_DIR);

@@ -60,7 +60,7 @@ let createQrCode = (page, category, id) => {
 
     });
 };
-let filterData = (data, ENV) => {
+let filterData = (data, ENV, categoryCount) => {
     let list = {};
 
     data.forEach(item => {
@@ -71,7 +71,7 @@ let filterData = (data, ENV) => {
         list[key].push(item);
     });
 
-    return Promise.resolve({list, ENV});
+    return Promise.resolve({list, ENV, pageCount: data.length, categoryCount});
 };
 
 module.exports = (option, pageName, targetDir) => {
@@ -87,5 +87,5 @@ module.exports = (option, pageName, targetDir) => {
     }));
 
     return Promise.all(queue)
-        .then(result => filterData(result, ENV));
+        .then(result => filterData(result, ENV, Object.keys(INDEX_DOC).length));
 };
