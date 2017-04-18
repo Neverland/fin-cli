@@ -42,7 +42,6 @@
   ],
   "name": "fin-cli",
   "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Neverland/fin-cli.git"
