@@ -64,7 +64,7 @@ const ACTION = {
         const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
 
         let pageData = CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR);
-console.log(pageData);
+
         CREATE('index', pageData, TARGET_DIR);
         LOG('Generation completed!', 'success');
     }

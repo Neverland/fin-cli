@@ -34,8 +34,8 @@ let createIndexServerConf = (pageName, targetDir) => {
         BASE_DIR
     } = GET_PAGE_ENV(pageName, targetDir);
 
-    // CREATE_SERVER_CONF({ENV});
-    // OPEN_URL({ENV});
+    CREATE_SERVER_CONF({ENV});
+    OPEN_URL({ENV});
 
     return ENV;
 };
