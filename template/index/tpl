@@ -7,6 +7,8 @@
     <% project.name %> Index Page
     {%/block%}
     {%block name="main"%}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min.js"></script>
         <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
             <h1>* <% project.name %> Index</h1>
             <h2>Index page information</h2>
@@ -49,7 +51,15 @@
 
         {%script%}
             define('page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>', () => {
-                return JSON.parse('<% data %>');
+                let data = '<% data %>';
+                let pageData = data.replace(/&amp;/g,"&")
+                    .replace(/&lt;/g,"<")
+                    .replace(/&gt;/g,">")
+                    .replace(/&nbsp;/g," ")
+                    .replace(/&#39;/g,"\'")
+                    .replace(/&quot;/g,"\"");
+
+                return JSON.parse(pageData);
             });
             require('./<% name %>.js');
         {%/script%}

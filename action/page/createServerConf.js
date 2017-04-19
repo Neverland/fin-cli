@@ -18,15 +18,14 @@ module.exports = (data) => {
         PROJECT_ID,
         ROOT_DIR,
         WORK_DIR_ARRAY,
-        CURRENT_DIR,
-        PARENT_DIR,
         PARENT_DIR_ALIAS,
         REAL_NAME,
+        MODULE_NAME,
         NAME
     } = data.ENV;
 
     // 当前创建的page的相对根的路径: ${projectId}/${module}/page/abc/abc-def/abc-def.tpl
-    let currentTplPath = `${PROJECT_ID}${CURRENT_DIR}${PARENT_DIR}/${NAME}/${NAME}.tpl`;
+    let currentTplPath = PATH.join(PROJECT_ID, MODULE_NAME, 'page', PARENT_DIR_ALIAS, NAME, `${NAME}.tpl`);
     let truePath = PARENT_DIR_ALIAS.replace(/\//g, '\\/');
     let regReg = `template ^(\\/${PROJECT_ID})?${STRING(truePath).camelize().s}\\/${REAL_NAME}($|\\?.*)$`;
 
