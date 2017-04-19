@@ -60,25 +60,13 @@ const ACTION = {
     },
     index(option) {
         const PAGE_NAME = 'index';
-        const DEV_DIR = 'fin-dev';
+        const DEV_DIR = 'dev-fin';
         const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
 
-        CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR)
-            .then(result => {
-                let {list, ENV, pageCount, categoryCount} = result;
-                let pageData = Object.assign(
-                        {},
-                        {name: PAGE_NAME},
-                        {page: list, ENV, pageCount, categoryCount, overwrite: true}
-                    );
-
-                CREATE('index', pageData, TARGET_DIR);
-                LOG('Generation completed!', 'success');
-            })
-            .catch(error => {
-
-                LOG(`\n × \`${error}\``);
-            });
+        let pageData = CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR);
+console.log(pageData);
+        CREATE('index', pageData, TARGET_DIR);
+        LOG('Generation completed!', 'success');
     }
 };
 

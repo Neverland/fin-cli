@@ -81,8 +81,6 @@ module.exports = (createPage, option) => {
         pagesMessage = pagesMessage.concat(page);
     });
 
-
-    console.table(pagesMessage);
     LOG(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms.`, 'green');
 
     LOG('Batch generation completed! \n', 'success');

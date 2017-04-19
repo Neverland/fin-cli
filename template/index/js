@@ -5,15 +5,42 @@
  * @since <% ENV.TIME_STRING_CN %>
  */
 
+import u from 'underscore';
 import Vue from 'vue';
 
 import {redirect} from 'fin-fg/util/index';
 
+import pageData from 'page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>';
+
 new Vue({
     el: 'body',
+    data() {
+        return pageData;
+    },
     methods: {
-        jumpTo(url) {
-            redirect(url);
+        jumpTo(uri) {
+            redirect(uri);
         }
+    },
+    ready() {
+        let data = u.extend({}, this.list);
+        let {protocol, hostname, port, hash, search} = location;
+        let url = `${protocol}//`;
+
+        if (/(?:127\.0\.0\.1|localhost)/g.test(location.hostname)) {
+            hostname = this.ip;
+        }
+
+        url = `${url}${hostname}`;
+
+        if (port) {
+            url = `${url}:${port}`;
+        }
+
+        Object.keys(data).forEach(category => data[category].forEach((page, index) => {
+            let path = `${url}${page.uri}${hash}${search}`;
+
+            $(`#${category}${index}`).qrcode({text: path});
+        }));
     }
 });

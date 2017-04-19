@@ -34,58 +34,40 @@ let createIndexServerConf = (pageName, targetDir) => {
         BASE_DIR
     } = GET_PAGE_ENV(pageName, targetDir);
 
-    CREATE_SERVER_CONF({ENV});
-    OPEN_URL({ENV});
+    // CREATE_SERVER_CONF({ENV});
+    // OPEN_URL({ENV});
 
     return ENV;
 };
 
-let createQrCode = (page, category, id) => {
-    let url = `/${id}/${category}/${page.name}`;
-    let {name, title} = page;
-
-    return new Promise((resolve, reject) => {
-        let path = `http://${IP_ADDRESS}:8080${url}`;
-
-        QRCODE.toDataURL(path, (error, result) => {
-
-            if (error) {
-                reject(error);
-
-                LOG(`${error}`);
-            }
-
-            resolve({url, title: title ? title : name, name, qrCode: result, category});
-        });
-
-    });
-};
-let filterData = (data, ENV, categoryCount) => {
-    let list = {};
-
-    data.forEach(item => {
-        let key = item.category;
-
-        list[key] || (list[key] = []);
-
-        list[key].push(item);
-    });
-
-    return Promise.resolve({list, ENV, pageCount: data.length, categoryCount});
-};
-
 module.exports = (option, pageName, targetDir) => {
     const CWD = process.cwd();
-    const INDEX_DOC = READ_PROJECT_YAML(CWD);
     const ENV = createIndexServerConf(pageName, targetDir);
 
     let id = ENV.PROJECT_ID;
-    let queue = [];
+    const yamlData = READ_PROJECT_YAML(CWD);
+    let allCategory = Object.keys(yamlData);
+    let pageCount = 0;
 
-    Object.keys(INDEX_DOC).forEach(category => INDEX_DOC[category].forEach(page => {
-        return queue.push(createQrCode(page, category, id))
+    allCategory.forEach(category => yamlData[category].forEach((page, index) => {
+        pageCount++;
+        yamlData[category][index]['uri'] = `/${id}/${category}/${page.name}`;
     }));
 
-    return Promise.all(queue)
-        .then(result => filterData(result, ENV, Object.keys(INDEX_DOC).length));
+    let data = JSON.stringify({
+        list: yamlData,
+        ip: IP_ADDRESS,
+        categoryCount: allCategory.length,
+        pageCount
+    });
+
+    let indexPageData = {
+        name: pageName,
+        title: pageName,
+        alias: pageName,
+        overwrite: true
+    };
+
+    return Object.assign({}, option, {ENV, data}, indexPageData);
 };
+
