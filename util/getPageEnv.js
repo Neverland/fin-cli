@@ -135,6 +135,9 @@ module.exports = (name, targetDir) => {
     if (ROOT.WORK_DIR_ARRAY.indexOf('page') > -1) {
         page = method.page(ROOT, PROJECT);
     }
+    else {
+        LOG('`Page` dir does not exist!', 'red');
+    }
 
     /**
       * { CWD: '/WorkSpace/abc-def/app/page',

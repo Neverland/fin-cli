@@ -15,6 +15,8 @@ module.exports = (data) => {
     }
 
     CREATE_SERVER_CONF(data);
+
+    return false;
     CREATE_MOCK(data);
 
     if (data.createType === 'single') {

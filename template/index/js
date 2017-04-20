@@ -29,7 +29,6 @@ new Vue({
             redirect(uri);
         },
         showTrueUrl(e) {
-
             ui.dialog({
                 title: 'Page url',
                 type: 'alert',
