@@ -15,7 +15,14 @@ import pageData from 'page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>';
 new Vue({
     el: 'body',
     data() {
-        return pageData;
+        let data = pageData.replace(/&amp;/g,"&")
+            .replace(/&lt;/g,"<")
+            .replace(/&gt;/g,">")
+            .replace(/&nbsp;/g," ")
+            .replace(/&#39;/g,"\'")
+            .replace(/&quot;/g,"\"");
+
+        return JSON.parse(data);
     },
     methods: {
         jumpTo(uri) {
@@ -39,8 +46,10 @@ new Vue({
 
         Object.keys(data).forEach(category => data[category].forEach((page, index) => {
             let path = `${url}${page.uri}${hash}${search}`;
+            let $target = $(`#${category}${index}`);
 
-            $(`#${category}${index}`).qrcode({text: path});
+            $target.qrcode({text: path});
+            $target.attr('alt', path);
         }));
     }
 });

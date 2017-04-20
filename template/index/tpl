@@ -13,8 +13,8 @@
             <h1>* <% project.name %> Index</h1>
             <h2>Index page information</h2>
             <h3>创建时间：<% ENV.TIME_STRING_CN %></h3>
-            <h3>共{{ categoryCount }}个分类, {{ pageCount }}个page</h3>
             <h3>Ip address: {{ ip }}</h3>
+            <h3>共{{ categoryCount }}个分类, {{ pageCount }}个page</h3>
             <div id="index">
                 <ul>
                     <li v-for="(key, category) in list">
@@ -36,7 +36,7 @@
                     <tr v-for="(index, item) in category">
                         <td width="10%">{{ index + 1 }}.</td>
                         <td width="60%">
-                            <span class="link" @click=jumpTo(item.uri)>{{ item.title || item.name }}</span>
+                            <span class="link" @click=jumpTo(item.uri) alt="{{ item.uri }}"> {{ item.title || item.name }}</span>
                         </td>
                         <td width="30%">
                             <span class="preview" id="{{ key }}{{ index }}">
@@ -51,15 +51,7 @@
 
         {%script%}
             define('page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>', () => {
-                let data = '<% data %>';
-                let pageData = data.replace(/&amp;/g,"&")
-                    .replace(/&lt;/g,"<")
-                    .replace(/&gt;/g,">")
-                    .replace(/&nbsp;/g," ")
-                    .replace(/&#39;/g,"\'")
-                    .replace(/&quot;/g,"\"");
-
-                return JSON.parse(pageData);
+                return '<% data %>';
             });
             require('./<% name %>.js');
         {%/script%}
