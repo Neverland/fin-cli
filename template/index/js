@@ -1,16 +1,16 @@
 /**
- * @file <% name %>.js
- * @author <% author %>(<% email %>@baidu.com)
+ * @file index.js
+ * @author ienix(guoaimin01@baidu.com)
  *
- * @since <% ENV.TIME_STRING_CN %>
+ * @since 4/20/2017, 12:33:27 PM
  */
 
 import u from 'underscore';
 import Vue from 'vue';
 
-import {redirect} from 'fin-fg/util/index';
+import {redirect, ui} from 'fin-fg/util/index';
 
-import pageData from 'page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>';
+import pageData from 'page/development/index';
 
 new Vue({
     el: 'body',
@@ -27,6 +27,15 @@ new Vue({
     methods: {
         jumpTo(uri) {
             redirect(uri);
+        },
+        showTrueUrl(e) {
+
+            ui.dialog({
+                title: 'Page url',
+                type: 'alert',
+                content: e.target.parentNode.title
+            })
+                .then(vm => vm.hideUi());
         }
     },
     ready() {
@@ -49,7 +58,7 @@ new Vue({
             let $target = $(`#${category}${index}`);
 
             $target.qrcode({text: path});
-            $target.attr('alt', path);
+            $target.attr('title', path);
         }));
     }
 });
