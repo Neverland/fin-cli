@@ -35,12 +35,19 @@ new Vue({
                 target = target.parentNode;
             }
 
+            let id = `${target.id}-qr`;
+            let url = target.title;
+
             ui.dialog({
                 title: 'Page url',
                 type: 'alert',
-                content: target.title
+                content: `<div><div id="${id}"></div><div>${target.title}</div></div>`
             })
                 .then(vm => vm.hideUi());
+
+            Vue.nextTick(() => {
+                $(`#${id}`).qrcode({text: url});
+            });
         }
     },
     ready() {
