@@ -34,7 +34,7 @@ new Vue({
             while (target.tagName.toLocaleLowerCase() !== 'span') {
                 target = target.parentNode;
             }
-alert(target.outerHTML);
+
             ui.dialog({
                 title: 'Page url',
                 type: 'alert',
