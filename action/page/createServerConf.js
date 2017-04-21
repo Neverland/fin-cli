@@ -64,7 +64,7 @@ let checkServerConfRouter = (rootDir, projectName, router) => {
     return fileContent.split('\n').indexOf(router) > -1;
 };
 
-module.exports = (data) => {
+module.exports = data => {
     let {
         PROJECT_NAME,
         ROOT_DIR,
