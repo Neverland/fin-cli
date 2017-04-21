@@ -39,7 +39,7 @@
                             <span class="link" @click=jumpTo(item.uri) title="{{ item.uri }}"> {{ item.title || item.name }}</span>
                         </td>
                         <td width="30%">
-                            <span class="preview" id="{{ key }}{{ index }}">
+                            <span class="preview" id="{{ key }}{{ index }}" @click="showTrueUrl($event)">
                             </span>
                         </td>
                     </tr>

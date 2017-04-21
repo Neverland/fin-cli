@@ -29,10 +29,16 @@ new Vue({
             redirect(uri);
         },
         showTrueUrl(e) {
+            let target = e.target;
+
+            while (target.tagName.toLocaleLowerCase() !== 'span') {
+                target = target.parentNode;
+            }
+alert(target.outerHTML);
             ui.dialog({
                 title: 'Page url',
                 type: 'alert',
-                content: e.target.parentNode.title
+                content: target.title
             })
                 .then(vm => vm.hideUi());
         }
