@@ -51,7 +51,7 @@ let readServerConf = path => {
         LOG(`${error}`);
     }
 
-    LOG(`Read \`Server.conf\` from ${path}`, 'white');
+    // LOG(`Read \`Server.conf\` from ${path}`, 'white');
 
     return fileContent
 };
