@@ -9,7 +9,6 @@ fin-cli  曼哈顿cli
 
 ## START
 ```javascript
-
     npm install fin-cli -g
 
 ```
@@ -24,7 +23,6 @@ fin-cli  曼哈顿cli
  - path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
-
     fin i -u git.github.com -p  /git/${path}
 ```
 
@@ -59,7 +57,6 @@ fin-cli  曼哈顿cli
  - p|projectId 项目唯一识别
  
 ```javascript
-
     fin config -e abc
     fin config -N abc-xyz
     fin config -p abc
@@ -109,10 +106,22 @@ apply:
     fin l -u http://111.111.111 -p 8000
 ```
 
+### fin remove
+    fin remove|r
+#### option
+
+ - type|t 类型
+    1. type: page
+ 
+```javascript
+    fin r -t page // page, mock, router
+```
+
 ## CHANGELOG
 
 |version|type|description|date|
 |---|---|---|---|
+|1.6.0|feature|fin remove --type page(可以删除page及page对应的mock，server.conf中的router)|2017/4/26|
 |1.5.0|feature|可以创建fis widget，fis page|2017/4/17|
 |1.4.0|feature|创建，安装流程中添加loading|2017/4/17|
 |1.3.0|feature|使用fin create -t index 可以根据yml创建page index|2017/4/14|
