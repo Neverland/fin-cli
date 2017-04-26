@@ -5,6 +5,9 @@
  * @since 2017/4/13
  */
 
+const IP = require('ip');
+const IP_ADDRESS = IP.address();
+
 const RUN = require('exec-cmd');
 
 const STRING = require('string');
@@ -17,8 +20,13 @@ module.exports = (data) => {
         REAL_NAME,
         TRUE_PATH
     } = data.ENV;
+    let hostName = 'localhost';
 
-    let browseUrl = `localhost:8080/${PROJECT_ID}${STRING(TRUE_PATH).camelize().s}/${REAL_NAME}`;
+    if (IP_ADDRESS) {
+        hostName = IP_ADDRESS
+    }
+
+    let browseUrl =`${hostName}:8080/${PROJECT_ID}${STRING(TRUE_PATH).camelize().s}/${REAL_NAME}`;
 
     LOG(`\n Browse ${browseUrl}`, 'green');
     RUN('open', [`http://${browseUrl}`]);
