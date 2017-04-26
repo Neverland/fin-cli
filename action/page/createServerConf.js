@@ -53,11 +53,10 @@ module.exports = data => {
     let {router, ROUTER} = PAGE.getServerConfRouter(data);
 
     // 如果router 在server.conf中存在， 则不添加
-    if (checkServerConfRouter(ROOT_DIR, PROJECT_NAME, router) > -1) {
+    if (!checkServerConfRouter(ROOT_DIR, PROJECT_NAME, router)) {
         writeServerConf(ROOT_DIR, PROJECT_NAME, ROUTER);
     }
     else {
-        LOG(`${STRING(data.type).capitalize().s} \`${data.name}\`'s router is already exist!`, 'white');
+        LOG(`The page \`${data.ENV.name}\`'s router is already exist!`, 'white');
     }
-
 };
