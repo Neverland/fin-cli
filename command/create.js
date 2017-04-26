@@ -83,10 +83,9 @@ module.exports = () => {
 
         if (type in ACTION) {
             let name = '';
-            let action = STRING(type).capitalize().s;
 
             if (!/^(index|batch)$/g.test(type)) {
-                name = yield PROMPT(`${action} name: `);
+                name = yield PROMPT(`Create ${type} name: `);
 
                 if (!name) {
                     LOG(`The type \`${type}\` name is required!`);

@@ -88,7 +88,6 @@ let method = {
                 ? `/${parentDirAlias}`
                 : parentDirAlias;
 
-
         return {
             ROOT_DIR,
             CURRENT_DIR,

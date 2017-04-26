@@ -5,7 +5,6 @@
  * @since 2017/4/13
  */
 
-const PATH = require('path');
 const FS = require('fs');
 
 const FSE = require('fs-extra');
@@ -13,25 +12,22 @@ const STRING = require('string');
 
 const LOG = require('../../util/log');
 
+const PAGE = require('./page');
+
 module.exports = (data) => {
     let {
-        PROJECT_NAME,
-        ROOT_DIR,
         MODULE_NAME,
-        TRUE_PATH,
-        NAME
     } = data.ENV;
 
     if (!MODULE_NAME) {
         return false;
     }
 
-    let filePath = PATH.join(ROOT_DIR, PROJECT_NAME, MODULE_NAME, 'test/page', TRUE_PATH, NAME);
-    let file = `${filePath}/${NAME}.php`;
+    let {file, filePath} = PAGE.getMockPath(data);
 
     if (FS.existsSync(file)) {
 
-        LOG(`${STRING(data.type).capitalize().s} \`${data.name}\`'s mock is already exist!`, 'red');
+        LOG(`${STRING(data.type).capitalize().s} \`${data.name}\`'s mock is already exist!`, 'gray');
         return false;
     }
 
@@ -55,6 +51,6 @@ module.exports = (data) => {
         );
     }
     catch (error) {
-        console.log(error);
+        LOG('${error.message}', 'white');
     }
 };

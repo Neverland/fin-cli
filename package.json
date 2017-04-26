@@ -26,7 +26,6 @@
   },
   "description": "曼哈顿fin-cli",
   "devDependencies": {},
-  "directories": {},
   "homepage": "https://github.com/Neverland/fin-cli#readme",
   "keywords": [
     "fin",
@@ -41,7 +40,6 @@
     }
   ],
   "name": "fin-cli",
-  "optionalDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Neverland/fin-cli.git"
@@ -50,5 +48,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.5.18"
+  "version": "1.6.0"
 }

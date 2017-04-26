@@ -80,6 +80,16 @@ PROGRAM
     require('../command/live')();
 });
 
+PROGRAM
+    .command('remove')
+    .description('Remove a fin unit')
+    .option('-t, --type <string>', '[page|...]')
+    .option('-n, --name <string>', 'unit name')
+    .alias('r')
+    .action(() => {
+    require('../command/remove')();
+});
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {

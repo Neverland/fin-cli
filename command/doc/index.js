@@ -65,7 +65,7 @@ let moveFile = (target) => {
             FS.writeFileSync(path, text);
         })
         .catch(error => {
-            LOG(`${error}!`, 'fail');
+            LOG(`${error}!`);
         });
 };
 let createGitBook = () => {
@@ -77,8 +77,8 @@ let createGitBook = () => {
         createGitBookCopy();
         CREATE_SUMMARY(fileTree);
     }
-    catch (e) {
-        console.log(e);
+    catch (error) {
+        LOG(`${error.message}`, 'red');
     }
 
     let command = [];
@@ -88,8 +88,7 @@ let createGitBook = () => {
 
     EXEC(command.join(' && '), (error, stdout, stderr) => {
         if (error) {
-            console.log(CHALK.bold.red(`\n × ${error[0]}`));
-            process.exit();
+            LOG(`${error[0]}`);
         }
 
         console.log(stdout, stderr);
@@ -102,7 +101,7 @@ let createGitBook = () => {
 module.exports = () => {
     CO(function *() {
         if (!FS.existsSync(TARGET_DIR)) {
-            LOG('The `components` directory is not exist!', 'fail');
+            LOG('The `components` directory is not exist!');
         }
 
         let args = PROGRAM.args[0];
@@ -120,7 +119,7 @@ module.exports = () => {
 
                     console.log(error);
 
-                    LOG(message, 'fail');
+                    LOG(message);
                 });
             createGitBook();
         }

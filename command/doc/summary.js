@@ -46,8 +46,7 @@ module.exports = fileTree => {
 
     RUN('cp', ['./README.md', `${DOC_SOURCE}/README.md`])
         .catch(response => {
-            console.log(response[0]);
-            process.exit();
+            LOG(`${response[0]}`);
         });
 
     FS.writeFileSync(`${DOC_SOURCE}/SUMMARY.md`, text);

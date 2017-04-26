@@ -5,11 +5,7 @@
  * @since 2017/4/13
  */
 
-const QRCODE = require('qrcode');
-
 const IP = require('ip');
-
-const LOG = require('../util/log');
 
 const GET_PAGE_ENV = require('../util/getPageEnv');
 
