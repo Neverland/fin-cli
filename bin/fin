@@ -32,8 +32,8 @@ PROGRAM
     .description('Generate a new fin project')
     .alias('i')
     .action(() => {
-    require('../command/init')();
-});
+        require('../command/init')();
+    });
 
 PROGRAM
     .command('create')
@@ -43,15 +43,15 @@ PROGRAM
     .description('Generate a new fin unit [component, page, batch, index, widget, webpage ...]')
     .alias('c')
     .action(() => {
-    require('../command/create')();
-});
+        require('../command/create')();
+    });
 
 PROGRAM
     .command('config')
     .option('-e, --email <string>', 'email prefix')
     .option('-a, --author <string>', 'author name')
-    .option('-n, --projectName <string>', 'project name(`local work space` or `git dir`)')
-    .option('-i, --projectId <string>', 'project id')
+    .option('-N, --pName <string>', 'project name(`local work space` or `git dir`)')
+    .option('-I, --pId <string>', 'project id')
     .option('-l, --list [boolean]', 'list config')
     .description('Generate fin user config')
     .alias('C')

@@ -48,5 +48,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.6.5"
+  "version": "1.6.6"
 }

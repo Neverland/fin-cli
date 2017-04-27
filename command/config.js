@@ -17,8 +17,9 @@ module.exports = () => {
     let data = USER.getRcData();
     let {
             list, author,
-            email, projectName,
-            projectId
+            email,
+            pName,
+            pId
         } = PROGRAM.args[0];
 
     if (list) {
@@ -40,11 +41,11 @@ module.exports = () => {
     else if (author) {
         data.author = author;
     }
-    else if (projectName) {
-        data.project.name = projectName;
+    else if (pName) {
+        data.project.name = pName;
     }
-    else if (projectId) {
-        data.project.id = projectId;
+    else if (pId) {
+        data.project.id = pId;
     }
 
     USER.createRC(data);

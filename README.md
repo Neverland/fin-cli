@@ -52,14 +52,14 @@ fin-cli  曼哈顿cli
 #### option
 
  - email|e email前缀
- - author|a auhtor
- - projectName|n fin init时录入的名称
- - projectId|i 项目唯一识别
+ - author|a author
+ - pName|N fin init时录入的名称
+ - pId|I 项目唯一识别
  
 ```javascript
     fin config -e abc
-    fin config -n abc-xyz
-    fin config -i abc
+    fin config -N abc-xyz
+    fin config -I abc
     fin config -a abc
     fin config -e abc -a abc
 ```
