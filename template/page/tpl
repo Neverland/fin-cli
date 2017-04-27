@@ -15,7 +15,7 @@
                 return JSON.parse('{%$data|@json_encode%}');
             });
 
-            require('./<% name %>.js');
+            require('./<% name %>');
         {%/script%}
 
         <!-- // 删除*注释可以打印后端返回的数据 -->
