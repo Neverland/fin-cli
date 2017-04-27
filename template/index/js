@@ -1,9 +1,11 @@
 /**
- * @file index.js
- * @author ienix(guoaimin01@baidu.com)
+ * @file <% name %>.js
+ * @author <% author %>(<% email %>@baidu.com)
  *
- * @since 4/20/2017, 12:33:27 PM
+ * @since <% ENV.TIME_STRING_CN %>
  */
+
+"use strict";
 
 import u from 'underscore';
 import Vue from 'vue';

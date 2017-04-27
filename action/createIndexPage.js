@@ -38,16 +38,18 @@ let createIndexServerConf = (pageName, targetDir) => {
 
 module.exports = (option, pageName, targetDir) => {
     const CWD = process.cwd();
-    const ENV = createIndexServerConf(pageName, targetDir);
 
-    let id = ENV.PROJECT_ID;
-    const yamlData = READ_PROJECT_YAML(CWD);
+    let yamlData = READ_PROJECT_YAML(CWD);
+
+    const ENV = createIndexServerConf(pageName, targetDir);
+    const ID = ENV.PROJECT_ID;
+
     let allCategory = Object.keys(yamlData);
     let pageCount = 0;
 
     allCategory.forEach(category => yamlData[category].forEach((page, index) => {
         pageCount++;
-        yamlData[category][index]['uri'] = `/${id}/${category}/${page.name}`;
+        yamlData[category][index]['uri'] = `/${ID}/${category}/${page.name}`;
     }));
 
     let data = JSON.stringify({
@@ -66,4 +68,3 @@ module.exports = (option, pageName, targetDir) => {
 
     return Object.assign({}, option, {ENV, data}, indexPageData);
 };
-

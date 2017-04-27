@@ -5,6 +5,8 @@
  * @since <% ENV.TIME_STRING_CN %>
  */
 
+"use strict";
+
 export default
 function () {
 
