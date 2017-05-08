@@ -17,7 +17,7 @@ const PROGRAM = require('commander');
 const STRING = require('string');
 
 const LOG = require('../util/log');
-const GET_PAGE_ENV = require('../util/getPageEnv');
+const GET_ENV = require('../util/getEnv');
 
 const REMOVE_PAGE_SERVICE = require('../action/removePageService');
 
@@ -85,7 +85,7 @@ module.exports = () => {
 
             let alias = STRING(name).camelize().s;
 
-            const ENV = GET_PAGE_ENV(name) || {};
+            const ENV = GET_ENV('page', name) || {};
 
             try {
                 ACTION[type]({

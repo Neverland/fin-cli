@@ -7,7 +7,7 @@
 
 const IP = require('ip');
 
-const GET_PAGE_ENV = require('../util/getPageEnv');
+const GET_ENV = require('../util/getEnv');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 const CREATE_SERVER_CONF = require('../action/page/createServerConf');
@@ -28,7 +28,7 @@ let createIndexServerConf = (pageName, targetDir) => {
         REAL_NAME,
         PARSE_PATH,
         BASE_DIR
-    } = GET_PAGE_ENV(pageName, targetDir);
+    } = GET_ENV('page', pageName, targetDir);
 
     CREATE_SERVER_CONF({ENV});
     OPEN_URL({ENV});

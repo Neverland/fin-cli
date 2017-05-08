@@ -18,7 +18,7 @@ const STRING = require('string');
 
 const LOG = require('../util/log');
 
-const GET_PAGE_ENV = require('../util/getPageEnv');
+const GET_ENV = require('../util/getEnv');
 
 const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
 
@@ -44,7 +44,7 @@ let batchCreatePage = (list, dirPath, createPage, option) => {
                 );
             let alias = STRING(name).camelize().s;
 
-            const ENV = GET_PAGE_ENV(pageName, dirPath);
+            const ENV = GET_ENV('page', pageName, dirPath);
 
             createPage(Object.assign({}, data, {ENV}, {name: pageName, alias, targetDir: dirPath}));
             pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});

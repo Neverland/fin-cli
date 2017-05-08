@@ -20,7 +20,7 @@ const LOG = require('../util/log');
 
 const CREATE = require('./create/index');
 
-const GET_PAGE_ENV = require('../util/getPageEnv');
+const GET_ENV = require('../util/getEnv');
 
 const CREATE_PAGE_SERVICE = require('../action/createPageService');
 const BATCH_CREATE_PAGE = require('../action/batchCreatePage');
@@ -94,7 +94,7 @@ module.exports = () => {
 
             let alias = STRING(name).camelize().s;
 
-            const ENV = GET_PAGE_ENV(name) || {};
+            const ENV = GET_ENV(type, name) || {};
 
             try {
                 ACTION[type]({
