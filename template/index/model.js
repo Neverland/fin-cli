@@ -7,4 +7,6 @@
 
 'use strict';
 
+/* eslint-disable */
 export default '<% data %>';
+/* eslint-enable */
