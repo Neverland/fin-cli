@@ -15,7 +15,7 @@ import {defaultArgs} from 'constant';
 
 import {redirect, ui} from 'fin-fg/util/index';
 
-import pageData from 'page/development/index';
+import pageData from './model';
 
 new Vue({
     el: 'body',

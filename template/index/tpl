@@ -46,12 +46,10 @@
                   </tbody>
                 </table>
             </div>
+            <div id="goToTop" onclick="scrollTo(0, 0)">去顶部</div>
         </section>
 
         {%script%}
-            define('page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>', () => {
-                return '<% data %>';
-            });
             require('./<% name %>.js');
         {%/script%}
 

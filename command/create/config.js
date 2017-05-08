@@ -33,6 +33,7 @@ module.exports = function(type, extra) {
             ['tpl']
         ],
         index: [
+            ['model.js'],
             ['js'],
             ['less'],
             ['tpl']
