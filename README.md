@@ -47,23 +47,6 @@ fin-cli  曼哈顿cli
     fin create -t index                 // 创建项目的聚合页
 ```
 
-### fin config
-    fin config|C
-#### option
-
- - email|e email前缀
- - author|a author
- - pName|N fin init时录入的名称
- - pId|I 项目唯一识别
- 
-```javascript
-    fin config -e abc
-    fin config -N abc-xyz
-    fin config -I abc
-    fin config -a abc
-    fin config -e abc -a abc
-```
-
 ##### batch create
 
 1. 对应`模块`下必须有，`index.yml` 文件${module}/index.yml
@@ -79,6 +62,23 @@ apply:
     title: '首页'   // ${title}
   - name: home
     title: '主页'
+```
+
+### fin config
+    fin config|C
+#### option
+
+ - email|e email前缀
+ - author|a author
+ - pName|N fin init时录入的名称
+ - pId|I 项目唯一识别
+ 
+```javascript
+    fin config -e abc
+    fin config -N abc-xyz
+    fin config -I abc
+    fin config -a abc
+    fin config -e abc -a abc
 ```
 
 ### fin documentation

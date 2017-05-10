@@ -10,11 +10,14 @@
         <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min.js"></script>
         <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
-            <h1>* <% project.name %> Index</h1>
+            <h1>* ad-loan-tgs-fe Index</h1>
             <h2>Index page information</h2>
-            <h3>创建时间：<% ENV.TIME_STRING_CN %></h3>
+            <h3>创建时间：5/9/2017, 4:48:17 PM</h3>
             <h3>Ip address: {{ ip }}</h3>
             <h3>共{{ categoryCount }}个分类, {{ pageCount }}个page</h3>
+            <h2>Manhattan documentation</h2>
+            <h3><a href="\\\\{{ ip }}:4000">曼哈顿sdk文档</a></h3>
+            <h2>Category</h2>
             <div id="index">
                 <ul>
                     <li v-for="(key, category) in list">
@@ -24,7 +27,6 @@
             </div>
             <h2>Page list</h2>
             <div id="pageList">
-
                 <table id="{{ key }}" v-for="(key, category) in list">
                   <thead>
                     <tr>
