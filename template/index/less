@@ -15,6 +15,10 @@
 
 .page-<% ENV.TIME_STRING_32 %>-<% name %> {
     padding: 20px;
+    a:link,
+    a:visited {
+        color: #6492e3;
+    }
 
     h1 {
       margin: 20px 0;
@@ -61,7 +65,7 @@
       }
       .link {
           font-size: 16px;
-          color: #00f;
+          color: #6492e3;
           &:hover {
             text-decoration: underline;
           }
