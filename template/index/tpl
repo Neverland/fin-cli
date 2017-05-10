@@ -16,7 +16,7 @@
             <h3>Ip address: {{ ip }}</h3>
             <h3>共{{ categoryCount }}个分类, {{ pageCount }}个page</h3>
             <h2>Manhattan documentation</h2>
-            <h3><a href="\\\\{{ ip }}:4000">曼哈顿sdk文档</a></h3>
+            <h3><a target="_blank" href="\\\\{{ ip }}:4000">曼哈顿sdk文档</a></h3>
             <h2>Category</h2>
             <div id="index">
                 <ul>
