@@ -106,6 +106,21 @@ apply:
     fin l -u http://111.111.111 -p 8000
 ```
 
+### fin format
+    fin format|f
+#### option
+
+ - type|t 类型
+    1. type: vue(default: vue)
+ - path|p 路径 (default: process.cwd())
+ 
+```javascript
+    fin f                   // 格式化`当前目录中`的`vue`文件
+    fin f -p .              // 格式化`指定路径中`的`vue`文件
+    fin f -p . -t vue       // 格式化`指定路径中`的`vue`文件
+```
+
+
 ### fin remove
     fin remove|r
 #### option
