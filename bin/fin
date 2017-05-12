@@ -78,6 +78,16 @@ PROGRAM
     require('../command/live')();
 });
 
+PROGRAM
+    .command('format')
+    .description('Format a vue file')
+    .option('-t, --type <string>', '[vue|...]')
+    .option('-p, --path <string>', 'directory path')
+    .alias('f')
+    .action(() => {
+    require('../command/format')();
+});
+
 PROGRAM.parse(process.argv);
 
 if (!PROGRAM.args.length) {

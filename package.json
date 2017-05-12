@@ -18,7 +18,8 @@
     "exec-cmd": "^2.0.1",
     "fs-extra": "^2.1.2",
     "js-yaml": "^3.8.3",
-    "string": "^3.3.1"
+    "string": "^3.3.1",
+    "beautify-vue": "^0.0.4"
   },
   "description": "曼哈顿fin-cli",
   "devDependencies": {},
@@ -39,6 +40,10 @@
     {
       "name": "neverland",
       "email": "enix@foxmail.com"
+    },
+    {
+      "name": "tangciwei",
+      "email": "tangciwei@qq.com"
     }
   ],
   "name": "fin-cli",
@@ -52,5 +57,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.2.0"
+  "version": "1.7.0"
 }
