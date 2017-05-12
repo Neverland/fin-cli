@@ -3,7 +3,7 @@
     "name": "enix@foxmail.com"
   },
   "bin": {
-    "fin": "bin/fin"
+    "fin": "bin/fin.js"
   },
   "bugs": {
     "url": "https://github.com/Neverland/fin-cli/issues"
@@ -52,5 +52,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.7.0"
+  "version": "1.7.1"
 }

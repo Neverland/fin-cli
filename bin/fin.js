@@ -88,6 +88,7 @@ PROGRAM
     .alias('f')
     .action(() => {
     require('../command/format')();
+});
 
 PROGRAM
     .command('remove')
