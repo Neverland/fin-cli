@@ -81,6 +81,15 @@ PROGRAM
 });
 
 PROGRAM
+    .command('format')
+    .description('Format a vue file')
+    .option('-t, --type <string>', '[vue|...]')
+    .option('-p, --path <string>', 'directory path')
+    .alias('f')
+    .action(() => {
+    require('../command/format')();
+
+PROGRAM
     .command('remove')
     .description('Remove a fin unit')
     .option('-t, --type <string>', '[page|...]')
