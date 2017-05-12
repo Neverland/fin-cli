@@ -5,8 +5,8 @@
  * @since 2017/4/1
  */
 
-const HOME_PATH = require('os').homedir();
-const PATH = require('path');
+// const HOME_PATH = require('os').homedir();
+// const PATH = require('path');
 
 const PROGRAM = require('commander');
 const BS = require('browser-sync').create();

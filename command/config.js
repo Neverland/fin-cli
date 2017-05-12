@@ -9,7 +9,7 @@
 
 const PROGRAM = require('commander');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
 const USER = require('./user');
 
@@ -17,8 +17,9 @@ module.exports = () => {
     let data = USER.getRcData();
     let {
             list, author,
-            email, projectName,
-            projectId
+            email,
+            pName,
+            pId
         } = PROGRAM.args[0];
 
     if (list) {
@@ -29,10 +30,9 @@ module.exports = () => {
                 list.push(`\n -${item}: ${JSON.stringify(data[item])}`);
             });
 
-        console.log(''
-            + CHALK.green('\n Config list:')
-            + CHALK.white('\n' + list.join(''))
-        );
+        LOG('Config list:', 'green');
+        LOG(list.join(''), 'white');
+
         process.exit();
     }
     else if (email) {
@@ -41,11 +41,11 @@ module.exports = () => {
     else if (author) {
         data.author = author;
     }
-    else if (projectName) {
-        data.project.name = projectName;
+    else if (pName) {
+        data.project.name = pName;
     }
-    else if (projectId) {
-        data.project.id = projectId;
+    else if (pId) {
+        data.project.id = pId;
     }
 
     USER.createRC(data);

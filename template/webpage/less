@@ -5,6 +5,6 @@
  * @since <% ENV.TIME_STRING_CN %>
  */
 
-import <% alias %> from './<% name %>.vue';
+.page-<% ENV.TIME_STRING_32 %>-<% name %> {
 
-export default <% alias %>;
+}

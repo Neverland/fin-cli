@@ -5,48 +5,68 @@
  * @since 2017/4/7
  */
 
+'use strict';
+
+require('console.table');
+
 const FS = require('fs');
 const PATH = require('path');
 
 const FSE = require('fs-extra');
-const YAML = require('js-yaml');
+
 const STRING = require('string');
 
-const CHALK = require('chalk');
+const LOG = require('../util/log');
 
-let batchCreatePage = (userData, list, dirPath, createPage) => {
+const GET_ENV = require('../util/getEnv');
+
+const READ_PROJECT_YAML = require('../util/readProjectConfigYaml');
+
+let batchCreatePage = (list, dirPath, createPage, option) => {
+    let pageTrace = [];
 
     if (Array.isArray(list)) {
         list.forEach(item => {
             if (!item.name) {
-                console.log(CHALK.bold.red('\n × Page `name` does not exist!'));
+                LOG('✖ Page `name` does not exist!', 'red');
                 return false;
             }
 
-            let pageName = STRING(item.name).dasherize().s;
+            const START = +(new Date());
 
-            createPage(pageName, userData, dirPath);
+            let {name, title} = item;
+            let pageName = STRING(item.name).dasherize().s;
+            let data = Object.assign(
+                    {},
+                    option,
+                    {title},
+                    {type: option.extra, createType: 'batch', overwrite: false}
+                );
+            let alias = STRING(name).camelize().s;
+
+            const ENV = GET_ENV('page', pageName, dirPath);
+
+            createPage(Object.assign({}, data, {ENV}, {name: pageName, alias, targetDir: dirPath}));
+            pageTrace.push({'Page name': pageName, 'Consumption time': `${+(new Date())- START}ms`});
         });
     }
+
+    return pageTrace;
 };
 
-module.exports = (userData, createPage) => {
+module.exports = (createPage, option) => {
+    const START = + (new Date());
     const CWD = process.cwd();
-    const ymlPath = PATH.join(CWD, 'index.yml');
-
-    if (!FS.existsSync(ymlPath)) {
-        console.log(CHALK.bold.red('\n × `index.yml` does not exist!'));
-        process.exit();
-    }
-
-    const INDEX_DOC = YAML.safeLoad(FS.readFileSync(ymlPath, 'utf8'));
+    const INDEX_DOC = READ_PROJECT_YAML(CWD);
 
     let keyMap = Object.keys(INDEX_DOC);
 
     if (keyMap === 0) {
-       console.log(CHALK.bold.red('\n × `index.yml` has some error!'));
-       process.exit();
+
+        LOG('`index.yml` has some error!', 'fail');
     }
+
+    let pagesMessage = [];
 
     Object.keys(INDEX_DOC).forEach(key => {
         let dirName = STRING(key).dasherize().s;
@@ -56,9 +76,13 @@ module.exports = (userData, createPage) => {
             FSE.ensureDirSync(dirPath);
         }
 
-        batchCreatePage(userData, INDEX_DOC[key], dirPath, createPage);
+        let page = batchCreatePage(INDEX_DOC[key], dirPath, createPage, option);
+
+        pagesMessage = pagesMessage.concat(page);
     });
 
-    console.log(CHALK.green('\n √ Batch generation completed!'));
-    process.exit();
+    console.table(pagesMessage);
+    LOG(`Total: ${pagesMessage.length} pages was created, Take ${+(new Date) - START}ms.`, 'green');
+
+    LOG('Batch generation completed! \n', 'success');
 };

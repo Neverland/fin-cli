@@ -7,14 +7,13 @@
 
 fin-cli  曼哈顿cli
 
-## start
+## START
 ```javascript
-
     npm install fin-cli -g
 
 ```
 
-## usage
+## USAGE
 
 ### fin init
     fin init|i
@@ -24,7 +23,6 @@ fin-cli  曼哈顿cli
  - path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
-
     fin i -u git.github.com -p  /git/${path}
 ```
 
@@ -33,36 +31,25 @@ fin-cli  曼哈顿cli
 #### option
 
  - type|t 类型
-    1. type: component、input
+    1. type: component
     2. type: page
-    3. type: bath
+    3. type: batch
+    4. type: index
+ - extra|x 附加page类型page|webpage(default: page)
  
 ```javascript
-    // 创建普通component
-    fin create -t component
-```
-
-### fin config
-    fin config|C
-#### option
-
- - email|e email前缀
- - author|a auhtor
- - projectName|N fin init时录入的名称
- - p|projectId 项目唯一识别
- 
-```javascript
-
-    fin config -e abc
-    fin config -N abc-xyz
-    fin config -p abc
-    fin config -a abc
-    fin config -e abc -a abc
+    fin create -t component             // 创建普通component
+    fin create -t widget                // 创建fis widget
+    fin create -t page                  // 创建page
+    fin create -t webpage               // 创建fis page
+    fin create -t batch                 // 批量创建page
+    fin create -t batch -x webpage      // 批量创建fis page
+    fin create -t index                 // 创建项目的聚合页
 ```
 
 ##### batch create
 
-1. 对应`模块`下必须有，`index.yal` 文件${module}/index.yml
+1. 对应`模块`下必须有，`index.yml` 文件${module}/index.yml
 2. yml样例如下
 ```
 preApply:           // ${category} required
@@ -75,6 +62,23 @@ apply:
     title: '首页'   // ${title}
   - name: home
     title: '主页'
+```
+
+### fin config
+    fin config|C
+#### option
+
+ - email|e email前缀
+ - author|a author
+ - pName|N fin init时录入的名称
+ - pId|I 项目唯一识别
+ 
+```javascript
+    fin config -e abc
+    fin config -N abc-xyz
+    fin config -I abc
+    fin config -a abc
+    fin config -e abc -a abc
 ```
 
 ### fin documentation
@@ -102,10 +106,25 @@ apply:
     fin l -u http://111.111.111 -p 8000
 ```
 
-## changelog
+### fin remove
+    fin remove|r
+#### option
+
+ - type|t 类型
+    1. type: page
+ 
+```javascript
+    fin r -t page // page, mock, router
+```
+
+## CHANGELOG
 
 |version|type|description|date|
 |---|---|---|---|
+|1.6.0|feature|fin remove --type page(可以删除page及page对应的mock，server.conf中的router)|2017/4/26|
+|1.5.0|feature|可以创建fis widget，fis page|2017/4/17|
+|1.4.0|feature|创建，安装流程中添加loading|2017/4/17|
+|1.3.0|feature|使用fin create -t index 可以根据yml创建page index|2017/4/14|
 |1.2.0|feature|使用fin create -t batch 可以根据yml批量创建page|2017/4/7|
 |1.1.0|feature|使用fin create -t page创建page时会创建好mockup|2017/4/5|
 |1.0.1|bugfixed|live 可以监听指定目录|2017/4/5|

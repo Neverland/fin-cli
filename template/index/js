@@ -1,0 +1,99 @@
+/**
+ * @file <% name %>.js
+ * @author <% author %>(<% email %>@baidu.com)
+ *
+ * @since <% ENV.TIME_STRING_CN %>
+ */
+
+'use strict';
+
+import u from 'underscore';
+import Vue from 'vue';
+
+import queryString from 'query-string';
+import {defaultArgs} from 'constant';
+
+import {redirect, ui} from 'fin-fg/util/index';
+
+import pageData from './model';
+
+new Vue({
+    el: 'body',
+    data() {
+        let data = pageData.replace(/&amp;/g,"&")
+            .replace(/&lt;/g,"<")
+            .replace(/&gt;/g,">")
+            .replace(/&nbsp;/g," ")
+            .replace(/&#39;/g,"\'")
+            .replace(/&quot;/g,"\"");
+
+        data = JSON.parse(data);
+
+        let {protocol, port, search, hash} = location;
+
+        protocol += '//';
+        port = port ? `:${port}` : '';
+
+        search = queryString.parse(search);
+        search = u.extend({}, defaultArgs, search);
+        search = queryString.stringify(search);
+        search = search ? `?${search}` : '';
+
+        hash = hash ? `${hash}` : '#';
+
+        let param = {protocol, port, search, hash};
+
+        return u.extend({}, location, param, data);
+    },
+    methods: {
+        jumpTo(uri) {
+            redirect(uri);
+        },
+        showTrueUrl(e) {
+            let target = e.target;
+
+            while (target.tagName.toLocaleLowerCase() !== 'span') {
+                target = target.parentNode;
+            }
+
+            let id = `${target.id}-qr`;
+            let url = target.title;
+
+            ui.dialog({
+                title: 'Page url',
+                type: 'alert',
+                content: `<div><div id="${id}"></div><div>${target.title}</div></div>`
+            })
+                .then(vm => vm.hideUi());
+
+            Vue.nextTick(() => {
+                $(`#${id}`).qrcode({text: url});
+            });
+        },
+        realUrl() {
+
+
+
+        }
+    },
+    ready() {
+        let data = u.extend({}, this.list);
+        let url = this.protocol;
+        let hostname = this.hostname;
+
+        if (/(?:127\.0\.0\.1|localhost)/g.test(location.hostname)) {
+            hostname = this.ip;
+        }
+
+        url = `${url}${hostname}`;
+        url = `${url}${this.port}`;
+
+        Object.keys(data).forEach(category => data[category].forEach((page, index) => {
+            let path = `${url}${page.uri}${this.search}`;
+            let $target = $(`#${category}${index}`);
+
+            $target.qrcode({text: path});
+            $target.attr('title', path);
+        }));
+    }
+});

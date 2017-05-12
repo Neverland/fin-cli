@@ -41,7 +41,7 @@
 
 ## Changelog
 
-* 版本：0.0.1，日期：<% date %>，描述：create
+* 版本：0.0.1，日期：<% ENV.TIME_STRING_CN %>，描述：create
 
 ## Author
 

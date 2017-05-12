@@ -7,74 +7,109 @@
 
 'use strict';
 
+require('console.table');
+
+const PATH = require('path');
+
 const STRING = require('string');
 const PROGRAM = require('commander');
 const CO = require('co');
 const PROMPT = require('co-prompt');
 
-const CHALK = require('chalk');
- 
+const LOG = require('../util/log');
+
 const CREATE = require('./create/index');
-const USER = require('./user').getRcData();
-const SERVER_CONF = require('../action/createServerConf');
+
+const GET_ENV = require('../util/getEnv');
+
+const CREATE_PAGE_SERVICE = require('../action/createPageService');
 const BATCH_CREATE_PAGE = require('../action/batchCreatePage');
+const CREATE_INDEX_PAGE = require('../action/createIndexPage');
 
-let userData = {
-    author: USER.author,
-    email: USER.email,
-    project: USER.project
+let createPage = (option) => {
+    let {type = 'page', targetDir = ''} = option;
+
+    CREATE(type, option, targetDir);
+    CREATE_PAGE_SERVICE(option, targetDir);
 };
 
-let createPage = (name, userData, targetDir = '') => {
-    SERVER_CONF(name, userData.project, targetDir);
-    CREATE('page', Object.assign({}, {name}, userData), targetDir);
+const ACTION = {
+    component(option) {
+        CREATE('component', option);
+
+        LOG('Generation completed!', 'success');
+    },
+    widget(option) {
+        CREATE('widget', option);
+
+        LOG('Generation completed!', 'success');
+    },
+    page(option) {
+        createPage(option);
+        LOG('Generation completed!', 'success');
+    },
+    webpage(option) {
+        let data  = Object.assign({}, option, {type: 'webpage'});
+
+        createPage(data);
+        LOG('Generation completed!', 'success');
+    },
+    batch(option) {
+
+        BATCH_CREATE_PAGE(createPage, option);
+    },
+    index(option) {
+        const PAGE_NAME = 'index';
+        const DEV_DIR = 'development';
+        const TARGET_DIR = PATH.join(process.cwd(), 'page', DEV_DIR);
+
+        let pageData = CREATE_INDEX_PAGE(option, PAGE_NAME, TARGET_DIR);
+
+        CREATE('index', pageData, TARGET_DIR);
+        LOG('Generation completed!', 'success');
+    }
 };
+
+const CREATE_TYPE = 'single';
+const OVERWRITE = false;
 
 module.exports = () => {
-
     CO(function *() {
-        let type = PROGRAM.args[0].type;
+        let {type, title = '', extra = 'page'} = PROGRAM.args[0];
 
         if (!type) {
-            console.log(CHALK.bold.red('\n × `type` does not exist!'));
-            process.exit();
+            LOG(` The \`${type}\` does not support!`);
         }
 
-        if (type === 'component') {
+        if (type in ACTION) {
+            let name = '';
 
-            let name = yield PROMPT('Component name: ');
+            if (!/^(index|batch)$/g.test(type)) {
+                name = yield PROMPT(`Create ${type} name: `);
 
-            if (!name) {
-                console.log(CHALK.bold.red('\n × `Component name` does not exist!'));
-                process.exit();
+                if (!name) {
+                    LOG(`The type \`${type}\` name is required!`);
+                }
             }
 
-            let alias = name;
+            let alias = STRING(name).camelize().s;
 
-            if (alias.indexOf('-')) {
-                alias = STRING(alias).camelize().s;
+            const ENV = GET_ENV(type, name) || {};
+
+            try {
+                ACTION[type]({
+                    ENV,
+                    overwrite: OVERWRITE,
+                    createType: CREATE_TYPE,
+                    type, name, title, alias, extra
+                });
             }
-
-            CREATE('component', Object.assign({}, {name, alias}, userData));
-        }
-        else if (type === 'page') {
-            let name = yield PROMPT('Page name: ');
-
-            if (!name) {
-                console.log(CHALK.bold.red('\n × `Page name` does not exist!'));
-                process.exit();
+            catch (e) {
+                LOG(`${e}`);
             }
-
-            createPage(name, userData);
-
-            console.log(CHALK.green('\n √ Generation completed!'));
-            process.exit();
         }
-        else if (type === 'batch') {
-            BATCH_CREATE_PAGE(userData, createPage);
+        else {
+            LOG(`The type \`${type}\` does not support!`);
         }
-
-        console.log(CHALK.bold.red(`\n × The type \`${type}\` does not support!`));
-        process.exit();
     });
 };

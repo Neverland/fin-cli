@@ -1,0 +1,61 @@
+{%* @file: <% name %> *%}
+{%* @author: <% author %>(<% email %>@baidu.com) *%}
+{%* @since <% ENV.TIME_STRING_CN %> *%}
+
+{%extends file="../../layout.tpl"%}
+    {%block name="block_title"%}
+    <% project.name %> Index Page
+    {%/block%}
+    {%block name="main"%}
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.14.0/jquery-qrcode.min.js"></script>
+        <section class="page-<% ENV.TIME_STRING_32 %>-<% name %>">
+            <h1>* ad-loan-tgs-fe Index</h1>
+            <h2>Index page information</h2>
+            <h3>创建时间：5/9/2017, 4:48:17 PM</h3>
+            <h3>Ip address: {{ ip }}</h3>
+            <h3>共{{ categoryCount }}个分类, {{ pageCount }}个page</h3>
+            <h2>Manhattan documentation</h2>
+            <h3><a target="_blank" href="\\\\{{ ip }}:4000">曼哈顿sdk文档</a></h3>
+            <h3><a target="_blank" href="http://v1-cn.vuejs.org/api/">vue 1.x文档</a></h3>
+            <h3><a target="_blank" href="https://cn.vuejs.org/v2/api/">vue 2.x文档</a></h3>
+            <h3><a target="_blank" href="http://www.iconfont.cn/manage/index">Manhattan icon font</a></h3>
+            <h2>Category</h2>
+            <div id="index">
+                <ul>
+                    <li v-for="(key, category) in list">
+                        <a href="#{{ key }}">{{ key }}</a>
+                    </li>
+                </ul>
+            </div>
+            <h2>Page list</h2>
+            <div id="pageList">
+                <table id="{{ key }}" v-for="(key, category) in list">
+                  <thead>
+                    <tr>
+                      <th colspan="3">{{ key }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr v-for="(index, item) in category">
+                        <td width="10%">{{ index + 1 }}.</td>
+                        <td width="60%">
+                            <span class="link" @click=jumpTo(item.uri) title="{{ item.uri }}"> {{ item.title || item.name }}</span>
+                        </td>
+                        <td width="30%">
+                            <span class="preview" id="{{ key }}{{ index }}" @click="showTrueUrl($event)">
+                            </span>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div id="goToTop" onclick="scrollTo(0, 0)">去顶部</div>
+        </section>
+
+        {%script%}
+            require('./<% name %>.js');
+        {%/script%}
+
+    {%/block%}

@@ -8,18 +8,20 @@
      * @file <% name %>
      * @author <% author %>(<% email %>@baidu.com)
      *
-     * @since <% date %>
+     * @since <% ENV.TIME_STRING_CN %>
      */
 
     /**
      * <% name %> xxxxxxx
      * @module <% name %>
      *
-     * @property {array} title - 标题
+     * @property {string} title - 标题
      *
      * @example
      *
      */
+
+    'use strict';
 
     export default {
         props: {

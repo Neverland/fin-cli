@@ -2,8 +2,10 @@
  * @file <% name %>.js
  * @author <% author %>(<% email %>@baidu.com)
  *
- * @since <% date %>
+ * @since <% ENV.TIME_STRING_CN %>
  */
+
+'use strict';
 
 /**
  * 导入顺序
@@ -28,13 +30,10 @@ import Vue from 'vue';
 import helpService from 'fin-cs/help-service';
 
 // 不要在页面中直接使用pageData.xxx， 应该使用this.xxx
-import pageData from 'page/<% name %>';
+import pageData from 'page<%ENV.PARENT_DIR_ALIAS%>/<% alias %>';
 
 new Vue({
     el: 'body',
-    props: {
-
-    },
     data() {
         // return u.extend({}, pageData, {xxx: 1});
         // 不要在页面中直接使用pageData.xxx， 应该使用this.xxx

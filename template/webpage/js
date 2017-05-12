@@ -5,6 +5,9 @@
  * @since <% ENV.TIME_STRING_CN %>
  */
 
-import <% alias %> from './<% name %>.vue';
+'use strict';
 
-export default <% alias %>;
+export default
+function () {
+
+}

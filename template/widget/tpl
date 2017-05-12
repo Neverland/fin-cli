@@ -1,0 +1,11 @@
+{%* @file: <% name %> *%}
+{%* @author: <% author %>(<% email %>@baidu.com) *%}
+{%* @since <% ENV.TIME_STRING_CN %> *%}
+
+<section class="widget-<% name %>">
+
+</section>
+
+{%script%}
+    require('./<% name %>.js');
+{%/script%}
