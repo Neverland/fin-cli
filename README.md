@@ -136,6 +136,7 @@ apply:
 
 |version|type|description|date|
 |---|---|---|---|
+|1.7.0|feature|fin format --type vue|2017/5/20|
 |1.6.0|feature|fin remove --type page(可以删除page及page对应的mock，server.conf中的router)|2017/4/26|
 |1.5.0|feature|可以创建fis widget，fis page|2017/4/17|
 |1.4.0|feature|创建，安装流程中添加loading|2017/4/17|
