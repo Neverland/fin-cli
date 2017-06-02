@@ -42,12 +42,7 @@
 </script>
 
 <style lang="less" scoped rel="stylesheet/less">
-    @import "../../fin-ui/css/variable.less";
-
-     /**
-     * @require "fin-ui/css/util.less"
-     * @require "fin-ui/css/icon.less"
-     */
+    @prefix: we-chat-
 
     @name: ~`'@{prefix}' + '<% name %>'`;
 
