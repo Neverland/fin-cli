@@ -56,8 +56,8 @@ PROGRAM
     .description('Generate fin user config')
     .alias('C')
     .action(() => {
-    require('../command/config')();
-});
+        require('../command/config')();
+    });
 
 PROGRAM
     .command('documentation')
@@ -66,8 +66,8 @@ PROGRAM
     .option('-s, --server [boolean]', 'server start')
     .alias('d')
     .action(() => {
-    require('../command/doc/index')();
-});
+        require('../command/doc/index')();
+    });
 
 PROGRAM
     .command('live')
@@ -77,8 +77,8 @@ PROGRAM
     .option('-d, --dir <string>', 'watch directory')
     .alias('l')
     .action(() => {
-    require('../command/live')();
-});
+        require('../command/live')();
+    });
 
 PROGRAM
     .command('format')
@@ -87,8 +87,8 @@ PROGRAM
     .option('-p, --path <string>', 'directory path')
     .alias('f')
     .action(() => {
-    require('../command/format')();
-});
+        require('../command/format')();
+    });
 
 PROGRAM
     .command('remove')
@@ -97,8 +97,16 @@ PROGRAM
     .option('-n, --name <string>', 'unit name')
     .alias('r')
     .action(() => {
-    require('../command/remove')();
-});
+        require('../command/remove')();
+    });
+
+PROGRAM
+    .command('proxy')
+    .description('Http(s) proxy')
+    .alias('proxy')
+    .action(() => {
+        require('../command/proxy')();
+    });
 
 PROGRAM.parse(process.argv);
 

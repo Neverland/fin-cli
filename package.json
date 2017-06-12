@@ -26,6 +26,7 @@
     "etpl": "^3.2.0",
     "exec-cmd": "^2.0.1",
     "fs-extra": "^2.1.2",
+    "http-proxy": "^1.16.2",
     "ip": "^1.1.5",
     "js-yaml": "^3.8.3",
     "ora": "^1.2.0",
@@ -56,5 +57,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.7.24"
+  "version": "1.7.26"
 }

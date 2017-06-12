@@ -20,12 +20,12 @@ import pageData from './model';
 new Vue({
     el: 'body',
     data() {
-        let data = pageData.replace(/&amp;/g,"&")
-            .replace(/&lt;/g,"<")
-            .replace(/&gt;/g,">")
-            .replace(/&nbsp;/g," ")
-            .replace(/&#39;/g,"\'")
-            .replace(/&quot;/g,"\"");
+        let data = pageData.replace(/&amp;/g, '&')
+                    .replace(/&lt;/g, '<')
+                    .replace(/&gt;/g, '>')
+                    .replace(/&nbsp;/g, ' ')
+                    .replace(/&#39;/g, '\'')
+                    .replace(/&quot;/g, '\"');
 
         data = JSON.parse(data);
 
