@@ -1,6 +1,7 @@
 # fin-cli
 
-[![Build Status](https://travis-ci.org/greengerong/qing.png?branch=master)](https://travis-ci.org/greengerong/qing)
+[![npm](https://img.shields.io/npm/v/fin-cli.svg)](https://www.npmjs.com/package/fin-cli)
+[![Github All Releases](https://img.shields.io/npm/dm/fin-cli.svg)](https://www.npmjs.com/package/fin-cli)
 
 <center>
 
