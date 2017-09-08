@@ -37,9 +37,9 @@
   "devDependencies": {},
   "homepage": "https://github.com/Neverland/fin-cli#readme",
   "keywords": [
+    "fin-cli",
     "fin",
-    "Manhattan",
-    "fin-cli"
+    "Manhattan"
   ],
   "license": "ISC",
   "maintainers": [
@@ -57,5 +57,5 @@
     "postinstall": "node ./figlet/index.js --harmory",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.7.30"
+  "version": "1.7.31"
 }
