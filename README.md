@@ -18,18 +18,18 @@ fin-cli  曼哈顿cli
 ## USAGE
 
 ### fin init
-    fin init|i
+    $ fin init|i
 #### option
 
  - uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
  - path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
 
 ```javascript
-    fin i -u git.github.com -p  /git/${path}
+    $ fin i -u git.github.com -p  /git/${path}
 ```
 
 ### fin create
-    fin create|c
+    $ fin create|c
 #### option
 
  - type|t 类型
@@ -40,13 +40,13 @@ fin-cli  曼哈顿cli
  - extra|x 附加page类型page|webpage(default: page)
  
 ```javascript
-    fin create -t component             // 创建普通component
-    fin create -t widget                // 创建fis widget
-    fin create -t page                  // 创建page
-    fin create -t webpage               // 创建fis page
-    fin create -t batch                 // 批量创建page
-    fin create -t batch -x webpage      // 批量创建fis page
-    fin create -t index                 // 创建项目的聚合页
+    $ fin create -t component             // 创建普通component
+    $ fin create -t widget                // 创建fis widget
+    $ fin create -t page                  // 创建page
+    $ fin create -t webpage               // 创建fis page
+    $ fin create -t batch                 // 批量创建page
+    $ fin create -t batch -x webpage      // 批量创建fis page
+    $ fin create -t index                 // 创建项目的聚合页
 ```
 
 >注意：项目变更时必须更新pName,pId才能在创建page时创建对应的mock文件
@@ -69,7 +69,7 @@ apply:
 ```
 
 ### fin config
-    fin config|C
+    $ fin config|C
 #### option
 
  - email|e email前缀
@@ -79,27 +79,27 @@ apply:
 
 
 ```javascript
-    fin config -e abc
-    fin config -N abc-xyz
-    fin config -I abc
-    fin config -a abc
-    fin config -e abc -a abc
+    $ fin config -e abc
+    $ fin config -N abc-xyz
+    $ fin config -I abc
+    $ fin config -a abc
+    $ fin config -e abc -a abc
 ```
 
 ### fin documentation
-    fin documentation|d
+    $ fin documentation|d
 #### option
 
  - sever|s 打印启动server命令
  - gitbook|g 生成gitbook文档
  
 ```javascript
-    fin d -g
-    fin d -s
+    $ fin d -g
+    $ fin d -s
 ```
 
 ### fin live
-    fin live|l
+    $ fin live|l
 #### option
 
  - url|u 需要代理的url default: http://localhost
@@ -107,12 +107,12 @@ apply:
  - dir|d 指定需要监听的文件夹
  
 ```javascript
-    fin l
-    fin l -u http://111.111.111 -p 8000
+    $ fin l
+    $ fin l -u http://111.111.111 -p 8000
 ```
 
 ### fin format
-    fin format|f
+    $ fin format|f
 #### option
 
  - type|t 类型
@@ -120,21 +120,21 @@ apply:
  - path|p 路径 (default: process.cwd())
  
 ```javascript
-    fin f                   // 格式化`当前目录中`的`vue`文件
-    fin f -p .              // 格式化`指定路径中`的`vue`文件
-    fin f -p . -t vue       // 格式化`指定路径中`的`vue`文件
+    $ fin f                   // 格式化`当前目录中`的`vue`文件
+    $ fin f -p .              // 格式化`指定路径中`的`vue`文件
+    $ fin f -p . -t vue       // 格式化`指定路径中`的`vue`文件
 ```
 
 
 ### fin remove
-    fin remove|r
+    $ fin remove|r
 #### option
 
  - type|t 类型
     1. type: page
  
 ```javascript
-    fin r -t page // page, mock, router
+    $ fin r -t page // page, mock, router
 ```
 
 ## CHANGELOG
