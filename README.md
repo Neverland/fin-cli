@@ -30,6 +30,10 @@ fin-cli  曼哈顿cli
 
 ```javascript
     $ fin i -u git.github.com -p  /git/${path}
+    $ fin i -u git.github.com -p  /git/${path} -t NODE
+    $ fin i -u git.github.com -p  /git/${path} -t NORMAL
+    $ fin i -u git.github.com -p 
+    $ fin i -u git.github.com -t NODE
 ```
 
 ### fin create
