@@ -29,6 +29,7 @@ PROGRAM
     .command('init')
     .option('-u, --uri <string>', 'icode Uri')
     .option('-p, --path <string>', 'Your project icode patch `/baidu/${path}`')
+    .option('-t, --type <string>', 'NORMAL: FE + PHP; NODE: Full stack；Default: `NORMAL`')
     .description('Generate a new fin project')
     .alias('i')
     .action(() => {

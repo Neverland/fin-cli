@@ -21,6 +21,11 @@ const LOG = require('../util/log');
 
 const USER = require('./user');
 
+let SYS_MAP = {
+    NORMAL: 'finland',
+    NODE: 'frontsystem'
+};
+
 let initProjectName = function (name) {
     let data = USER.getRcData();
 
@@ -30,11 +35,18 @@ let initProjectName = function (name) {
 
 module.exports = () => {
     CO(function *() {
-        let {uri, path} = PROGRAM.args[0];
+        let {uri, path, type = 'NORMAL'} = PROGRAM.args[0];
         let pathName = path;
+
 
         if (!uri) {
             LOG('`uri` does not exist!');
+        }
+
+        const SYSTEM = SYS_MAP[type];
+
+        if (!SYSTEM) {
+            LOG(`Plz input  the correct type！（NORMAL or NODE）`, 'fail');
         }
 
         const ROOT_URI = `ssh://git@${uri}:8235`;
@@ -51,9 +63,9 @@ module.exports = () => {
         LOG('Start generating... \n', 'yellow');
 
         let cloneInit = () => {
-            let command = `git clone ${ROOT_URI}/baidu/finland/init ${projectName}`;
+            let command = `git clone ${ROOT_URI}/baidu/${SYSTEM}/init ${projectName}`;
 
-            PROGRESS.set('text', 'Finland SDK installing!')
+            PROGRESS.set('text', 'The `SDK` installing!')
                 .start();
 
             EXEC(command, (error, stdout, stderr) => {
@@ -62,10 +74,15 @@ module.exports = () => {
                 }
                 console.log(`\n\n ${stdout} \n`, `\n\n ${stderr} \n\n`);
 
-                PROGRESS.succeed('Finland sdk installed! \n')
+                PROGRESS.succeed('The sdk installed! \n')
                     .clear();
 
-                npmInstall();
+                if ('NORMAL' === SYSTEM) {
+                    npmInstall();
+                }
+                else {
+                    addComponent();
+                }
             });
         };
 
@@ -88,15 +105,6 @@ module.exports = () => {
         };
 
         let addComponent = () => {
-            let modules = [
-                ['FinanceGeneral', 'fin-fg'],
-                ['UserInterface', 'fin-ui'],
-                ['RiskManagement', 'fin-rm'],
-                ['ResultState', 'fin-rs'],
-                ['InstitutionServices', 'fin-is'],
-                ['FinanceKernel', 'fin-fk'],
-                ['CustomerServices', 'fin-cs']
-            ];
             let command = [];
 
             // LOG('\n add submodule... \n', 'yellow');
@@ -104,9 +112,13 @@ module.exports = () => {
             PROGRESS.set('text', 'Add git submodule...')
                 .start();
 
-            modules.forEach(item => {
-                command.push(`git submodule add ${ROOT_URI}/baidu/finland/${item[0]} components/${item[1]}`);
-            });
+            let modulesPath = 'components';
+
+            if ('NODE' === type) {
+                modulesPath = 'client/components';
+            }
+
+            command.push(`git submodule add ${ROOT_URI}/baidu/frontsystem/finland ${modulesPath}`);
 
             command = `cd ${projectName} && ${command.join(' && ')} && git remote rm origin`;
 

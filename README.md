@@ -23,7 +23,10 @@ fin-cli  曼哈顿cli
 #### option
 
  - uri|u git.github.com  [固定值，内部地址不能外传至github, 你懂得]
- - path|path /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
+ - path|p /git/${path}  [可选，你的项目所在git的地址，如果有此值会直接把代码push到对应仓库]
+ - type|t 类型 default: NORMAL
+    1. type: NORMAL                     // 创建需要其他后端语言配合的项目
+    2. type: NODE                       // 创建基于javascript， NODEjs的全栈项目
 
 ```javascript
     $ fin i -u git.github.com -p  /git/${path}
@@ -142,6 +145,7 @@ apply:
 
 |version|type|description|date|
 |---|---|---|---|
+|1.8.0|feature|fin init --type NODE|2017/11/6 支持创建node项目|
 |1.7.0|feature|fin format --type vue|2017/5/20|
 |1.6.0|feature|fin remove --type page(可以删除page及page对应的mock，server.conf中的router)|2017/4/26|
 |1.5.0|feature|可以创建fis widget，fis page|2017/4/17|
