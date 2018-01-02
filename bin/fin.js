@@ -104,7 +104,7 @@ PROGRAM
 PROGRAM
     .command('proxy')
     .description('Http(s) proxy')
-    .alias('proxy')
+    .alias('p')
     .action(() => {
         require('../command/proxy')();
     });
